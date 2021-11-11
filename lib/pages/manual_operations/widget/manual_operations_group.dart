@@ -1,10 +1,12 @@
 // ignore_for_file: unnecessary_new
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/data/manual_operation_data.dart';
 import 'package:interface_example1/data/settings_parameters.dart';
 import 'package:interface_example1/pages/manual_operations/widget/manual_operation_card.dart';
+import 'package:interface_example1/routing/routes.dart';
 import 'package:interface_example1/widgets/custom_text.dart';
 
 class ManualOperationsGroup extends StatelessWidget {
@@ -30,8 +32,9 @@ class ManualOperationsGroup extends StatelessWidget {
         height: 30,
         margin: EdgeInsets.only(left: _width / 64, right: _width / 64),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.blue,
           border: Border.all(color: Colors.blue),
+          borderRadius: BorderRadius.circular(5),
           boxShadow: [
             BoxShadow(
                 offset: const Offset(6, 6),
@@ -46,7 +49,8 @@ class ManualOperationsGroup extends StatelessWidget {
             splashColor: Colors.blue,
             highlightColor: Colors.blue.withOpacity(0.3),
             onTap: () {
-              mechanicalGroupSelector.value = -1;
+              mechanicalGroupSelector = -1;
+              navigationController.navigateTo(manualOperationsPageRoute);
             },
             child: const Center(
               child: CustomText(

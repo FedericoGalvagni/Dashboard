@@ -51,28 +51,7 @@ class StatesLargeState extends State<StatesLarge> {
                 },
                 child:
                     CustomText(text: "GO", size: 18, weight: FontWeight.bold))),
-        Expanded(child: Container()), // Responsive Spacer
-        //Old itemPerPage textfield
-        /*Container(
-            alignment: Alignment.centerLeft,
-            width: _width / 16,
-            height: 50,
-            child: TextField(
-              enableInteractiveSelection: true,
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly
-              ],
-              onChanged: (text) {
-                itemPerPage.value = int.parse(comandController2
-                    .text); //int.parse(comandController2.text);
-              },
-              textAlign: TextAlign.center,
-              controller: comandController2,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-              ),
-            )),*/
+        Expanded(child: Container()),
         //-------
         // SPACER
         //-------
@@ -90,7 +69,11 @@ class StatesLargeState extends State<StatesLarge> {
           )
         ],
       ),
-      _progressIndicator(),
+      ValueListenableBuilder(
+          valueListenable: comandsList,
+          builder: (context, value, widget) {
+            return _progressIndicator();
+          }),
       Row(
         children: [
           Container(
@@ -104,6 +87,8 @@ class StatesLargeState extends State<StatesLarge> {
             child: ValueListenableBuilder(
                 valueListenable: comandsList,
                 builder: (context, value, widget) {
+                  showTableIndicator = false;
+                  print("we");
                   return DataTableD();
                 })),
       ])
@@ -112,7 +97,11 @@ class StatesLargeState extends State<StatesLarge> {
 
   Widget _progressIndicator() {
     if (showTableIndicator) {
-      return LinearProgressIndicator(minHeight: 10);
+      return Container(
+          margin: EdgeInsets.only(left: 5, right: 5),
+          child: LinearProgressIndicator(
+            minHeight: 10,
+          ));
     } else {
       return Container();
     }

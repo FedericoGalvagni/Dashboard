@@ -2,4 +2,4 @@ import 'package:flutter/material.dart';
 
 var node_url = Uri.parse('http://192.168.2.63:1880/prova');
 var iconPerRow = 6;
-ValueNotifier<int> mechanicalGroupSelector = ValueNotifier<int>(-1);
+int mechanicalGroupSelector = -1;

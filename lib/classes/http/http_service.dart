@@ -11,7 +11,7 @@ import 'package:interface_example1/data/states_data.dart';
 class HttpService {
   HttpService instance = Get.find();
   static get(String id) async {
-    var response;
+    http.Response response;
     switch (id) {
       case "overview":
         response = await http.get(node_url, headers: {"id": id});
@@ -40,13 +40,14 @@ class HttpService {
 
         break;
       default:
-        showTableIndicator = false;
     }
   }
 
   static statesGet(final response) {
     //build the JSON object from the http response
     //
+    showTableIndicator = false;
+    print("received");
     String responseBody = response.body.toString();
     dynamic jsonObject = json.decode(responseBody);
     //extract the comands list

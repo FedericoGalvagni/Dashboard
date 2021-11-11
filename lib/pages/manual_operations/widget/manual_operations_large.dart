@@ -12,15 +12,14 @@ class ManualOperationsLarge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //print("length: " + mechanicalGroup.groups.length.toString());
-    if (mechanicalGroupSelector.value == -1) {
-      return Column(children: buildMechanicalGroupIcon(context));
+    if (mechanicalGroupSelector == -1) {
+      return Column(children: buildColumn(context));
     } else {
-      return ManualOperationsGroup(groupIndex: mechanicalGroupSelector.value);
+      return ManualOperationsGroup(groupIndex: mechanicalGroupSelector);
     }
-    
   }
-  
-  List<Widget> buildMechanicalGroupIcon(context) {
+
+  List<Widget> buildColumn(context) {
     List<Widget> mechanicalGroupIcons = [];
 
     if (mechanicalGroup.groups.isEmpty) {
@@ -51,11 +50,11 @@ class ManualOperationsLarge extends StatelessWidget {
     int ii;
     for (ii = 0; ii < iconPerRow; ii++) {
       if (i + ii >= mechanicalGroup.groups.length) {
-        row.add(Container(width: _width / 64, color: Colors.red));
+        row.add(Container(width: _width / 64, ));
         row.add(Expanded(child: Container(color: Colors.blue)));
         //print("true" + ii.toString());
       } else {
-        row.add(Container(width: _width / 64, height: 10, color: Colors.red));
+        row.add(Container(width: _width / 64, height: 10,));
 
         row.add(MechanicalGroupIcon(
           groupIndex: i + ii,
@@ -63,7 +62,7 @@ class ManualOperationsLarge extends StatelessWidget {
         //print("false" + ii.toString());
       }
     }
-    row.add(Container(width: _width / 64, height: 10, color: Colors.red));
+    row.add(Container(width: _width / 64, height: 10, ));
     return row;
   }
 }

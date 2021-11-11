@@ -13,6 +13,7 @@ class CustomText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(text!,
         style: GoogleFonts.roboto(
+            
             fontSize: size ?? 16,
             color: color ?? Colors.black,
             fontWeight: weight ?? FontWeight.normal));
