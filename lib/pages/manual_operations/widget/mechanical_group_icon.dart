@@ -16,6 +16,8 @@ class MechanicalGroupIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double _width = MediaQuery.of(context).size.width;
+
     return Expanded(
       child: AspectRatio(
         aspectRatio: 1,
@@ -84,7 +86,7 @@ class MechanicalGroupIcon extends StatelessWidget {
                           Row(
                             children: [
                               Container(
-                                height: 10,
+                                height: _width / 256,
                               )
                             ],
                           ),
@@ -93,7 +95,7 @@ class MechanicalGroupIcon extends StatelessWidget {
                             children: [
                               CustomText(
                                 text: mechanicalGroup.groups[groupIndex].name,
-                                size: 15,
+                                size: 13,
                                 weight: FontWeight.w600,
                                 color: dark,
                               ),
@@ -102,7 +104,7 @@ class MechanicalGroupIcon extends StatelessWidget {
                           Row(
                             children: [
                               Container(
-                                height: 10,
+                                height: _width / 256,
                               )
                             ],
                           )

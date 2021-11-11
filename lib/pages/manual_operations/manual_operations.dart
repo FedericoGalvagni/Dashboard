@@ -3,9 +3,12 @@ import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/data/manual_operation_data.dart';
 import 'package:interface_example1/data/settings_parameters.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
+import 'package:interface_example1/pages/manual_operations/widget/manual_operation_large.dart';
+import 'package:interface_example1/pages/manual_operations/widget/manual_operations_medium.dart';
 import 'package:interface_example1/widgets/custom_text.dart';
 
-import 'widget/manual_operations_large.dart';
+import 'widget/manual_operations_grid.dart';
+import 'widget/manual_operations_small.dart';
 
 class ManualOperationsPage extends StatelessWidget {
   const ManualOperationsPage({Key? key}) : super(key: key);
@@ -38,11 +41,11 @@ class ManualOperationsPage extends StatelessWidget {
             if (ResponsiveWidget.isLargeScreen(context) ||
                 ResponsiveWidget.isMediumScreen(context))
               if (ResponsiveWidget.isCustomSize(context))
-                ManualOperationsLarge()
+                ManualOperationsMedium()
               else
                 ManualOperationsLarge()
             else
-              ManualOperationsLarge(),
+              ManualOperationsSmall(),
           ],
         ))
       ],

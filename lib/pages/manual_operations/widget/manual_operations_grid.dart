@@ -6,8 +6,10 @@ import 'package:interface_example1/data/settings_parameters.dart';
 import 'package:interface_example1/pages/manual_operations/widget/manual_operations_group.dart';
 import 'package:interface_example1/pages/manual_operations/widget/mechanical_group_icon.dart';
 
-class ManualOperationsLarge extends StatelessWidget {
-  const ManualOperationsLarge({Key? key}) : super(key: key);
+class ManualOperationIconsGrid extends StatelessWidget {
+  ManualOperationIconsGrid({Key? key, required this.iconsPerRow})
+      : super(key: key);
+  int iconsPerRow;
 
   @override
   Widget build(BuildContext context) {
@@ -21,22 +23,22 @@ class ManualOperationsLarge extends StatelessWidget {
 
   List<Widget> buildColumn(context) {
     List<Widget> mechanicalGroupIcons = [];
-
+    double _width = MediaQuery.of(context).size.width;
     if (mechanicalGroup.groups.isEmpty) {
       mechanicalGroupIcons.add(Container());
       return mechanicalGroupIcons;
     }
-    for (var i = 0; i < mechanicalGroup.groups.length; i = i + iconPerRow) {
+    for (var i = 0; i < mechanicalGroup.groups.length; i = i + iconsPerRow) {
       //print("buildIndex: " + i.toString());
       mechanicalGroupIcons.add((Row(children: [
         Container(
-          height: 30,
+          height: _width / 64,
         )
       ])));
       mechanicalGroupIcons.add(Row(children: buildRow(i, context)));
       mechanicalGroupIcons.add((Row(children: [
         Container(
-          height: 30,
+          height: _width / 64,
         )
       ])));
     }
@@ -48,13 +50,18 @@ class ManualOperationsLarge extends StatelessWidget {
     double _width = MediaQuery.of(context).size.width;
     List<Widget> row = [];
     int ii;
-    for (ii = 0; ii < iconPerRow; ii++) {
+    for (ii = 0; ii < iconsPerRow; ii++) {
       if (i + ii >= mechanicalGroup.groups.length) {
-        row.add(Container(width: _width / 64, ));
+        row.add(Container(
+          width: _width / 64,
+        ));
         row.add(Expanded(child: Container(color: Colors.blue)));
         //print("true" + ii.toString());
       } else {
-        row.add(Container(width: _width / 64, height: 10,));
+        row.add(Container(
+          width: _width / 64,
+          height: _width / 128,
+        ));
 
         row.add(MechanicalGroupIcon(
           groupIndex: i + ii,
@@ -62,7 +69,10 @@ class ManualOperationsLarge extends StatelessWidget {
         //print("false" + ii.toString());
       }
     }
-    row.add(Container(width: _width / 64, height: 10, ));
+    row.add(Container(
+      width: _width / 64,
+      height: _width / 128,
+    ));
     return row;
   }
 }
