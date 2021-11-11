@@ -29,7 +29,7 @@ void main() {
         HttpService.get("overview");
         break;
       case manualOperationsPageRoute:
-        HttpService.get("manualOperation");
+        //HttpService.get("manualOperation");
         //print("manualOperation");
         break;
       default:

@@ -8,7 +8,7 @@ import 'package:interface_example1/widgets/custom_text.dart';
 
 enum Prova { motors, pneumatic }
 
-class ManualOperationGroup extends StatelessWidget {
+class ManualOperationCard extends StatelessWidget {
   final String? title;
   final String id;
   final String value;
@@ -17,7 +17,7 @@ class ManualOperationGroup extends StatelessWidget {
   final String type;
   final VoidCallback onTap;
 
-  const ManualOperationGroup({
+  const ManualOperationCard({
     Key? key,
     this.title,
     required this.id,
