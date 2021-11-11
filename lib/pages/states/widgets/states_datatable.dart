@@ -45,13 +45,13 @@ class DataTableDState extends State<DataTableD> {
                         print("false");
                         _isAscending = false;
                         // sort the product list in Ascending, order by time
-                        comandsList.sort((productA, productB) =>
+                        comandsList.value.sort((productA, productB) =>
                             productB.time.compareTo(productA.time));
                       } else {
                         print("true");
                         _isAscending = true;
                         // sort the product list in Descending, order by time
-                        comandsList.sort((productA, productB) =>
+                        comandsList.value.sort((productA, productB) =>
                             productA.time.compareTo(productB.time));
                       }
                     });
@@ -65,13 +65,13 @@ class DataTableDState extends State<DataTableD> {
                         print("false");
                         _isAscending = false;
                         // sort the product list in Ascending, order by time
-                        comandsList.sort((productA, productB) =>
+                        comandsList.value.sort((productA, productB) =>
                             productB.id.compareTo(productA.id));
                       } else {
                         print("true");
                         _isAscending = true;
                         // sort the product list in Descending, order by time
-                        comandsList.sort((productA, productB) =>
+                        comandsList.value.sort((productA, productB) =>
                             productA.id.compareTo(productB.id));
                       }
                     });
@@ -85,13 +85,13 @@ class DataTableDState extends State<DataTableD> {
                         print("false");
                         _isAscending = false;
                         // sort the product list in Ascending, order by time
-                        comandsList.sort((productA, productB) =>
+                        comandsList.value.sort((productA, productB) =>
                             productB.action.compareTo(productA.action));
                       } else {
                         print("true");
                         _isAscending = true;
                         // sort the product list in Descending, order by time
-                        comandsList.sort((productA, productB) =>
+                        comandsList.value.sort((productA, productB) =>
                             productA.action.compareTo(productB.action));
                       }
                     });
@@ -105,14 +105,14 @@ class DataTableDState extends State<DataTableD> {
                         print("false");
                         _isAscending = false;
                         // sort the product list in Ascending, order by time
-                        comandsList.sort((productA, productB) => productB
+                        comandsList.value.sort((productA, productB) => productB
                             .description
                             .compareTo(productA.description));
                       } else {
                         print("true");
                         _isAscending = true;
                         // sort the product list in Descending, order by time
-                        comandsList.sort((productA, productB) => productA
+                        comandsList.value.sort((productA, productB) => productA
                             .description
                             .compareTo(productB.description));
                       }
@@ -127,13 +127,13 @@ class DataTableDState extends State<DataTableD> {
                         print("false");
                         _isAscending = false;
                         // sort the product list in Ascending, order by time
-                        comandsList.sort((productA, productB) =>
+                        comandsList.value.sort((productA, productB) =>
                             productB.user.compareTo(productA.user));
                       } else {
                         print("true");
                         _isAscending = true;
                         // sort the product list in Descending, order by time
-                        comandsList.sort((productA, productB) =>
+                        comandsList.value.sort((productA, productB) =>
                             productA.user.compareTo(productB.user));
                       }
                     });
@@ -154,7 +154,7 @@ class _DataSource extends DataTableSource {
   @override
   DataRow? getRow(int index) {
     assert(index >= 0);
-    final row = comandsList[index];
+    final row = comandsList.value[index];
 
     return DataRow.byIndex(
       /*selected: row.selected,
@@ -178,7 +178,7 @@ class _DataSource extends DataTableSource {
 
   List<DataCell> _buildCells(final row) {
     List<DataCell> dataCell;
-    if (comandsList.length > 0) {
+    if (comandsList.value.length > 0) {
       return dataCell = [
         DataCell(Text(row.time ?? "")),
         DataCell(Text(row.id ?? "")),
@@ -198,7 +198,7 @@ class _DataSource extends DataTableSource {
   }
 
   @override
-  int get rowCount => comandsList.length;
+  int get rowCount => comandsList.value.length;
 
   @override
   bool get isRowCountApproximate => false;

@@ -15,7 +15,7 @@ class ManualOperationsLarge extends StatelessWidget {
 
     List<Widget> actuatorsWidget = [];
     String responseBody =
-        '{"Gruppo1": [{"name": "Motore", "type": "motor", "value": "10"},{"name": "Motore 1", "type": "motor", "value": "-25"},{"name": "Motore X", "type": "motor", "value": "125"},  {"name": "Motore Y", "type": "motor", "value": "10"},  {"name": "Motore Z", "type": "motor", "value": "-67"}          ]    }';
+        '{"Gruppo1": [{"name": "Motore", "type": "motor", "value": "10"},{"name": "Motore", "type": "motor", "value": "10"},{"name": "Motore", "type": "motor", "value": "10"},{"name": "Motore", "type": "motor", "value": "10"},{"name": "Motore", "type": "motor", "value": "10"},{"name": "Motore", "type": "motor", "value": "10"},{"name": "Motore 1", "type": "motor", "value": "-25"},{"name": "Motore X", "type": "motor", "value": "125"},  {"name": "Motore Y", "type": "motor", "value": "10"},  {"name": "Motore Z", "type": "motor", "value": "-67"}          ]    }';
     var actuatorsObjsJson = jsonDecode(responseBody)['Gruppo1'] as List;
     List<Actuator> actuatorsList = actuatorsObjsJson
         .map((actuatorJson) => Actuator.fromJson(actuatorJson))

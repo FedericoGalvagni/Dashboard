@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 
 class Comands {
@@ -36,9 +37,10 @@ String responseBody =
 dynamic jsonResponse = json.decode(responseBody);
 final convertedJsonResponse = jsonResponse.cast<Map<String, dynamic>>();
 
-List<Comands> comandsList = convertedJsonResponse
-    .map<Comands>((json) => Comands.fromJson(json))
-    .toList();
+ValueNotifier<List<Comands>> comandsList = ValueNotifier<List<Comands>>(
+    convertedJsonResponse
+        .map<Comands>((json) => Comands.fromJson(json))
+        .toList());
 String headers = '["time", "id", "action", "description", "user"]';
 var comandsHeaders = json.decode(headers);
 var test;

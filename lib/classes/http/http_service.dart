@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:interface_example1/data/global.dart';
 import 'package:interface_example1/data/overview_data.dart';
 import 'package:interface_example1/data/settings_parameters.dart';
 import 'package:interface_example1/data/states_data.dart';
@@ -39,6 +40,7 @@ class HttpService {
 
         break;
       default:
+        showTableIndicator = false;
     }
   }
 
@@ -53,7 +55,7 @@ class HttpService {
         jsonObject["comands"].cast<Map<String, dynamic>>();
     //populate a List<Comands> instance of the Comands class
     //
-    comandsList = convertedJsonObjectComands
+    comandsList.value = convertedJsonObjectComands
         .map<Comands>((json) => Comands.fromJson(json))
         .toList();
     //same thing with the headers list

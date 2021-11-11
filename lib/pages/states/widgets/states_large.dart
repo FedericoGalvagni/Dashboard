@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:interface_example1/classes/http/http_service.dart';
+import 'package:interface_example1/data/global.dart';
 import 'package:interface_example1/data/settings_parameters.dart';
+import 'package:interface_example1/data/states_data.dart';
 import 'package:interface_example1/pages/states/widgets/states_datatable.dart';
 import 'package:interface_example1/widgets/custom_text.dart';
 
@@ -42,8 +44,10 @@ class StatesLargeState extends State<StatesLarge> {
             height: 50,
             child: ElevatedButton(
                 onPressed: () {
+                  showTableIndicator = true;
                   HttpService.get(comandController.text);
                   print(comandController.text);
+                  setState(() {});
                 },
                 child:
                     CustomText(text: "GO", size: 18, weight: FontWeight.bold))),
@@ -79,9 +83,38 @@ class StatesLargeState extends State<StatesLarge> {
       //-------
       // TABLE
       //-------
+      Row(
+        children: [
+          Container(
+            height: 5,
+          )
+        ],
+      ),
+      _progressIndicator(),
+      Row(
+        children: [
+          Container(
+            height: 5,
+          )
+        ],
+      ),
       Row(children: [
-        Expanded(flex: 1, child: DataTableD()),
+        Expanded(
+            flex: 1,
+            child: ValueListenableBuilder(
+                valueListenable: comandsList,
+                builder: (context, value, widget) {
+                  return DataTableD();
+                })),
       ])
     ]);
+  }
+
+  Widget _progressIndicator() {
+    if (showTableIndicator) {
+      return LinearProgressIndicator(minHeight: 10);
+    } else {
+      return Container();
+    }
   }
 }
