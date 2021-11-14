@@ -32,9 +32,9 @@ class StatesPage extends StatelessWidget {
             if (ResponsiveWidget.isLargeScreen(context) ||
                 ResponsiveWidget.isMediumScreen(context))
               if (ResponsiveWidget.isCustomSize(context))
-                StatesLarge()
+                const StatesLarge()
               else
-                StatesLarge()
+                const StatesLarge()
             else
               StatesSmall(),
           ],

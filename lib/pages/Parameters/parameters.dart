@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
+import 'package:interface_example1/pages/Parameters/widget/parameters_large.dart';
+import 'package:interface_example1/pages/Parameters/widget/parameters_small.dart';
 import 'package:interface_example1/widgets/custom_text.dart';
-import 'widgets/overview_cards_large.dart';
-import 'widgets/overview_cards_medium.dart';
-import 'widgets/overview_cards_small.dart';
 
-class OverviewPage extends StatelessWidget {
-  const OverviewPage({Key? key}) : super(key: key);
+class ParametersPage extends StatelessWidget {
+  const ParametersPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,11 +33,11 @@ class OverviewPage extends StatelessWidget {
             if (ResponsiveWidget.isLargeScreen(context) ||
                 ResponsiveWidget.isMediumScreen(context))
               if (ResponsiveWidget.isCustomSize(context))
-                const OverviewCardsMedium()
+                const ParametersLarge() //medium
               else
-                const OverviewCardsLarge()
+                const ParametersLarge() //large
             else
-              const OverviewCardsSmall(),
+              const ParametersSmall(), //small
           ],
         ))
       ],

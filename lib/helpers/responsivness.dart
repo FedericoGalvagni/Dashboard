@@ -1,5 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
-
 import 'package:flutter/material.dart';
 
 const int largeScreenSize = 1366;
@@ -14,12 +12,12 @@ class ResponsiveWidget extends StatelessWidget {
   final Widget smallScreen;
   final Widget customScreen;
 
-  const ResponsiveWidget({
+  const ResponsiveWidget({Key? key,
     required this.largeScreen,
     required this.mediumScreen,
     required this.smallScreen,
     required this.customScreen,
-  });
+  }) : super(key: key);
 
   static bool isSmallScreen(BuildContext context) {
     return MediaQuery.of(context).size.width < mediumScreenSize;

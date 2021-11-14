@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:interface_example1/data/overview_data.dart';
+import 'package:interface_example1/data_models/overview_data.dart';
 
 import 'info_card.dart';
 

@@ -6,8 +6,8 @@ class ManualOperationsMedium extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ManualOperationIconsGrid(
-      iconsPerRow: 4,
+    return const ManualOperationIconsGrid(
+      iconsPerRow: 4,aControllPerRow: 2,
     );
   }
 }

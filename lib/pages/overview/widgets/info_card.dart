@@ -8,7 +8,7 @@ class InfoCard extends StatelessWidget {
   final bool isActive;
   final VoidCallback onTap;
 
-  InfoCard(
+  const InfoCard(
       {Key? key,
       this.title,
       this.value,

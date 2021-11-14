@@ -1,17 +1,15 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:interface_example1/classes/http/http_service.dart';
-import 'package:interface_example1/data/global.dart';
-import 'package:interface_example1/data/settings_parameters.dart';
-import 'package:interface_example1/data/states_data.dart';
+import 'package:interface_example1/data_models/config.dart';
+import 'package:interface_example1/data_models/states_data.dart';
 import 'package:interface_example1/pages/states/widgets/states_datatable.dart';
 import 'package:interface_example1/widgets/custom_text.dart';
 
 class StatesLarge extends StatefulWidget {
+  const StatesLarge({Key? key}) : super(key: key);
+
   @override
   StatesLargeState createState() => StatesLargeState();
 }
@@ -29,28 +27,28 @@ class StatesLargeState extends State<StatesLarge> {
         SizedBox(
           width: _width / 100,
         ),
-        Container(
+        SizedBox(
             width: _width / 4,
             height: 50,
             child: TextField(
               controller: comandController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Enter a search term',
               ),
             )),
-        Container(
+        SizedBox(
             width: 60,
             height: 50,
             child: ElevatedButton(
                 onPressed: () {
                   showTableIndicator = true;
                   HttpService.get(comandController.text);
-                  print(comandController.text);
+                  debugPrint(comandController.text);
                   setState(() {});
                 },
                 child:
-                    CustomText(text: "GO", size: 18, weight: FontWeight.bold))),
+                    const CustomText(text: "GO", size: 18, weight: FontWeight.bold))),
         Expanded(child: Container()),
         //-------
         // SPACER
@@ -88,8 +86,8 @@ class StatesLargeState extends State<StatesLarge> {
                 valueListenable: comandsList,
                 builder: (context, value, widget) {
                   showTableIndicator = false;
-                  print("we");
-                  return DataTableD();
+                  debugPrint("we");
+                  return const DataTableD();
                 })),
       ])
     ]);
@@ -98,8 +96,8 @@ class StatesLargeState extends State<StatesLarge> {
   Widget _progressIndicator() {
     if (showTableIndicator) {
       return Container(
-          margin: EdgeInsets.only(left: 5, right: 5),
-          child: LinearProgressIndicator(
+          margin: const EdgeInsets.only(left: 5, right: 5),
+          child: const LinearProgressIndicator(
             minHeight: 10,
           ));
     } else {

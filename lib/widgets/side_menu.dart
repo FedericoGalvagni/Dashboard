@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interface_example1/constants/controllers.dart';
@@ -24,7 +22,7 @@ class SideMenu extends StatelessWidget {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 Row(
@@ -47,7 +45,7 @@ class SideMenu extends StatelessWidget {
                 ),
               ],
             ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Divider(

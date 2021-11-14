@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:interface_example1/constants/controllers.dart';
-import 'package:interface_example1/data/manual_operation_data.dart';
-import 'package:interface_example1/data/settings_parameters.dart';
+import 'package:interface_example1/data_models/config.dart';
+import 'package:interface_example1/data_models/manual_operation_data.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
 import 'package:interface_example1/pages/manual_operations/widget/manual_operation_large.dart';
 import 'package:interface_example1/pages/manual_operations/widget/manual_operations_medium.dart';
 import 'package:interface_example1/widgets/custom_text.dart';
-
-import 'widget/manual_operations_grid.dart';
 import 'widget/manual_operations_small.dart';
 
 class ManualOperationsPage extends StatelessWidget {
@@ -41,11 +39,11 @@ class ManualOperationsPage extends StatelessWidget {
             if (ResponsiveWidget.isLargeScreen(context) ||
                 ResponsiveWidget.isMediumScreen(context))
               if (ResponsiveWidget.isCustomSize(context))
-                ManualOperationsMedium()
+                const ManualOperationsMedium()
               else
-                ManualOperationsLarge()
+                const ManualOperationsLarge()
             else
-              ManualOperationsSmall(),
+              const ManualOperationsSmall(),
           ],
         ))
       ],

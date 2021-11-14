@@ -1,24 +1,26 @@
-// ignore_for_file: unnecessary_new
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/constants/style.dart';
-import 'package:interface_example1/data/manual_operation_data.dart';
-import 'package:interface_example1/data/settings_parameters.dart';
+import 'package:interface_example1/data_models/config.dart';
+import 'package:interface_example1/data_models/manual_operation_data.dart';
 import 'package:interface_example1/pages/manual_operations/widget/manual_operation_card.dart';
 import 'package:interface_example1/routing/routes.dart';
 import 'package:interface_example1/widgets/custom_text.dart';
 
 class ManualOperationsGroup extends StatelessWidget {
-  int groupIndex;
-  ManualOperationsGroup({Key? key, required this.groupIndex}) : super(key: key);
+  final int groupIndex;
+  final int mControllPerRow;
+  const ManualOperationsGroup(
+      {Key? key, required this.groupIndex, required this.mControllPerRow})
+      : super(key: key);
 
   @override
   Widget build(
     BuildContext context,
   ) {
     double _width = MediaQuery.of(context).size.width;
-    print(mechanicalGroup.groups[0].actuators[2].name);
+    //print(mechanicalGroup.groups[0].actuators[2].name);
 
     List<Widget> actuatorsWidget = [];
     /*String responseBody =
@@ -28,7 +30,7 @@ class ManualOperationsGroup extends StatelessWidget {
         .map((actuatorJson) => Actuator.fromJson(actuatorJson))
         .toList();*/
     actuatorsWidget.add(
-      new Container(
+      Container(
         height: 30,
         margin: EdgeInsets.only(left: _width / 64, right: _width / 64),
         decoration: BoxDecoration(
@@ -53,28 +55,25 @@ class ManualOperationsGroup extends StatelessWidget {
               navigationController.navigateTo(manualOperationsPageRoute);
             },
             child: const Center(
-              child: CustomText(
-                text: "Go Back",
-              ),
+              child: CustomText(text: "Go Back", color: Colors.white),
             ),
           ),
         ),
       ),
     );
-    actuatorsWidget.add(new Row(children: [SizedBox(height: 20)]));
-    if (mechanicalGroup.groups[groupIndex].actuators.length == 0) {
+    actuatorsWidget.add(Row(children: const [SizedBox(height: 20)]));
+    if (mechanicalGroup.groups[groupIndex].actuators.isEmpty) {
       actuatorsWidget.add(Container());
     } else {
       for (var i = 0;
-          i < mechanicalGroup.groups[groupIndex].actuators.length;) {
-        if (i.floor().isEven) {
-          actuatorsWidget.add(new Row(
-              children: _getActuatorsRow(
-                  mechanicalGroup.groups[groupIndex].actuators, i, context)));
-          actuatorsWidget.add(new Row(children: [SizedBox(height: 20)]));
-        }
-        // Because of how the row is built the i (index) must be increased by two
-        i = i + 2;
+          i < mechanicalGroup.groups[groupIndex].actuators.length;
+          i = i + mControllPerRow) {
+        /*if (i.floor().isEven) {*/
+        actuatorsWidget.add(Row(
+            children: _getActuatorsRow(
+                mechanicalGroup.groups[groupIndex].actuators, i, context)));
+        actuatorsWidget.add(Row(children: const [SizedBox(height: 20)]));
+        // }
       }
     }
 
@@ -88,56 +87,34 @@ class ManualOperationsGroup extends StatelessWidget {
     // Here the row is being built: check if the index is pointing on the last
     // actuator in the List<Actuator> list, if so we only need to add an actuator
     // instead of two
-    if (index == list.length - 1) {
-      row.add(new SizedBox(
-        width: _width / 64,
-      ));
-      row.add(new ManualOperationCard(
-        type: list[index].type,
-        id: "0",
-        title: list[index].name,
-        value: list[index].value,
-        onTap: () {},
-        backgroundColor: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-            .withOpacity(0.6),
-      ));
-      row.add(new SizedBox(
-        width: _width / 64,
-      ));
-      row.add(new Expanded(child: Container()));
-      row.add(new SizedBox(
-        width: _width / 64,
-      ));
-      return row;
-    } else {
-      row.add(new SizedBox(
-        width: _width / 64,
-      ));
-      row.add(new ManualOperationCard(
-        type: list[index].type,
-        id: "0",
-        title: list[index].name,
-        value: list[index].value,
-        onTap: () {},
-        backgroundColor: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-            .withOpacity(0.6),
-      ));
-      row.add(new SizedBox(
-        width: _width / 64,
-      ));
-      row.add(new ManualOperationCard(
-        type: list[index + 1].type,
-        id: "0",
-        title: list[index + 1].name,
-        value: list[index + 1].value,
-        onTap: () {},
-        backgroundColor: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-            .withOpacity(0.6),
-      ));
-      row.add(new SizedBox(
-        width: _width / 64,
-      ));
-      return row;
+    for (var i = 0; i < mControllPerRow; i++) {
+      if (index == list.length - 1) {
+        row.add(SizedBox(
+          width: _width / 64,
+        ));
+        row.add(Expanded(child: Container()));
+        row.add(SizedBox(
+          width: _width / 64,
+        ));
+      } else {
+        row.add(SizedBox(
+          width: _width / 64,
+        ));
+        row.add(ManualOperationCard(
+          type: list[index + i].type,
+          id: "0",
+          title: list[index + i].name,
+          value: list[index + i].value,
+          onTap: () {},
+          backgroundColor:
+              Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+                  .withOpacity(0.6),
+        ));
+      }
     }
+    row.add(SizedBox(
+      width: _width / 64,
+    ));
+    return row;
   }
 }

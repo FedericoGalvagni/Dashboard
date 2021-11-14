@@ -1,9 +1,9 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
-import 'package:interface_example1/data/states_data.dart';
+import 'package:interface_example1/data_models/states_data.dart';
 
 class DataTableD extends StatefulWidget {
+  const DataTableD({Key? key}) : super(key: key);
+
   @override
   DataTableDState createState() => DataTableDState();
 
@@ -32,7 +32,7 @@ class DataTableDState extends State<DataTableD> {
                 itemPerPage.value = v ?? 10;
               });
             },
-            availableRowsPerPage: [5, 10, 25, 50, 100],
+            availableRowsPerPage: const [5, 10, 25, 50, 100],
             rowsPerPage: itemPerPage.value,
             columns: [
               DataColumn(
@@ -42,13 +42,11 @@ class DataTableDState extends State<DataTableD> {
                     setState(() {
                       _currentSortColumn = columnIndex;
                       if (_isAscending == true) {
-                        print("false");
                         _isAscending = false;
                         // sort the product list in Ascending, order by time
                         comandsList.value.sort((productA, productB) =>
                             productB.time.compareTo(productA.time));
                       } else {
-                        print("true");
                         _isAscending = true;
                         // sort the product list in Descending, order by time
                         comandsList.value.sort((productA, productB) =>
@@ -62,13 +60,11 @@ class DataTableDState extends State<DataTableD> {
                     setState(() {
                       _currentSortColumn = columnIndex;
                       if (_isAscending == true) {
-                        print("false");
                         _isAscending = false;
                         // sort the product list in Ascending, order by time
                         comandsList.value.sort((productA, productB) =>
                             productB.id.compareTo(productA.id));
                       } else {
-                        print("true");
                         _isAscending = true;
                         // sort the product list in Descending, order by time
                         comandsList.value.sort((productA, productB) =>
@@ -82,13 +78,11 @@ class DataTableDState extends State<DataTableD> {
                     setState(() {
                       _currentSortColumn = columnIndex;
                       if (_isAscending == true) {
-                        print("false");
                         _isAscending = false;
                         // sort the product list in Ascending, order by time
                         comandsList.value.sort((productA, productB) =>
                             productB.action.compareTo(productA.action));
                       } else {
-                        print("true");
                         _isAscending = true;
                         // sort the product list in Descending, order by time
                         comandsList.value.sort((productA, productB) =>
@@ -102,14 +96,12 @@ class DataTableDState extends State<DataTableD> {
                     setState(() {
                       _currentSortColumn = columnIndex;
                       if (_isAscending == true) {
-                        print("false");
                         _isAscending = false;
                         // sort the product list in Ascending, order by time
                         comandsList.value.sort((productA, productB) => productB
                             .description
                             .compareTo(productA.description));
                       } else {
-                        print("true");
                         _isAscending = true;
                         // sort the product list in Descending, order by time
                         comandsList.value.sort((productA, productB) => productA
@@ -124,13 +116,11 @@ class DataTableDState extends State<DataTableD> {
                     setState(() {
                       _currentSortColumn = columnIndex;
                       if (_isAscending == true) {
-                        print("false");
                         _isAscending = false;
                         // sort the product list in Ascending, order by time
                         comandsList.value.sort((productA, productB) =>
                             productB.user.compareTo(productA.user));
                       } else {
-                        print("true");
                         _isAscending = true;
                         // sort the product list in Descending, order by time
                         comandsList.value.sort((productA, productB) =>
@@ -157,29 +147,14 @@ class _DataSource extends DataTableSource {
     final row = comandsList.value[index];
 
     return DataRow.byIndex(
-      /*selected: row.selected,
-      onSelectChanged: (selected) {
-        row.selected = !row.selected;
-        print("ostia");
-      },*/
       index: index,
-      /*onSelectChanged: (value) {
-        if (row.selected != value) {
-          _selectedCount += value ? 1 : -1;
-          assert(_selectedCount >= 0);
-          row.selected = value;
-          notifyListeners();
-        }
-      },*/
-
       cells: _buildCells(row),
     );
   }
 
   List<DataCell> _buildCells(final row) {
-    List<DataCell> dataCell;
-    if (comandsList.value.length > 0) {
-      return dataCell = [
+    if (comandsList.value.isNotEmpty) {
+      return [
         DataCell(Text(row.time ?? "")),
         DataCell(Text(row.id ?? "")),
         DataCell(Text(row.action ?? "")),
@@ -187,12 +162,12 @@ class _DataSource extends DataTableSource {
         DataCell(Text(row.user ?? "")),
       ];
     } else {
-      return dataCell = [
-        DataCell(Text("")),
-        DataCell(Text("")),
-        DataCell(Text("")),
-        DataCell(Text("")),
-        DataCell(Text("")),
+      return [
+        const DataCell(Text("")),
+        const DataCell(Text("")),
+        const DataCell(Text("")),
+        const DataCell(Text("")),
+        const DataCell(Text("")),
       ];
     }
   }

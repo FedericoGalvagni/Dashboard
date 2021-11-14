@@ -1,7 +1,4 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,11 +11,10 @@ import 'package:interface_example1/widgets/menu_controller.dart';
 
 import 'classes/http/http_service.dart';
 
-
 void main() {
   Get.put(MenuController());
   Get.put(NavigationController());
-  runApp(MyApp());
+  runApp(const MyApp());
   const oneSec = Duration(seconds: 1);
 
   Timer.periodic(oneSec, (Timer timer) {
@@ -50,8 +46,8 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.mulishTextTheme(Theme.of(context).textTheme)
               .apply(bodyColor: Colors.black),
           pageTransitionsTheme: const PageTransitionsTheme(builders: {
-            TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
-            TargetPlatform.android: FadeUpwardsPageTransitionsBuilder()
+            TargetPlatform.iOS: ZoomPageTransitionsBuilder(),
+            TargetPlatform.android: ZoomPageTransitionsBuilder(),
           }),
           primaryColor: Colors.blue),
       home: SiteLayout(),

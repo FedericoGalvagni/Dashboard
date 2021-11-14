@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interface_example1/helpers/responsivness.dart';

@@ -1,23 +1,31 @@
-// ignore_for_file: unnecessary_new
-
 import 'package:flutter/material.dart';
-import 'package:interface_example1/data/manual_operation_data.dart';
-import 'package:interface_example1/data/settings_parameters.dart';
+import 'package:interface_example1/data_models/config.dart';
+import 'package:interface_example1/data_models/manual_operation_data.dart';
 import 'package:interface_example1/pages/manual_operations/widget/manual_operations_group.dart';
 import 'package:interface_example1/pages/manual_operations/widget/mechanical_group_icon.dart';
 
-class ManualOperationIconsGrid extends StatelessWidget {
-  ManualOperationIconsGrid({Key? key, required this.iconsPerRow})
+class ManualOperationIconsGrid extends StatefulWidget {
+  const ManualOperationIconsGrid(
+      {Key? key, required this.iconsPerRow, required this.aControllPerRow})
       : super(key: key);
-  int iconsPerRow;
+  final int iconsPerRow;
+  final int aControllPerRow;
 
+  @override
+  State<ManualOperationIconsGrid> createState() => _ManualOperationIconsGridState();
+}
+
+class _ManualOperationIconsGridState extends State<ManualOperationIconsGrid> {
   @override
   Widget build(BuildContext context) {
     //print("length: " + mechanicalGroup.groups.length.toString());
     if (mechanicalGroupSelector == -1) {
       return Column(children: buildColumn(context));
     } else {
-      return ManualOperationsGroup(groupIndex: mechanicalGroupSelector);
+      return ManualOperationsGroup(
+        groupIndex: mechanicalGroupSelector,
+        mControllPerRow: widget.aControllPerRow,
+      );
     }
   }
 
@@ -28,7 +36,7 @@ class ManualOperationIconsGrid extends StatelessWidget {
       mechanicalGroupIcons.add(Container());
       return mechanicalGroupIcons;
     }
-    for (var i = 0; i < mechanicalGroup.groups.length; i = i + iconsPerRow) {
+    for (var i = 0; i < mechanicalGroup.groups.length; i = i + widget.iconsPerRow) {
       //print("buildIndex: " + i.toString());
       mechanicalGroupIcons.add((Row(children: [
         Container(
@@ -50,7 +58,7 @@ class ManualOperationIconsGrid extends StatelessWidget {
     double _width = MediaQuery.of(context).size.width;
     List<Widget> row = [];
     int ii;
-    for (ii = 0; ii < iconsPerRow; ii++) {
+    for (ii = 0; ii < widget.iconsPerRow; ii++) {
       if (i + ii >= mechanicalGroup.groups.length) {
         row.add(Container(
           width: _width / 64,
@@ -58,7 +66,7 @@ class ManualOperationIconsGrid extends StatelessWidget {
         row.add(Expanded(child: Container(color: Colors.blue)));
         //print("true" + ii.toString());
       } else {
-        row.add(Container(
+        row.add(SizedBox(
           width: _width / 64,
           height: _width / 128,
         ));
@@ -69,7 +77,7 @@ class ManualOperationIconsGrid extends StatelessWidget {
         //print("false" + ii.toString());
       }
     }
-    row.add(Container(
+    row.add(SizedBox(
       width: _width / 64,
       height: _width / 128,
     ));

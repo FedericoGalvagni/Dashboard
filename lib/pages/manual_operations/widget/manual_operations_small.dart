@@ -6,6 +6,9 @@ class ManualOperationsSmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ManualOperationIconsGrid(iconsPerRow: 2);
+    return const ManualOperationIconsGrid(
+      iconsPerRow: 2,
+      aControllPerRow: 1,
+    );
   }
 }

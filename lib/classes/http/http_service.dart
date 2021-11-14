@@ -1,12 +1,11 @@
-// ignore_for_file: avoid_print, unnecessary_new
-
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:interface_example1/data/global.dart';
-import 'package:interface_example1/data/overview_data.dart';
-import 'package:interface_example1/data/settings_parameters.dart';
-import 'package:interface_example1/data/states_data.dart';
+import 'package:interface_example1/data_models/config.dart';
+import 'package:interface_example1/data_models/overview_data.dart';
+import 'package:interface_example1/data_models/states_data.dart';
+
 
 class HttpService {
   HttpService instance = Get.find();
@@ -14,7 +13,7 @@ class HttpService {
     http.Response response;
     switch (id) {
       case "overview":
-        response = await http.get(node_url, headers: {"id": id});
+        response = await http.get(nodeUrl, headers: {"id": id});
         Map<String, dynamic> stats = jsonDecode(response.body.toString());
         totalProduction.value = stats['totalProduction'];
         h24Production.value = stats['h24Production'];
@@ -22,20 +21,20 @@ class HttpService {
         downtime.value = stats['downtime'];
         break;
       case "manualOperation":
-        response = await http.get(node_url, headers: {"id": id});
-        Map<String, dynamic> temp = jsonDecode(response.body.toString());
+        response = await http.get(nodeUrl, headers: {"id": id});
+        
         break;
       case "states":
-        final response = await http.get(node_url, headers: {"id": id});
+        final response = await http.get(nodeUrl, headers: {"id": id});
         statesGet(response);
         break;
       case "states1":
-        final response = await http.get(node_url, headers: {"id": id});
+        final response = await http.get(nodeUrl, headers: {"id": id});
         statesGet(response);
 
         break;
       case "states2":
-        final response = await http.get(node_url, headers: {"id": id});
+        final response = await http.get(nodeUrl, headers: {"id": id});
         statesGet(response);
 
         break;
@@ -47,7 +46,7 @@ class HttpService {
     //build the JSON object from the http response
     //
     showTableIndicator = false;
-    print("received");
+    debugPrint("received");
     String responseBody = response.body.toString();
     dynamic jsonObject = json.decode(responseBody);
     //extract the comands list
@@ -65,6 +64,6 @@ class HttpService {
   }
 
   static postManualOp(String id) async {
-    http.post(node_url, headers: {"id": id});
+    http.post(nodeUrl, headers: {"id": id});
   }
 }

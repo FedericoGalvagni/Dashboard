@@ -1,7 +1,6 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:interface_example1/pages/Parameters/parameters.dart';
 import 'package:interface_example1/pages/authentication/authentication.dart';
 import 'package:interface_example1/pages/overview/overview.dart';
 import 'package:interface_example1/pages/manual_operations/manual_operations.dart';
@@ -12,22 +11,25 @@ import 'package:interface_example1/routing/routes.dart';
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case overviewPageRoute:
-      return _getPageRoute(OverviewPage());
+      return _getPageRoute(const OverviewPage());
 
     case manualOperationsPageRoute:
-      return _getPageRoute(ManualOperationsPage());
+      return _getPageRoute(const ManualOperationsPage());
 
     case statesPageRoute:
-      return _getPageRoute(StatesPage());
+      return _getPageRoute(const StatesPage());
+
+    case parametersPageRooute:
+      return _getPageRoute(const ParametersPage());
 
     case settingsPageRoute:
-      return _getPageRoute(SettingsPage());
+      return _getPageRoute(const SettingsPage());
 
     case authenticationPageRoute:
-      return _getPageRoute(AuthenticationPage());
+      return _getPageRoute(const AuthenticationPage());
 
     default:
-      return _getPageRoute(OverviewPage());
+      return _getPageRoute(const OverviewPage());
   }
 }
 
