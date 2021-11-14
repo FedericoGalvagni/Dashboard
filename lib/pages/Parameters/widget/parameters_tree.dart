@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:interface_example1/constants/style.dart';
-import 'package:interface_example1/data_models/config.dart';
 import 'package:interface_example1/data_models/parameters_data.dart';
+import 'package:interface_example1/pages/Parameters/widget/parameters_view.dart';
 
 class ParametersTree extends StatefulWidget {
   const ParametersTree({Key? key, required this.title}) : super(key: key);
@@ -36,6 +36,7 @@ class ParametersTreeState extends State<ParametersTree> {
 
   @override
   Widget build(BuildContext context) {
+    double _width = MediaQuery.of(context).size.width;
     TreeViewTheme _treeViewTheme = TreeViewTheme(
       expanderTheme: ExpanderThemeData(
           type: _expanderType,
@@ -60,30 +61,42 @@ class ParametersTreeState extends State<ParametersTree> {
       ),
       colorScheme: Theme.of(context).colorScheme,
     );
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).requestFocus(FocusNode());
-      },
-      child: Container(
-        padding: const EdgeInsets.all(20),
-        child: TreeView(
-          shrinkWrap: true,
-          controller: _treeViewController,
-          allowParentSelect: _allowParentSelect,
-          supportParentDoubleTap: _supportParentDoubleTap,
-          onExpansionChanged: (key, expanded) => _expandNode(key, expanded),
-          onNodeTap: (key) {
-            debugPrint('Selected: $key');
-            treeviewKey.value = key;
-            setState(() {
-              _selectedNode = key;
-              _treeViewController =
-                  _treeViewController.copyWith(selectedKey: key);
-            });
-          },
-          theme: _treeViewTheme,
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: _width / 4,
+          child: GestureDetector(
+            onTap: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: TreeView(
+                shrinkWrap: true,
+                controller: _treeViewController,
+                allowParentSelect: _allowParentSelect,
+                supportParentDoubleTap: _supportParentDoubleTap,
+                onExpansionChanged: (key, expanded) =>
+                    _expandNode(key, expanded),
+                onNodeTap: (key) {
+                  debugPrint('Selected: $key');
+                  setState(() {
+                    _selectedNode = key;
+                    _treeViewController =
+                        _treeViewController.copyWith(selectedKey: key);
+                  });
+                },
+                theme: _treeViewTheme,
+              ),
+            ),
+          ),
         ),
-      ),
+        Expanded(
+          child: ParametersView(treeviewKey: _selectedNode),
+        )
+      ],
     );
   }
 
