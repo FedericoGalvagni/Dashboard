@@ -20,15 +20,10 @@ class ManualOperationsGroup extends StatelessWidget {
     BuildContext context,
   ) {
     double _width = MediaQuery.of(context).size.width;
+
     //print(mechanicalGroup.groups[0].actuators[2].name);
 
     List<Widget> actuatorsWidget = [];
-    /*String responseBody =
-        '{"Gruppo1": [{"name": "Motore", "type": "motor", "value": "10"},{"name": "Motore", "type": "motor", "value": "10"},{"name": "Motore", "type": "motor", "value": "10"},{"name": "Motore", "type": "motor", "value": "10"},{"name": "Motore", "type": "motor", "value": "10"},{"name": "Motore", "type": "motor", "value": "10"},{"name": "Motore 1", "type": "motor", "value": "-25"},{"name": "Motore X", "type": "motor", "value": "125"},  {"name": "Motore Y", "type": "motor", "value": "10"},  {"name": "Motore Z", "type": "motor", "value": "-67"}          ]    }';
-    var actuatorsObjsJson = jsonDecode(responseBody)['Gruppo1'] as List;
-    List<Actuator> actuatorsList = actuatorsObjsJson
-        .map((actuatorJson) => Actuator.fromJson(actuatorJson))
-        .toList();*/
     actuatorsWidget.add(
       Container(
         height: 30,
@@ -66,14 +61,14 @@ class ManualOperationsGroup extends StatelessWidget {
       actuatorsWidget.add(Container());
     } else {
       for (var i = 0;
-          i < mechanicalGroup.groups[groupIndex].actuators.length;
+          i < mechanicalGroup.groups[groupIndex].actuators.length - 1;
           i = i + mControllPerRow) {
-        /*if (i.floor().isEven) {*/
+        debugPrint("lenght: " +
+            mechanicalGroup.groups[groupIndex].actuators.length.toString());
         actuatorsWidget.add(Row(
             children: _getActuatorsRow(
                 mechanicalGroup.groups[groupIndex].actuators, i, context)));
         actuatorsWidget.add(Row(children: const [SizedBox(height: 20)]));
-        // }
       }
     }
 
@@ -88,7 +83,10 @@ class ManualOperationsGroup extends StatelessWidget {
     // actuator in the List<Actuator> list, if so we only need to add an actuator
     // instead of two
     for (var i = 0; i < mControllPerRow; i++) {
-      if (index == list.length - 1) {
+      debugPrint("i" + i.toString());
+      debugPrint("index" + index.toString());
+      if (index + i == list.length - 1) {
+        debugPrint("true");
         row.add(SizedBox(
           width: _width / 64,
         ));
@@ -97,12 +95,13 @@ class ManualOperationsGroup extends StatelessWidget {
           width: _width / 64,
         ));
       } else {
+        debugPrint("false");
         row.add(SizedBox(
           width: _width / 64,
         ));
         row.add(ManualOperationCard(
           type: list[index + i].type,
-          id: "0",
+          id: list[index + i].id,
           title: list[index + i].name,
           value: list[index + i].value,
           onTap: () {},

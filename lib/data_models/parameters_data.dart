@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+final originalParameter = emptyFromJson(parametersJS);
+
 final parameter = emptyFromJson(parametersJS);
 
 Parameters emptyFromJson(String str) => Parameters.fromJson(json.decode(str));
@@ -69,7 +71,7 @@ class MotorList {
 class Parameter {
   Parameter({
     required this.name,
-    required this.value,
+    required this.value,  
   });
 
   String name;

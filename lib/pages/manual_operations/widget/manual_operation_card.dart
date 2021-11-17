@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:interface_example1/constants/style.dart';
+import 'package:interface_example1/data_models/config.dart';
 import 'package:interface_example1/widgets/custom_text.dart';
 import 'package:interface_example1/widgets/stepper.dart';
 
@@ -92,7 +93,15 @@ class ManualOperationCard extends StatelessWidget {
                   ],
                 ),
               ]),
-          const ValueStepper()
+          ValueStepper(
+            id: id,
+            sendData: true,
+            nodeUrl: nodeUrl,
+            newValue: (newValue) {
+              
+            },
+            value: value,
+          )
         ],
       ),
     ));

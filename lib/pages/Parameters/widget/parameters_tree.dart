@@ -4,6 +4,7 @@ import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/data_models/parameters_data.dart';
 import 'package:interface_example1/pages/Parameters/widget/parameters_view.dart';
+import 'package:interface_example1/widgets/custom_text.dart';
 
 class ParametersTree extends StatefulWidget {
   const ParametersTree({Key? key, required this.title}) : super(key: key);
@@ -61,42 +62,107 @@ class ParametersTreeState extends State<ParametersTree> {
       ),
       colorScheme: Theme.of(context).colorScheme,
     );
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          width: _width / 4,
-          child: GestureDetector(
-            onTap: () {
-              FocusScope.of(context).requestFocus(FocusNode());
-            },
-            child: Container(
-              padding: const EdgeInsets.all(20),
-              child: TreeView(
-                shrinkWrap: true,
-                controller: _treeViewController,
-                allowParentSelect: _allowParentSelect,
-                supportParentDoubleTap: _supportParentDoubleTap,
-                onExpansionChanged: (key, expanded) =>
-                    _expandNode(key, expanded),
-                onNodeTap: (key) {
-                  debugPrint('Selected: $key');
-                  setState(() {
-                    _selectedNode = key;
-                    _treeViewController =
-                        _treeViewController.copyWith(selectedKey: key);
-                  });
-                },
-                theme: _treeViewTheme,
+    return Container(
+      decoration: BoxDecoration(
+          border: Border(
+              top: BorderSide(width: 1, color: divider))), //Color(0xFFD7D8DD)
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(height: 20),
+              Container(
+                width: (_width / 4) - 40,
+                margin: const EdgeInsets.only(left: 20),
+                child: CustomText(
+                    text: "Browser",
+                    weight: FontWeight.w600,
+                    size: 20,
+                    color: dark),
               ),
-            ),
+              SizedBox(
+                width: _width / 4,
+                child: GestureDetector(
+                  onTap: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    child: TreeView(
+                      shrinkWrap: true,
+                      controller: _treeViewController,
+                      allowParentSelect: _allowParentSelect,
+                      supportParentDoubleTap: _supportParentDoubleTap,
+                      onExpansionChanged: (key, expanded) =>
+                          _expandNode(key, expanded),
+                      onNodeTap: (key) {
+                        debugPrint('Selected: $key');
+                        setState(() {
+                          _selectedNode = key;
+                          _treeViewController =
+                              _treeViewController.copyWith(selectedKey: key);
+                        });
+                      },
+                      theme: _treeViewTheme,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  width: (_width / 4) - 40,
+                  height: 1,
+                  decoration: BoxDecoration(
+                    color: divider,
+                    borderRadius: BorderRadius.circular(1),
+                  )),
+              Container(
+                width: (_width / 4) - 40,
+                margin: EdgeInsets.only(left: 20),
+                child: CustomText(
+                    text: "Tool",
+                    weight: FontWeight.w600,
+                    size: 20,
+                    color: dark),
+              ),
+              Container(height: 10),
+              InkWell(
+                onTap: () {},
+                child: Container(
+                  width: (_width / 4) - 40,
+                  margin: EdgeInsets.only(left: 20),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.restore,
+                        color: Colors.green,
+                      ),
+                      Container(
+                        width: 5,
+                      ),
+                      //TODO: implement restore function
+                      CustomText(
+                        text: "Restore",
+                        size: 15,
+                        color: dark,
+                        weight: FontWeight.normal,
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
           ),
-        ),
-        Expanded(
-          child: ParametersView(treeviewKey: _selectedNode),
-        )
-      ],
+          Expanded(
+            child: ParametersView(treeviewKey: _selectedNode),
+          )
+        ],
+      ),
     );
   }
 
@@ -106,7 +172,7 @@ class ParametersTreeState extends State<ParametersTree> {
     Node? node = _treeViewController.getNode(key);
     if (node != null) {
       List<Node> updated;
-      if (key == 'docs') {
+      if (key == 'motor parameter') {
         updated = _treeViewController.updateNode(
             key,
             node.copyWith(
@@ -118,7 +184,7 @@ class ParametersTreeState extends State<ParametersTree> {
             key, node.copyWith(expanded: expanded));
       }
       setState(() {
-        if (key == 'docs') docsOpen = expanded;
+        if (key == 'motor parameter') docsOpen = expanded;
         _treeViewController = _treeViewController.copyWith(children: updated);
       });
     }

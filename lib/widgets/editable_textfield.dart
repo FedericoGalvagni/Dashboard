@@ -25,12 +25,10 @@ class _EditableTextFieldState extends State<EditableTextField> {
       return Center(
         child: TextField(
           onSubmitted: (newValue) {
-            print("we are here");
             setState(() {
               widget.initialText = newValue;
               widget.isEditingText = false;
               widget.newValue(newValue);
-              print("we are here");
             });
           },
           controller: widget.editingController,

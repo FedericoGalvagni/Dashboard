@@ -16,8 +16,9 @@ class DataTableDState extends State<DataTableD> {
   DataTableDState({Key? key});
   bool _isAscending = true;
   int _currentSortColumn = 0;
-  // The value of the default itemPerPage must be present in the
-  // availableRowsPerPage list
+
+  /// The value of the default [itemPerPage] must be present in the
+  /// availableRowsPerPage list
   ValueNotifier<int> itemPerPage = ValueNotifier<int>(10);
   @override
   Widget build(BuildContext context) {
@@ -44,13 +45,13 @@ class DataTableDState extends State<DataTableD> {
                       if (_isAscending == true) {
                         _isAscending = false;
                         // sort the product list in Ascending, order by time
-                        comandsList.value.sort((productA, productB) =>
-                            productB.time.compareTo(productA.time));
+                        comandsList.value.sort(
+                            (itemA, itemB) => itemB.time.compareTo(itemA.time));
                       } else {
                         _isAscending = true;
                         // sort the product list in Descending, order by time
-                        comandsList.value.sort((productA, productB) =>
-                            productA.time.compareTo(productB.time));
+                        comandsList.value.sort(
+                            (itemA, itemB) => itemA.time.compareTo(itemB.time));
                       }
                     });
                   }),
@@ -61,14 +62,14 @@ class DataTableDState extends State<DataTableD> {
                       _currentSortColumn = columnIndex;
                       if (_isAscending == true) {
                         _isAscending = false;
-                        // sort the product list in Ascending, order by time
-                        comandsList.value.sort((productA, productB) =>
-                            productB.id.compareTo(productA.id));
+                        // sort the product list in Ascending, order by id
+                        comandsList.value.sort(
+                            (itemA, itemB) => itemB.id.compareTo(itemA.id));
                       } else {
                         _isAscending = true;
                         // sort the product list in Descending, order by time
-                        comandsList.value.sort((productA, productB) =>
-                            productA.id.compareTo(productB.id));
+                        comandsList.value.sort(
+                            (itemA, itemB) => itemA.id.compareTo(itemB.id));
                       }
                     });
                   }),
@@ -80,13 +81,13 @@ class DataTableDState extends State<DataTableD> {
                       if (_isAscending == true) {
                         _isAscending = false;
                         // sort the product list in Ascending, order by time
-                        comandsList.value.sort((productA, productB) =>
-                            productB.action.compareTo(productA.action));
+                        comandsList.value.sort((itemA, itemB) =>
+                            itemB.action.compareTo(itemA.action));
                       } else {
                         _isAscending = true;
                         // sort the product list in Descending, order by time
-                        comandsList.value.sort((productA, productB) =>
-                            productA.action.compareTo(productB.action));
+                        comandsList.value.sort((itemA, itemB) =>
+                            itemA.action.compareTo(itemB.action));
                       }
                     });
                   }),
@@ -98,15 +99,13 @@ class DataTableDState extends State<DataTableD> {
                       if (_isAscending == true) {
                         _isAscending = false;
                         // sort the product list in Ascending, order by time
-                        comandsList.value.sort((productA, productB) => productB
-                            .description
-                            .compareTo(productA.description));
+                        comandsList.value.sort((itemA, itemB) =>
+                            itemB.description.compareTo(itemA.description));
                       } else {
                         _isAscending = true;
                         // sort the product list in Descending, order by time
-                        comandsList.value.sort((productA, productB) => productA
-                            .description
-                            .compareTo(productB.description));
+                        comandsList.value.sort((itemA, itemB) =>
+                            itemA.description.compareTo(itemB.description));
                       }
                     });
                   }),
@@ -118,13 +117,13 @@ class DataTableDState extends State<DataTableD> {
                       if (_isAscending == true) {
                         _isAscending = false;
                         // sort the product list in Ascending, order by time
-                        comandsList.value.sort((productA, productB) =>
-                            productB.user.compareTo(productA.user));
+                        comandsList.value.sort(
+                            (itemA, itemB) => itemB.user.compareTo(itemA.user));
                       } else {
                         _isAscending = true;
                         // sort the product list in Descending, order by time
-                        comandsList.value.sort((productA, productB) =>
-                            productA.user.compareTo(productB.user));
+                        comandsList.value.sort(
+                            (itemA, itemB) => itemA.user.compareTo(itemB.user));
                       }
                     });
                   }),

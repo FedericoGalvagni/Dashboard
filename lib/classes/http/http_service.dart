@@ -63,7 +63,7 @@ class HttpService {
     comandsHeaders = List.from(convertedJsonObjectHeaders);
   }
 
-  static postManualOp(String id) async {
+  static post(String id) async {
     http.post(nodeUrl, headers: {"id": id});
   }
 }

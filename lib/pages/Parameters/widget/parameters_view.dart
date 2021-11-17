@@ -54,6 +54,13 @@ class _ParametersViewState extends State<ParametersView> {
               size: 20,
               color: dark,
               weight: FontWeight.w600,
+            )),
+            DataColumn(
+                label: CustomText(
+              text: "State",
+              size: 20,
+              color: dark,
+              weight: FontWeight.w600,
             ))
           ], rows: _buildRow(list)));
     }
@@ -80,12 +87,35 @@ class _ParametersViewState extends State<ParametersView> {
               newValue: (st) {
                 parameter.motorParameters[groupIndex].motorList[actuatorIndex]
                     .parameters[i].value = st;
+                    setState(() {
+                      
+                    });
               },
             ),
           ),
         ),
+        DataCell(_getChild(originalParameter.motorParameters[groupIndex]
+                .motorList[actuatorIndex].parameters[i].value ==
+            list[i].value))
       ]));
     }
     return row;
+  }
+
+  Widget _getChild(bool t) {
+    if (t) {
+      return const Icon(
+        Icons.check_circle,
+        color: Colors.green,
+        size: 20,
+      );
+    } else {
+      return Icon(
+        Icons.published_with_changes,
+        color: Colors.amber.shade700,
+        size: 20,
+      );
+    }
+    
   }
 }
