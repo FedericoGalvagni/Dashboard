@@ -6,7 +6,6 @@ import 'package:interface_example1/data_models/config.dart';
 import 'package:interface_example1/data_models/overview_data.dart';
 import 'package:interface_example1/data_models/states_data.dart';
 
-
 class HttpService {
   HttpService instance = Get.find();
   static get(String id) async {
@@ -22,7 +21,7 @@ class HttpService {
         break;
       case "manualOperation":
         response = await http.get(nodeUrl, headers: {"id": id});
-        
+        debugPrint(response.body);
         break;
       case "states":
         final response = await http.get(nodeUrl, headers: {"id": id});
@@ -45,7 +44,7 @@ class HttpService {
   static statesGet(final response) {
     //build the JSON object from the http response
     //
-    showTableIndicator = false;
+
     debugPrint("received");
     String responseBody = response.body.toString();
     dynamic jsonObject = json.decode(responseBody);
@@ -61,6 +60,20 @@ class HttpService {
     //same thing with the headers list
     final convertedJsonObjectHeaders = jsonObject["headers"].cast<String>();
     comandsHeaders = List.from(convertedJsonObjectHeaders);
+  }
+
+  static getTable(String id) async {
+    http.get(nodeUrl, headers: {"id": id});
+    switch (id) {
+      case "produzione":
+        final response = await http.get(nodeUrl, headers: {"id": id});
+        String responseBody = response.body.toString();
+        String jsonStr = responseBody.toString();
+        row.value = json.decode(jsonStr);
+        showTableIndicator = false;
+        break;
+      default:
+    }
   }
 
   static post(String id) async {

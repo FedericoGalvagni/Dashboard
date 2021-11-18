@@ -22,7 +22,7 @@ void main() {
     switch (activePage) {
       case overviewPageRoute:
         //print("init");
-        HttpService.get("overview");
+        //HttpService.get("overview");
         break;
       case manualOperationsPageRoute:
         //HttpService.get("manualOperation");
@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HttpService.getTable("produzione");
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Industrial Dashboard",

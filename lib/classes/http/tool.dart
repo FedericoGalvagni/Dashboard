@@ -1,0 +1,10 @@
+import 'package:flutter/material.dart';
+
+class Tool {
+  static bool isNumeric(String s) {
+    if (s == null) {
+      return false;
+    }
+    return double.tryParse(s) != null;
+  }
+}

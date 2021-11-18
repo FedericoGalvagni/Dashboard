@@ -42,13 +42,13 @@ class StatesLargeState extends State<StatesLarge> {
             height: 50,
             child: ElevatedButton(
                 onPressed: () {
-                  showTableIndicator = true;
-                  HttpService.get(comandController.text);
+                  
+                  HttpService.getTable(comandController.text);
                   debugPrint(comandController.text);
                   setState(() {});
                 },
-                child:
-                    const CustomText(text: "GO", size: 18, weight: FontWeight.bold))),
+                child: const CustomText(
+                    text: "GO", size: 18, weight: FontWeight.bold))),
         Expanded(child: Container()),
         //-------
         // SPACER
