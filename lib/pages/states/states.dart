@@ -3,8 +3,14 @@ import 'package:get/get.dart';
 import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
 import 'package:interface_example1/pages/states/widgets/states_large.dart';
+import 'package:interface_example1/pages/states/widgets/states_medium.dart';
 import 'package:interface_example1/pages/states/widgets/states_small.dart';
 import 'package:interface_example1/widgets/custom_text.dart';
+
+/// Classe [StatesPage] contiene gli elementi grafici della pagina di
+/// visualizzazione dinamica delle tabelle. 
+/// In base alla dimensione del dispositivo
+/// ritorna [StatesLarge], [StatesMedium], [StatesSmall]
 
 class StatesPage extends StatelessWidget {
   const StatesPage({Key? key}) : super(key: key);
@@ -32,9 +38,9 @@ class StatesPage extends StatelessWidget {
             if (ResponsiveWidget.isLargeScreen(context) ||
                 ResponsiveWidget.isMediumScreen(context))
               if (ResponsiveWidget.isCustomSize(context))
-                const StatesLarge()
+                StatesLarge()
               else
-                const StatesLarge()
+                StatesMedium()
             else
               StatesSmall(),
           ],

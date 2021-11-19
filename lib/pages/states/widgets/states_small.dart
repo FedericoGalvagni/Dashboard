@@ -32,7 +32,7 @@ class StatesSmall extends StatelessWidget {
               height: 40,
               child: ElevatedButton(
                   onPressed: () {
-                    HttpService.get(comandController.text);
+                    HttpService(id:comandController.text).get();
                     debugPrint(comandController.text);
                   },
                   child: const CustomText(

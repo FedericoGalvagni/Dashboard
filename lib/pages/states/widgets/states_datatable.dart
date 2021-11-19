@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:interface_example1/classes/http/tool.dart';
-import 'package:interface_example1/data_models/config.dart';
+
+import 'package:interface_example1/data_models/states_data.dart';
 import 'package:interface_example1/widgets/custom_text.dart';
 
 class DataTableD extends StatefulWidget {
@@ -25,27 +26,30 @@ class DataTableDState extends State<DataTableD> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: row,
-      builder: (context, value, widget) {
-        return ValueListenableBuilder(
-            valueListenable: itemPerPage,
-            builder: (context, value, widget) {
-              return PaginatedDataTable(
-                  sortColumnIndex: _currentSortColumn,
-                  sortAscending: _isAscending,
-                  onRowsPerPageChanged: (v) {
-                    setState(() {
-                      itemPerPage.value = v ?? 10;
-                    });
-                  },
-                  availableRowsPerPage: const [5, 10, 25, 50, 100],
-                  rowsPerPage: itemPerPage.value,
-                  columns: _buildColumns(),
-                  source: _DataSource(context),
-                  columnSpacing: 0);
-            });
-      }
-    );
+        valueListenable: row,
+        builder: (context, value, widget) {
+          return ValueListenableBuilder(
+              valueListenable: itemPerPage,
+              builder: (context, value, widget) {
+                if (row.value.isEmpty) {
+                  return (Container());
+                } else {
+                  return PaginatedDataTable(
+                      sortColumnIndex: _currentSortColumn,
+                      sortAscending: _isAscending,
+                      onRowsPerPageChanged: (v) {
+                        setState(() {
+                          itemPerPage.value = v ?? 10;
+                        });
+                      },
+                      availableRowsPerPage: const [5, 10, 25, 50, 100],
+                      rowsPerPage: itemPerPage.value,
+                      columns: _buildColumns(),
+                      source: _DataSource(context),
+                      columnSpacing: 0);
+                }
+              });
+        });
   }
 
   List<DataColumn> _buildColumns() {
@@ -55,16 +59,16 @@ class DataTableDState extends State<DataTableD> {
       columns.add(DataColumn(
           label: CustomText(
             text: key,
-            size: 12,
+            size: 13,
             weight: FontWeight.w600,
           ),
           onSort: (columnIndex, a) {
             setState(() {
               _currentSortColumn = columnIndex;
-              print(columnIndex);
+              debugPrint("DATATABLE: INDEX" + columnIndex.toString());
               if (_isAscending == true) {
                 _isAscending = false;
-                print(_isAscending);
+                
                 // sort the product list in Ascending, order by time
                 row.value.sort((itemA, itemB) {
                   if (Tool.isNumeric(itemA[key].toString()) &&
@@ -94,7 +98,7 @@ class DataTableDState extends State<DataTableD> {
 
   List<DataRow> _buildRows() {
     /// iterazione all'interno della lista di jsonMap [row], chiamata
-    /// al metodo [_buildCells]
+    /// dal metodo [_buildCells]
     List<DataRow> columns = [];
     for (var item in row.value) {
       columns.add(DataRow(cells: _buildCells(item)));

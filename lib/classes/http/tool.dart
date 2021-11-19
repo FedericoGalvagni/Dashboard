@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Tool {
   static bool isNumeric(String s) {
     if (s == null) {

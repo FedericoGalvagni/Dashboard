@@ -42,3 +42,4 @@ ValueNotifier<List<Comands>> comandsList = ValueNotifier<List<Comands>>(
 String headers = '["time", "id", "action", "description", "user"]';
 var comandsHeaders = json.decode(headers);
 dynamic test;
+ValueNotifier<List<dynamic>> row = ValueNotifier<List<dynamic>>([]);
