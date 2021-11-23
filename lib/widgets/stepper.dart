@@ -39,7 +39,7 @@ class _ValueStepperState extends State<ValueStepper> {
                 icon: const Icon(Icons.remove),
                 iconSize: 25,
                 padding: const EdgeInsets.all(0),
-                color: Colors.white,
+                color: surface(2),
                 onPressed: () {
                   if (widget.sendData ?? false) {
                     debugPrint("minus: id" + widget.id.toString() + ".0");
@@ -82,7 +82,7 @@ class _ValueStepperState extends State<ValueStepper> {
                 icon: const Icon(Icons.add),
                 iconSize: 25,
                 padding: const EdgeInsets.all(0),
-                color: Colors.white,
+                color: surface(2),
                 onPressed: () {
                   if (widget.sendData ?? false) {
                     debugPrint("plus: id" + widget.id.toString() + ".1");

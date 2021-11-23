@@ -38,28 +38,28 @@ class _ParametersViewState extends State<ParametersView> {
                 label: CustomText(
               text: "Index",
               size: 20,
-              color: dark,
+              color: highEmphasis(textOnSurface),
               weight: FontWeight.w600,
             )),
             DataColumn(
                 label: CustomText(
               text: "Parameter",
               size: 20,
-              color: dark,
+              color: highEmphasis(textOnSurface),
               weight: FontWeight.w600,
             )),
             DataColumn(
                 label: CustomText(
               text: "Value",
               size: 20,
-              color: dark,
+              color: highEmphasis(textOnSurface),
               weight: FontWeight.w600,
             )),
             DataColumn(
                 label: CustomText(
               text: "State",
               size: 20,
-              color: dark,
+              color: highEmphasis(textOnSurface),
               weight: FontWeight.w600,
             ))
           ], rows: _buildRow(list)));
@@ -87,9 +87,7 @@ class _ParametersViewState extends State<ParametersView> {
               newValue: (st) {
                 parameter.motorParameters[groupIndex].motorList[actuatorIndex]
                     .parameters[i].value = st;
-                    setState(() {
-                      
-                    });
+                setState(() {});
               },
             ),
           ),
@@ -116,6 +114,5 @@ class _ParametersViewState extends State<ParametersView> {
         size: 20,
       );
     }
-    
   }
 }

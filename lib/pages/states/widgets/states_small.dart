@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:interface_example1/classes/http/http_service.dart';
+import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/pages/states/widgets/states_datatable.dart';
 import 'package:interface_example1/widgets/custom_text.dart';
 
@@ -32,11 +33,14 @@ class StatesSmall extends StatelessWidget {
               height: 40,
               child: ElevatedButton(
                   onPressed: () {
-                    HttpService(id:comandController.text).get();
+                    HttpService(id: comandController.text).get();
                     debugPrint(comandController.text);
                   },
-                  child: const CustomText(
-                      text: "GO", size: 18, weight: FontWeight.bold)))
+                  child: CustomText(
+                      color: highEmphasis(textOnSurface),
+                      text: "GO",
+                      size: 18,
+                      weight: FontWeight.bold)))
         ]),
         Row(
           children: const [DataTableD()],

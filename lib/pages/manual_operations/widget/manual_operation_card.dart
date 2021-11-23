@@ -33,12 +33,10 @@ class ManualOperationCard extends StatelessWidget {
         child: Container(
       height: 100,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: surface(2),
         boxShadow: [
           BoxShadow(
-              offset: const Offset(6, 6),
-              color: lightGrey.withOpacity(0.5),
-              blurRadius: 12)
+              offset: const Offset(6, 6), color: surface(2), blurRadius: 12)
         ],
       ),
       child: Row(
@@ -51,9 +49,7 @@ class ManualOperationCard extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                        width: 5,
-                        height: 50,
-                        color: Colors.blue.withOpacity(0.8)),
+                        width: 5, height: 50, color: primary.withOpacity(0.8)),
                     const SizedBox(
                       width: 10,
                       height: 50,
@@ -64,7 +60,7 @@ class ManualOperationCard extends StatelessWidget {
                           alignment: Alignment.bottomLeft,
                           child: CustomText(
                             text: title,
-                            color: dark,
+                            color: highEmphasis(textOnSurface),
                             size: 30,
                             weight: FontWeight.bold,
                           ),
@@ -75,9 +71,7 @@ class ManualOperationCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                        width: 5,
-                        height: 50,
-                        color: Colors.blue.withOpacity(0.8)),
+                        width: 5, height: 50, color: primary.withOpacity(0.8)),
                     Container(
                       width: 10,
                     ),
@@ -85,7 +79,7 @@ class ManualOperationCard extends StatelessWidget {
                       height: 50,
                       child: CustomText(
                         text: "max: 200, min: 200",
-                        color: dark.withOpacity(0.7),
+                        color: textOnSecondary.withOpacity(0.7),
                         size: 15,
                         weight: FontWeight.w300,
                       ),
@@ -96,10 +90,8 @@ class ManualOperationCard extends StatelessWidget {
           ValueStepper(
             id: id,
             sendData: true,
-            nodeUrl: nodeUrl,
-            newValue: (newValue) {
-              
-            },
+            nodeUrl: "http",
+            newValue: (newValue) {},
             value: value,
           )
         ],

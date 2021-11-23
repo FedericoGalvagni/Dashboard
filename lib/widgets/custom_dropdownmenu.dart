@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:interface_example1/constants/style.dart';
 
 class CustomDDMenu extends StatefulWidget {
   String dropdownValue;
   List<String> items;
-  Color color;
+  Color? color;
   Color textColor;
   Function(String) selectedValue;
 
@@ -11,7 +12,7 @@ class CustomDDMenu extends StatefulWidget {
     Key? key,
     required this.dropdownValue,
     required this.items,
-    this.color = Colors.blue,
+    this.color,
     this.textColor = Colors.black,
     required this.selectedValue,
   }) : super(key: key);
@@ -24,8 +25,10 @@ class CustomDDMenu extends StatefulWidget {
 class _CustomDDMenuState extends State<CustomDDMenu> {
   @override
   Widget build(BuildContext context) {
+    widget.color ?? primary;
     return DropdownButton<String>(
       value: widget.dropdownValue,
+      dropdownColor: surface(2),
       icon: const Icon(Icons.expand_more),
       iconSize: 24,
       elevation: 16,

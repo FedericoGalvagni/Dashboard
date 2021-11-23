@@ -1,12 +1,11 @@
-import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/controllers/navigation_controller.dart';
 import 'package:interface_example1/layout.dart';
-import 'package:interface_example1/routing/routes.dart';
 import 'package:interface_example1/widgets/menu_controller.dart';
 import 'classes/http/http_service.dart';
 
@@ -14,22 +13,7 @@ void main() {
   Get.put(MenuController());
   Get.put(NavigationController());
   runApp(const MyApp());
-  const oneSec = Duration(seconds: 1);
-
-  Timer.periodic(oneSec, (Timer timer) {
-    String activePage = MenuController.instance.activeItem();
-    switch (activePage) {
-      case overviewPageRoute:
-        //print("init");
-        //HttpService.get("overview");
-        break;
-      case manualOperationsPageRoute:
-        //HttpService.get("manualOperation");
-        //print("manualOperation");
-        break;
-      default:
-    }
-  });
+  CustomColor().assignColor(true);
 }
 
 class MyApp extends StatelessWidget {
@@ -37,24 +21,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: CLEAN
-    /*HttpService(
-      id: "produzione",
-      limit: 500,
-    ).get();*/
     HttpService(id: "graficoProduzione", limit: "100").get();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Industrial Dashboard",
       theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white60,
+          scaffoldBackgroundColor:background,
           textTheme: GoogleFonts.mulishTextTheme(Theme.of(context).textTheme)
-              .apply(bodyColor: Colors.black),
+              .apply(bodyColor: textOnSurface),
           pageTransitionsTheme: const PageTransitionsTheme(builders: {
             TargetPlatform.iOS: ZoomPageTransitionsBuilder(),
             TargetPlatform.android: ZoomPageTransitionsBuilder(),
           }),
-          primaryColor: Colors.blue),
+          primaryColor: primary),
       home: SiteLayout(),
     );
   }

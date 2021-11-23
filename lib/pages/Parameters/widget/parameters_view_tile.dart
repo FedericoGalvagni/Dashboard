@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/widgets/custom_text.dart';
 
 class ParametersViewTile extends StatefulWidget {
@@ -29,11 +30,13 @@ class ParametersViewTileState extends State<ParametersViewTile> {
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          CustomText(text: widget.index.toString()),
+          CustomText(
+              color: highEmphasis(textOnSurface),
+              text: widget.index.toString()),
           Container(
             width: _width / 64,
           ),
-          CustomText(text: widget.name),
+          CustomText(color: highEmphasis(textOnSurface), text: widget.name),
           Container(
             width: _width / 64,
           ),

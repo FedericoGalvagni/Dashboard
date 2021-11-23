@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/data_models/config.dart';
 import 'package:interface_example1/data_models/manual_operation_data.dart';
 import 'package:interface_example1/pages/manual_operations/widget/manual_operations_group.dart';
@@ -12,7 +13,8 @@ class ManualOperationIconsGrid extends StatefulWidget {
   final int aControllPerRow;
 
   @override
-  State<ManualOperationIconsGrid> createState() => _ManualOperationIconsGridState();
+  State<ManualOperationIconsGrid> createState() =>
+      _ManualOperationIconsGridState();
 }
 
 class _ManualOperationIconsGridState extends State<ManualOperationIconsGrid> {
@@ -36,7 +38,9 @@ class _ManualOperationIconsGridState extends State<ManualOperationIconsGrid> {
       mechanicalGroupIcons.add(Container());
       return mechanicalGroupIcons;
     }
-    for (var i = 0; i < mechanicalGroup.groups.length; i = i + widget.iconsPerRow) {
+    for (var i = 0;
+        i < mechanicalGroup.groups.length;
+        i = i + widget.iconsPerRow) {
       //print("buildIndex: " + i.toString());
       mechanicalGroupIcons.add((Row(children: [
         Container(
@@ -63,7 +67,7 @@ class _ManualOperationIconsGridState extends State<ManualOperationIconsGrid> {
         row.add(Container(
           width: _width / 64,
         ));
-        row.add(Expanded(child: Container(color: Colors.blue)));
+        row.add(Expanded(child: Container(color: primary)));
         //print("true" + ii.toString());
       } else {
         row.add(SizedBox(

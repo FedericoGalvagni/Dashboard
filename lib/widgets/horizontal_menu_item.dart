@@ -16,22 +16,23 @@ class HorizontalMenuItem extends StatelessWidget {
     double _width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: onTap,
+      splashColor: Colors.red,
       onHover: (value) {
         value
             ? menuController.onHover(itemName)
             : menuController.onHover("not hovering");
       },
       // Obx: the value will change
-      child: Obx(() => Container( 
+      child: Obx(() => Container(
           color: menuController.isHovering(itemName)
-              ? lightGrey.withOpacity(.1)
-              : Colors.transparent,
+              ? hovered(surface(2), Colors.white)
+              : surface(2),
           child: Row(
             children: [
               Visibility(
                 visible: menuController.isHovering(itemName) ||
                     menuController.isActive(itemName),
-                child: Container(width: 6, height: 40, color: dark),
+                child: Container(width: 6, height: 40, color: primary),
                 maintainSize: true,
                 maintainState: true,
                 maintainAnimation: true,
@@ -46,14 +47,15 @@ class HorizontalMenuItem extends StatelessWidget {
               if (!menuController.isActive(itemName))
                 Flexible(
                     child: CustomText(
-                  text: itemName,
-                  color: menuController.isHovering(itemName) ? dark : lightGrey,
-                ))
+                        text: itemName,
+                        color: menuController.isHovering(itemName)
+                            ? textOnSurface
+                            : mediumEmphasis(textOnSurface)))
               else
                 Flexible(
                     child: CustomText(
                   text: itemName,
-                  color: dark,
+                  color: highEmphasis(textOnSurface),
                   size: 18,
                   weight: FontWeight.bold,
                 ))

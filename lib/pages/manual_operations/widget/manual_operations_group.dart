@@ -29,28 +29,26 @@ class ManualOperationsGroup extends StatelessWidget {
         height: 30,
         margin: EdgeInsets.only(left: _width / 64, right: _width / 64),
         decoration: BoxDecoration(
-          color: Colors.blue,
-          border: Border.all(color: Colors.blue),
+          color: primary,
+          border: Border.all(color: primary),
           borderRadius: BorderRadius.circular(5),
           boxShadow: [
             BoxShadow(
-                offset: const Offset(6, 6),
-                color: lightGrey.withOpacity(0.5),
-                blurRadius: 12)
+                offset: const Offset(6, 6), color: surface(2), blurRadius: 12)
           ],
         ),
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            hoverColor: Colors.blue.withOpacity(0.1),
-            splashColor: Colors.blue,
-            highlightColor: Colors.blue.withOpacity(0.3),
+            hoverColor: primary.withOpacity(0.1),
+            splashColor: primary,
+            highlightColor: primary.withOpacity(0.3),
             onTap: () {
               mechanicalGroupSelector = -1;
               navigationController.navigateTo(manualOperationsPageRoute);
             },
-            child: const Center(
-              child: CustomText(text: "Go Back", color: Colors.white),
+            child: Center(
+              child: CustomText(text: "Go Back", color: surface(2)),
             ),
           ),
         ),

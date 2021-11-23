@@ -31,21 +31,22 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
           Visibility(
               child: CustomText(
                   text: "Dash",
-                  color: lightGrey,
+                  color: surface(2),
                   size: 20,
                   weight: FontWeight.bold)),
           Expanded(child: Container()),
           IconButton(
             icon: Icon(
               Icons.settings,
-              color: dark.withOpacity(.7),
+              color: textOnSurface.withOpacity(.7),
             ),
             onPressed: () {},
           ),
           Stack(
             children: [
               IconButton(
-                  icon: Icon(Icons.notifications, color: dark.withOpacity(.7)),
+                  icon: Icon(Icons.notifications,
+                      color: textOnSurface.withOpacity(.7)),
                   onPressed: () {}),
               Positioned(
                   top: 7,
@@ -55,42 +56,42 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
                     height: 12,
                     padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
-                        color: active,
+                        color: background,
                         borderRadius: BorderRadius.circular(30),
-                        border: Border.all(color: lightGrey, width: 2)),
+                        border: Border.all(color: surface(2), width: 2)),
                   ))
             ],
           ),
           Container(
             width: 1,
             height: 22,
-            color: lightGrey,
+            color: surface(2),
           ),
           const SizedBox(
             width: 24,
           ),
           CustomText(
             text: "Federico Galvagni",
-            color: lightGrey,
+            color: surface(2),
           ),
           const SizedBox(
             width: 16,
           ),
           Container(
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(30)),
+                  color: surface(2), borderRadius: BorderRadius.circular(30)),
               child: Container(
                   padding: const EdgeInsets.all(2),
                   margin: const EdgeInsets.all(2),
                   child: CircleAvatar(
-                    backgroundColor: light,
+                    backgroundColor: surface(2),
                     child: Icon(
                       Icons.person_outline,
-                      color: dark,
+                      color: highEmphasis(textOnSurface),
                     ),
                   )))
         ],
       ),
-      iconTheme: IconThemeData(color: dark),
-      backgroundColor: Colors.transparent,
+      iconTheme: IconThemeData(color: textOnSurface),
+      backgroundColor: surface(2),
     );

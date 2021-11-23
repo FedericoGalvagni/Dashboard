@@ -15,14 +15,6 @@ class HttpService {
     http.Response response;
 
     switch (id) {
-      case "overview":
-        response = await http.get(nodeUrl, headers: {"id": id, "limit": limit});
-        Map<String, dynamic> stats = jsonDecode(response.body.toString());
-        totalProduction.value = stats['totalProduction'];
-        h24Production.value = stats['h24Production'];
-        time.value = stats['time'];
-        downtime.value = stats['downtime'];
-        break;
       case "manualOperation":
         response = await http.get(nodeUrl, headers: {"id": id, "limit": limit});
         debugPrint(response.body);
@@ -54,14 +46,33 @@ class HttpService {
         String responseBody = response.body.toString();
         String jsonStr = responseBody.toString();
         productionGraph.value = json.decode(jsonStr);
-        showTableIndicator = false;
+
+        /// produzioneTotale.value è uguale all'ultimo valore della lista
+        /// [productionGraph]
+        produzioneTotale.value = productionGraph.value.last["pezzi"];
+
+        // produzioneUltime24h è uguale all'ultimo valore della lista
+        // productionGraph - il penultimo elemento
+        produzioneUltime24h.value = productionGraph.value.last["pezzi"] -
+            productionGraph.value[productionGraph.value.length - 2]["pezzi"];
+
+        // produzioneMediaGiornaliera è uguale alla somma della produzione di
+        // ogni singolo giorno diviso il numero totale di giorni
+
+        produzioneMediaGiornaliera.value =
+            (productionGraph.value.last["pezzi"] / productionGraph.value.length)
+                .round();
+
+        // produzioneMediaOraria è uguale a produzioneMediaGiornaliera/24
+        produzioneMediaOraria.value =
+            (produzioneMediaGiornaliera.value / 24).round();
         break;
       default:
         response = await http.get(nodeUrl, headers: {"id": id, "limit": limit});
         String jsonStr = response.body.toString();
         Map<String, dynamic> temp = json.decode(jsonStr);
         debugPrint(
-            "HTTP: ERRORE: " + temp["ERRORE"] + " FROM: " + temp["SORGENTE"]);
+            "HTTP: ERRORE: " + temp["ERRORE"] + " SORGENTE: " + temp["FROM"]);
     }
   }
 

@@ -5,11 +5,13 @@ const settingsPageRoute = "Settings";
 const authenticationPageRoute = "Authentication";
 const parametersPageRooute = "Parameters";
 
+
 List sideMenuItems = [
   overviewPageRoute,
   manualOperationsPageRoute,
   statesPageRoute,
   parametersPageRooute,
   settingsPageRoute,
-  authenticationPageRoute
+  authenticationPageRoute,
+
 ];

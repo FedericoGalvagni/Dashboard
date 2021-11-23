@@ -45,7 +45,7 @@ class ParametersTreeState extends State<ParametersTree> {
           position: _expanderPosition,
           // color: Colors.grey.shade800,
           size: 20,
-          color: dark),
+          color: textOnSurface),
       labelStyle: const TextStyle(
         fontSize: 16,
         letterSpacing: 0.3,
@@ -54,7 +54,7 @@ class ParametersTreeState extends State<ParametersTree> {
         fontSize: 16,
         letterSpacing: 0.1,
         fontWeight: FontWeight.w800,
-        color: dark,
+        color: highEmphasis(textOnSurface),
       ),
       iconTheme: IconThemeData(
         size: 18,
@@ -83,7 +83,7 @@ class ParametersTreeState extends State<ParametersTree> {
                     text: "Browser",
                     weight: FontWeight.w600,
                     size: 20,
-                    color: dark),
+                    color: textOnSurface),
               ),
               SizedBox(
                 width: _width / 4,
@@ -128,7 +128,7 @@ class ParametersTreeState extends State<ParametersTree> {
                     text: "Tool",
                     weight: FontWeight.w600,
                     size: 20,
-                    color: dark),
+                    color: textOnSurface),
               ),
               Container(height: 10),
               InkWell(
@@ -149,7 +149,7 @@ class ParametersTreeState extends State<ParametersTree> {
                       CustomText(
                         text: "Restore",
                         size: 15,
-                        color: dark,
+                        color: highEmphasis(textOnSurface),
                         weight: FontWeight.normal,
                       )
                     ],

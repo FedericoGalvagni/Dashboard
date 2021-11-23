@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interface_example1/constants/controllers.dart';
+import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
 import 'package:interface_example1/pages/states/widgets/states_large.dart';
 import 'package:interface_example1/pages/states/widgets/states_medium.dart';
@@ -28,6 +29,7 @@ class StatesPage extends StatelessWidget {
                     text: menuController.activeItem.value,
                     size: 24,
                     weight: FontWeight.bold,
+                    color: textOnBackground
                   )),
             ],
           ),
@@ -38,11 +40,11 @@ class StatesPage extends StatelessWidget {
             if (ResponsiveWidget.isLargeScreen(context) ||
                 ResponsiveWidget.isMediumScreen(context))
               if (ResponsiveWidget.isCustomSize(context))
-                StatesLarge()
-              else
                 StatesMedium()
+              else
+                StatesLarge()
             else
-              StatesSmall(),
+              StatesLarge(),
           ],
         ))
       ],

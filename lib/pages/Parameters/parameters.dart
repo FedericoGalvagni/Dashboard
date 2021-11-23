@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interface_example1/constants/controllers.dart';
+import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
 import 'package:interface_example1/pages/Parameters/widget/parameters_large.dart';
 import 'package:interface_example1/pages/Parameters/widget/parameters_small.dart';
@@ -20,6 +21,7 @@ class ParametersPage extends StatelessWidget {
                   margin: EdgeInsets.only(
                       top: ResponsiveWidget.isSmallScreen(context) ? 56 : 6),
                   child: CustomText(
+                    color: textOnBackground,
                     text: menuController.activeItem.value,
                     size: 24,
                     weight: FontWeight.bold,

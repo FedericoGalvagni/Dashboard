@@ -24,10 +24,13 @@ class InfoCardSmall extends StatelessWidget {
         child: Container(
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: surface(2),
               borderRadius: BorderRadius.circular(8),
-              border:
-                  Border.all(color: isActive ? active : lightGrey, width: .5),
+              border: Border.all(
+                  color: isActive
+                      ? mediumEmphasis(textOnSurface)
+                      : disabledEmphasis(textOnSurface),
+                  width: .5),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,13 +39,17 @@ class InfoCardSmall extends StatelessWidget {
                   text: title,
                   size: 24,
                   weight: FontWeight.w300,
-                  color: isActive ? active : lightGrey,
+                  color: isActive
+                      ? mediumEmphasis(textOnSurface)
+                      : disabledEmphasis(textOnSurface),
                 ),
                 CustomText(
                   text: value,
                   size: 24,
                   weight: FontWeight.bold,
-                  color: isActive ? active : dark,
+                  color: isActive
+                      ? mediumEmphasis(textOnSurface)
+                      : disabledEmphasis(textOnSurface),
                 )
               ],
             )),

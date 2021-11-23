@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interface_example1/constants/controllers.dart';
+import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/data_models/config.dart';
 import 'package:interface_example1/data_models/manual_operation_data.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
@@ -30,6 +31,7 @@ class ManualOperationsPage extends StatelessWidget {
                   text: title,
                   size: 24,
                   weight: FontWeight.bold,
+                  color: textOnBackground,
                 )),
           ],
         ),

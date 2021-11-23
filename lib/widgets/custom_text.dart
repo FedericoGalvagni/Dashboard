@@ -4,9 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomText extends StatelessWidget {
   final String? text;
   final double? size;
-  final Color? color;
+  final Color color;
   final FontWeight? weight;
-  const CustomText({Key? key, this.text, this.size, this.color, this.weight})
+  const CustomText({Key? key, this.text, this.size, required this.color, this.weight})
       : super(key: key);
 
   @override
@@ -15,7 +15,7 @@ class CustomText extends StatelessWidget {
         style: GoogleFonts.roboto(
             
             fontSize: size ?? 16,
-            color: color ?? Colors.black,
+            color: color,
             fontWeight: weight ?? FontWeight.normal));
   }
 }

@@ -32,55 +32,55 @@ class StatesLarge extends StatefulWidget {
 
 class StatesLargeState extends State<StatesLarge> {
   final comandController2 = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
+    GlobalKey<AutoCompleteTextFieldState<String>> key =
+        GlobalKey(debugLabel: "SimpleAutoCompleteTextField_federico");
     // TODO: CLEAN
     List<String> suggestions = ["produzione", "graficoProduzione"];
 
     double _width = MediaQuery.of(context).size.width;
-    GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
+
     return Column(children: [
       Row(children: [
         SizedBox(
           width: _width / 100,
         ),
-        SizedBox(
+        Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(4),color: surface(2)),
             width: _width / 4,
             height: 50,
             child: SimpleAutoCompleteTextField(
-              key: key,
-              suggestions: suggestions,
-              textChanged: (text) {
-                setState() {};
-                widget.id = text;
-                
-              },
-              /*textSubmitted: (text) {
-               print(text.toString());
-                
-              },*/
-            )),
-        // TODO: CLEAR?
-        /*TextField(
-              controller: widget.id,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter a search term',
-              ),
-            )),*/
+              
+                decoration: InputDecoration(
+
+                  border: OutlineInputBorder(),
+                  hintStyle: TextStyle(color: mediumEmphasis(textOnSurface)),
+                  hintText: 'Enter a search term',
+                ),
+                key: key,
+                clearOnSubmit: false,
+                suggestions: suggestions,
+                textSubmitted: (text) {
+                  print(text);
+                  widget.id = text;
+                })),
         SizedBox(
             width: 60,
             height: 50,
             child: ElevatedButton(
+              style: ButtonStyle(backgroundColor: MaterialStateColor.resolveWith((states) => secondary)),
                 onPressed: () {
                   setState(() {
                     HttpService(id: widget.id, limit: widget.limit).get();
                     widget.id = "";
                   });
                 },
-                child: const CustomText(
-                    text: "GO", size: 18, weight: FontWeight.bold))),
+                child: CustomText(
+                    color: highEmphasis(textOnSurface),
+                    text: "GO",
+                    size: 18,
+                    weight: FontWeight.bold))),
         SizedBox(
           width: _width / 100,
         ),
@@ -94,7 +94,7 @@ class StatesLargeState extends State<StatesLarge> {
             dropdownValue: widget.limit.toString(),
             items: const ["100", "250", "500", "1000", "2500", "5000", "10000"],
             color: primary,
-            textColor: dark,
+            textColor: highEmphasis(textOnSurface),
             selectedValue: (value) {
               debugPrint(value);
               widget.limit = value;

@@ -15,7 +15,7 @@ class SideMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     return Container(
-      color: light,
+      color: surface(2),
       child: ListView(
         children: [
           if (ResponsiveWidget.isSmallScreen(context))
@@ -37,7 +37,7 @@ class SideMenu extends StatelessWidget {
                         text: "Overview",
                         size: 20,
                         weight: FontWeight.bold,
-                        color: active,
+                        color: highEmphasis(textOnSurface),
                       ),
                     ),
                     SizedBox(width: _width / 48),
@@ -49,7 +49,8 @@ class SideMenu extends StatelessWidget {
             height: 30,
           ),
           Divider(
-            color: lightGrey.withOpacity(.1),
+            height: 1,
+            color: divider,
           ),
           Column(
             mainAxisSize: MainAxisSize.min,
@@ -61,8 +62,7 @@ class SideMenu extends StatelessWidget {
                         : itemName,
                     onTap: () {
                       if (itemName == authenticationPageRoute) {
-                        // ignore: todo
-                        //TODO :: go to authentication page
+                        // TODO: go to authentication page
                       }
 
                       if (!menuController.isActive(itemName)) {

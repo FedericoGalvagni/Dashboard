@@ -20,48 +20,30 @@ class InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: InkWell(
-        onTap: onTap,
-        child: Container(
-          height: 136,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                  offset: const Offset(0, 6),
-                  color: lightGrey.withOpacity(.1),
-                  blurRadius: 1)
-            ],
-          ),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                      child: Container(
-                    color: topColor ?? active,
-                    height: 5,
-                  ))
-                ],
-              ),
-              Expanded(child: Container()),
-              RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(children: [
-                    TextSpan(
-                        text: "$title\n",
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: isActive ? active : lightGrey)),
-                    TextSpan(
-                        text: "$value",
-                        style: TextStyle(
-                            fontSize: 40, color: isActive ? active : dark)),
-                  ])),
-              Expanded(child: Container()),
-            ],
-          ),
+      child: Container(
+        height: 136,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: surface(2),
+        ),
+        child: Column(
+          children: [
+            Expanded(child: Container()),
+            RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "$title\n",
+                      style: TextStyle(
+                          fontSize: 16, color: mediumEmphasis(textOnSurface))),
+                  TextSpan(
+                      text: "$value",
+                      style: TextStyle(
+                          fontSize: 40, color: highEmphasis(textOnSurface))),
+                ])),
+            Expanded(child: Container()),
+          ],
         ),
       ),
     );

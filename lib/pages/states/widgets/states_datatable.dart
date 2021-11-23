@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interface_example1/classes/http/tool.dart';
+import 'package:interface_example1/constants/style.dart';
 
 import 'package:interface_example1/data_models/states_data.dart';
 import 'package:interface_example1/widgets/custom_text.dart';
@@ -58,6 +59,7 @@ class DataTableDState extends State<DataTableD> {
     (headers as Map<String, dynamic>).forEach((key, value) {
       columns.add(DataColumn(
           label: CustomText(
+            color: highEmphasis(textOnSurface),
             text: key,
             size: 13,
             weight: FontWeight.w600,
@@ -68,7 +70,7 @@ class DataTableDState extends State<DataTableD> {
               debugPrint("DATATABLE: INDEX" + columnIndex.toString());
               if (_isAscending == true) {
                 _isAscending = false;
-                
+
                 // sort the product list in Ascending, order by time
                 row.value.sort((itemA, itemB) {
                   if (Tool.isNumeric(itemA[key].toString()) &&

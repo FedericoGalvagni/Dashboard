@@ -16,11 +16,11 @@ class OverviewCardsMedium extends StatelessWidget {
         Row(
           children: [
             ValueListenableBuilder(
-                valueListenable: totalProduction,
+                valueListenable: produzioneTotale,
                 builder: (context, value, widget) {
                   return InfoCard(
                     title: "Total Production",
-                    value: totalProduction.value.toString(),
+                    value: produzioneTotale.value.toString(),
                     onTap: () {},
                     topColor: Colors.orange,
                   );
@@ -29,11 +29,11 @@ class OverviewCardsMedium extends StatelessWidget {
               width: _width / 64,
             ),
             ValueListenableBuilder(
-                valueListenable: totalProduction,
+                valueListenable: produzioneUltime24h,
                 builder: (context, value, widget) {
                   return InfoCard(
                     title: "Production 24H",
-                    value: h24Production.value.toString(),
+                    value: produzioneUltime24h.value.toString(),
                     topColor: Colors.lightGreen,
                     onTap: () {},
                   );
@@ -46,11 +46,11 @@ class OverviewCardsMedium extends StatelessWidget {
         Row(
           children: [
             ValueListenableBuilder(
-                valueListenable: totalProduction,
+                valueListenable: produzioneMediaGiornaliera,
                 builder: (context, value, widget) {
                   return InfoCard(
                     title: "Time",
-                    value: time.value.toString(),
+                    value: produzioneMediaGiornaliera.value.toString(),
                     topColor: Colors.redAccent,
                     onTap: () {},
                   );
@@ -59,11 +59,11 @@ class OverviewCardsMedium extends StatelessWidget {
               width: _width / 64,
             ),
             ValueListenableBuilder(
-                valueListenable: totalProduction,
+                valueListenable: produzioneMediaOraria,
                 builder: (context, value, widget) {
                   return InfoCard(
                     title: "Downtime",
-                    value: downtime.value.toString(),
+                    value: produzioneMediaOraria.value.toString(),
                     onTap: () {},
                   );
                 }),

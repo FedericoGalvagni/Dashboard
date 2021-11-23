@@ -39,7 +39,7 @@ class MenuController extends GetxController {
 
       case parametersPageRooute:
         return _customIcon(Icons.list_alt, itemName);
-        
+
       default:
         return _customIcon(Icons.exit_to_app, itemName);
     }
@@ -50,13 +50,15 @@ class MenuController extends GetxController {
       return Icon(
         icon,
         size: 22,
-        color: dark,
+        color: highEmphasis(textOnSurface),
       );
     }
 
     return Icon(
       icon,
-      color: isHovering(itemName) ? dark : lightGrey,
+      color: isHovering(itemName)
+          ? mediumEmphasis(textOnSurface)
+          : highEmphasis(textOnSurface),
     );
   }
 }
