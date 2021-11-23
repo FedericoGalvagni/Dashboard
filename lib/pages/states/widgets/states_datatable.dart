@@ -31,13 +31,12 @@ class DataTableDState extends State<DataTableD> {
           cardColor: surface(4),
           dividerColor: divider,
           canvasColor: surface(24),
-          iconTheme:
-              IconThemeData(color: getEmphasis(textOnSurface, emphasis.high)),
-          textTheme: TextTheme(caption: TextStyle(color: Colors.white))),
+          iconTheme: IconThemeData(color: primary),
+          textTheme: TextTheme(caption: TextStyle(color: primary))),
       child: PaginatedDataTable(
           sortColumnIndex: _currentSortColumn,
           sortAscending: _isAscending,
-          arrowHeadColor: getEmphasis(textOnSurface, emphasis.high),
+          arrowHeadColor: primary,
           onRowsPerPageChanged: (v) {
             setState(() {
               itemPerPage.value = v ?? 10;

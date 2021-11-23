@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Industrial Dashboard",
       theme: ThemeData(
-          scaffoldBackgroundColor:background,
+          scaffoldBackgroundColor: background,
           textTheme: GoogleFonts.mulishTextTheme(Theme.of(context).textTheme)
               .apply(bodyColor: textOnSurface),
           pageTransitionsTheme: const PageTransitionsTheme(builders: {
