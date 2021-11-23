@@ -45,9 +45,10 @@ class InfoCard extends StatelessWidget {
                           color: getEmphasis(textOnSurface, emphasis.high))),
                 ])),*/
             CustomText(
-                text: title,
-                size: 16,
-                color: getEmphasis(textOnSurface, emphasis.medium)),
+              text: title,
+              size: 16,
+              color: primary,
+            ),
             NumberSlideAnimation(
               number: value.toString(),
               duration: const Duration(milliseconds: 1500),

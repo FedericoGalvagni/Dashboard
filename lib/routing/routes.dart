@@ -3,15 +3,13 @@ const manualOperationsPageRoute = "Manual operation";
 const statesPageRoute = "Machine state";
 const settingsPageRoute = "Settings";
 const authenticationPageRoute = "Authentication";
-const parametersPageRooute = "Parameters";
-
+const parametersPageRoute = "Parameters";
 
 List sideMenuItems = [
   overviewPageRoute,
   manualOperationsPageRoute,
   statesPageRoute,
-  parametersPageRooute,
+  parametersPageRoute,
   settingsPageRoute,
   authenticationPageRoute,
-
 ];

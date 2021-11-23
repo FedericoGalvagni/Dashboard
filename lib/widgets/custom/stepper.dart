@@ -7,6 +7,7 @@ class ValueStepper extends StatefulWidget {
   bool? sendData;
   var nodeUrl;
   String value;
+
   Function(String) newValue;
   ValueStepper(
       {Key? key,
@@ -24,6 +25,7 @@ class ValueStepper extends StatefulWidget {
 class _ValueStepperState extends State<ValueStepper> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController temp = TextEditingController();
     return Row(children: [
       Center(
         child: Container(
@@ -54,12 +56,25 @@ class _ValueStepperState extends State<ValueStepper> {
           width: 50,
           //color: Colors.red,
           child: TextField(
+            controller: temp,
             readOnly: true,
             textAlign: TextAlign.center,
+            style: TextStyle(
+                color: getEmphasis(
+              textOnSurface,
+              emphasis.high,
+            )),
             decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(10.0),
-              border: const OutlineInputBorder(borderRadius: BorderRadius.zero),
-              hintText: widget.value,
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(4),
+                  borderSide: BorderSide(
+                      color: getEmphasis(textOnSurface, emphasis.medium),
+                      width: 1)),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(4),
+                  borderSide: BorderSide(color: primary, width: 2)),
+              border:
+                  OutlineInputBorder(borderSide: BorderSide(color: primary)),
             ),
             onSubmitted: (newValue) {
               setState(() {

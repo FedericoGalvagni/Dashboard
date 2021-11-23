@@ -19,7 +19,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case statesPageRoute:
       return _getPageRoute(const StatesPage());
 
-    case parametersPageRooute:
+    case parametersPageRoute:
       return _getPageRoute(const ParametersPage());
 
     case settingsPageRoute:

@@ -38,45 +38,44 @@ class _ParametersViewState extends State<ParametersView> {
             child: DataTable(columns: [
               DataColumn(
                   label: Center(
-                    child: Text("index", textAlign: TextAlign.center,),
-                    /* CustomText(
-                align: TextAlign.center,
-                text: "Index",
-                size: 20,
-                color: getEmphasis(textOnSurface, emphasis.high),
-                weight: FontWeight.w600,
-              ),
-                  */)),
+                child: CustomText(
+                  align: TextAlign.center,
+                  text: "Index",
+                  size: 20,
+                  color: getEmphasis(textOnSurface, emphasis.high),
+                  weight: FontWeight.w600,
+                ),
+              )),
               DataColumn(
                   label: Center(
-                    child: CustomText(
-                align: TextAlign.center,
-                text: "Parameter",
-                size: 20,
-                color: getEmphasis(textOnSurface, emphasis.high),
-                weight: FontWeight.w600,
-              ),
-                  )),
+                child: CustomText(
+                  align: TextAlign.center,
+                  text: "Parameter",
+                  size: 20,
+                  color: getEmphasis(textOnSurface, emphasis.high),
+                  weight: FontWeight.w600,
+                ),
+              )),
               DataColumn(
                   label: Center(
-                    child: CustomText(
-                align: TextAlign.center,
-                text: "Value",
-                size: 20,
-                color: getEmphasis(textOnSurface, emphasis.high),
-                weight: FontWeight.w600,
-              ),
-                  )),
+                child: CustomText(
+                  align: TextAlign.center,
+                  text: "Value",
+                  size: 20,
+                  color: getEmphasis(textOnSurface, emphasis.high),
+                  weight: FontWeight.w600,
+                ),
+              )),
               DataColumn(
                   label: Center(
-                    child: CustomText(
-                align: TextAlign.center,
-                text: "State",
-                size: 20,
-                color: getEmphasis(textOnSurface, emphasis.high),
-                weight: FontWeight.w600,
-              ),
-                  ))
+                child: CustomText(
+                  align: TextAlign.center,
+                  text: "State",
+                  size: 20,
+                  color: getEmphasis(textOnSurface, emphasis.high),
+                  weight: FontWeight.w600,
+                ),
+              ))
             ], rows: _buildRow(list)),
           ));
     }

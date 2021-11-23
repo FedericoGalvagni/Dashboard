@@ -37,7 +37,7 @@ class MenuController extends GetxController {
       case authenticationPageRoute:
         return _customIcon(Icons.person, itemName);
 
-      case parametersPageRooute:
+      case parametersPageRoute:
         return _customIcon(Icons.list_alt, itemName);
 
       default:
