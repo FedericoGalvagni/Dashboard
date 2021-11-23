@@ -28,7 +28,7 @@ class _CustomDDMenuState extends State<CustomDDMenu> {
     widget.color ?? primary;
     return DropdownButton<String>(
       value: widget.dropdownValue,
-      dropdownColor: surface(2),
+      dropdownColor: surface(4),
       icon: const Icon(Icons.expand_more),
       iconSize: 24,
       elevation: 16,

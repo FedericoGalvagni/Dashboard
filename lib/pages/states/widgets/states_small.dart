@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:interface_example1/classes/http/http_service.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/pages/states/widgets/states_datatable.dart';
-import 'package:interface_example1/widgets/custom_text.dart';
+import 'package:interface_example1/widgets/custom/custom_text.dart';
 
 class StatesSmall extends StatelessWidget {
   final comandController = TextEditingController();
@@ -37,7 +37,7 @@ class StatesSmall extends StatelessWidget {
                     debugPrint(comandController.text);
                   },
                   child: CustomText(
-                      color: highEmphasis(textOnSurface),
+                      color: getEmphasis(textOnSurface, emphasis.high),
                       text: "GO",
                       size: 18,
                       weight: FontWeight.bold)))

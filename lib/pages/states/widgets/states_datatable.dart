@@ -3,7 +3,7 @@ import 'package:interface_example1/classes/http/tool.dart';
 import 'package:interface_example1/constants/style.dart';
 
 import 'package:interface_example1/data_models/states_data.dart';
-import 'package:interface_example1/widgets/custom_text.dart';
+import 'package:interface_example1/widgets/custom/custom_text.dart';
 
 class DataTableD extends StatefulWidget {
   const DataTableD({Key? key}) : super(key: key);
@@ -26,31 +26,29 @@ class DataTableDState extends State<DataTableD> {
   ValueNotifier<int> itemPerPage = ValueNotifier<int>(10);
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-        valueListenable: row,
-        builder: (context, value, widget) {
-          return ValueListenableBuilder(
-              valueListenable: itemPerPage,
-              builder: (context, value, widget) {
-                if (row.value.isEmpty) {
-                  return (Container());
-                } else {
-                  return PaginatedDataTable(
-                      sortColumnIndex: _currentSortColumn,
-                      sortAscending: _isAscending,
-                      onRowsPerPageChanged: (v) {
-                        setState(() {
-                          itemPerPage.value = v ?? 10;
-                        });
-                      },
-                      availableRowsPerPage: const [5, 10, 25, 50, 100],
-                      rowsPerPage: itemPerPage.value,
-                      columns: _buildColumns(),
-                      source: _DataSource(context),
-                      columnSpacing: 0);
-                }
-              });
-        });
+    return Theme(
+      data: ThemeData(
+          cardColor: surface(4),
+          dividerColor: divider,
+          canvasColor: surface(24),
+          iconTheme:
+              IconThemeData(color: getEmphasis(textOnSurface, emphasis.high)),
+          textTheme: TextTheme(caption: TextStyle(color: Colors.white))),
+      child: PaginatedDataTable(
+          sortColumnIndex: _currentSortColumn,
+          sortAscending: _isAscending,
+          arrowHeadColor: getEmphasis(textOnSurface, emphasis.high),
+          onRowsPerPageChanged: (v) {
+            setState(() {
+              itemPerPage.value = v ?? 10;
+            });
+          },
+          availableRowsPerPage: const [5, 10, 25, 50, 100],
+          rowsPerPage: itemPerPage.value,
+          columns: _buildColumns(),
+          source: _DataSource(context),
+          columnSpacing: 0),
+    );
   }
 
   List<DataColumn> _buildColumns() {
@@ -59,7 +57,7 @@ class DataTableDState extends State<DataTableD> {
     (headers as Map<String, dynamic>).forEach((key, value) {
       columns.add(DataColumn(
           label: CustomText(
-            color: highEmphasis(textOnSurface),
+            color: getEmphasis(textOnSurface, emphasis.high),
             text: key,
             size: 13,
             weight: FontWeight.w600,
@@ -97,26 +95,6 @@ class DataTableDState extends State<DataTableD> {
     });
     return columns;
   }
-
-  List<DataRow> _buildRows() {
-    /// iterazione all'interno della lista di jsonMap [row], chiamata
-    /// dal metodo [_buildCells]
-    List<DataRow> columns = [];
-    for (var item in row.value) {
-      columns.add(DataRow(cells: _buildCells(item)));
-    }
-    return columns;
-  }
-
-  List<DataCell> _buildCells(Map<String, dynamic> element) {
-    List<DataCell> cells = [];
-
-    (element as Map<String, dynamic>).forEach((key, value) {
-      cells.add(DataCell(Text(value)));
-    });
-
-    return cells;
-  }
 }
 
 class _DataSource extends DataTableSource {
@@ -140,7 +118,10 @@ class _DataSource extends DataTableSource {
     List<DataCell> cells = [];
 
     (element as Map<String, dynamic>).forEach((key, value) {
-      cells.add(DataCell(Text(value.toString())));
+      cells.add(DataCell(Text(
+        value.toString(),
+        style: TextStyle(color: getEmphasis(textOnSurface, emphasis.high)),
+      )));
     });
 
     return cells;

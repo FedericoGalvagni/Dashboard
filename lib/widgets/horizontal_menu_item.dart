@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/constants/style.dart';
-import 'package:interface_example1/widgets/custom_text.dart';
+import 'package:interface_example1/widgets/custom/custom_text.dart';
 
 class HorizontalMenuItem extends StatelessWidget {
   final String itemName;
@@ -25,8 +25,8 @@ class HorizontalMenuItem extends StatelessWidget {
       // Obx: the value will change
       child: Obx(() => Container(
           color: menuController.isHovering(itemName)
-              ? hovered(surface(2), Colors.white)
-              : surface(2),
+              ? hovered(surface(4), Colors.white)
+              : surface(4),
           child: Row(
             children: [
               Visibility(
@@ -50,12 +50,12 @@ class HorizontalMenuItem extends StatelessWidget {
                         text: itemName,
                         color: menuController.isHovering(itemName)
                             ? textOnSurface
-                            : mediumEmphasis(textOnSurface)))
+                            : getEmphasis(textOnSurface, emphasis.medium)))
               else
                 Flexible(
                     child: CustomText(
                   text: itemName,
-                  color: highEmphasis(textOnSurface),
+                  color: getEmphasis(textOnSurface, emphasis.high),
                   size: 18,
                   weight: FontWeight.bold,
                 ))

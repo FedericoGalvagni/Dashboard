@@ -41,5 +41,5 @@ ValueNotifier<List<Comands>> comandsList = ValueNotifier<List<Comands>>(
         .toList());
 String headers = '["time", "id", "action", "description", "user"]';
 var comandsHeaders = json.decode(headers);
-dynamic test;
 ValueNotifier<List<dynamic>> row = ValueNotifier<List<dynamic>>([]);
+ValueNotifier<int> rowLenght = ValueNotifier<int>(row.value.length);

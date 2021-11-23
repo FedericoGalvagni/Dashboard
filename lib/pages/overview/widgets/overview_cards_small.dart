@@ -20,7 +20,6 @@ class OverviewCardsSmall extends StatelessWidget {
                     title: "Total Production",
                     value: produzioneTotale.value.toString(),
                     onTap: () {},
-                    topColor: Colors.orange,
                   );
                 }),
             SizedBox(
@@ -32,7 +31,6 @@ class OverviewCardsSmall extends StatelessWidget {
                   return InfoCard(
                     title: "Production 24H",
                     value: produzioneUltime24h.value.toString(),
-                    topColor: Colors.lightGreen,
                     onTap: () {},
                   );
                 }),
@@ -45,7 +43,6 @@ class OverviewCardsSmall extends StatelessWidget {
                   return InfoCard(
                     title: "Time",
                     value: produzioneMediaGiornaliera.value.toString(),
-                    topColor: Colors.redAccent,
                     onTap: () {},
                   );
                 }),

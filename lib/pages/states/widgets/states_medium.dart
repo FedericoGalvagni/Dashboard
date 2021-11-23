@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:interface_example1/classes/http/http_service.dart';
@@ -7,8 +6,9 @@ import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/data_models/config.dart';
 import 'package:interface_example1/data_models/states_data.dart';
 import 'package:interface_example1/pages/states/widgets/states_datatable.dart';
-import 'package:interface_example1/widgets/custom_dropdownmenu.dart';
-import 'package:interface_example1/widgets/custom_text.dart';
+import 'package:interface_example1/widgets/custom/autocomplete_textfield.dart';
+import 'package:interface_example1/widgets/custom/custom_dropdownmenu.dart';
+import 'package:interface_example1/widgets/custom/custom_text.dart';
 
 /// Ritorna degli elementi di controllo della tabella.
 /// Un [ElevatedButton] che può essere premuto per inviare un Http request
@@ -46,32 +46,43 @@ class StatesMediumState extends State<StatesMedium> {
         SizedBox(
           width: _width / 100,
         ),
-        SizedBox(
+        Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4), color: surface(4)),
             width: _width / 4,
             height: 50,
             child: SimpleAutoCompleteTextField(
-                key: key,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
+                style:
+                    TextStyle(color: getEmphasis(textOnSurface, emphasis.high)),
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide(
+                          color: getEmphasis(textOnSurface, emphasis.medium),
+                          width: 1)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide(color: primary, width: 2)),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: primary)),
+                  hintStyle: TextStyle(
+                      color: getEmphasis(textOnSurface, emphasis.medium)),
                   hintText: 'Enter a search term',
                 ),
+                key: key,
+                clearOnSubmit: false,
                 suggestions: suggestions,
                 textSubmitted: (text) {
                   widget.id = text;
-                  print(text);
+                  HttpService(id: widget.id, limit: widget.limit).get();
                 })),
-        // TODO: CLEAR?
-        /*TextField(
-              controller: widget.id,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter a search term',
-              ),
-            )),*/
         SizedBox(
             width: 60,
             height: 50,
             child: ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateColor.resolveWith((states) => primary)),
                 onPressed: () {
                   setState(() {
                     HttpService(id: widget.id, limit: widget.limit).get();
@@ -79,7 +90,7 @@ class StatesMediumState extends State<StatesMedium> {
                   });
                 },
                 child: CustomText(
-                    color: highEmphasis(textOnSurface),
+                    color: getEmphasis(textOnSurface, emphasis.high),
                     text: "GO",
                     size: 18,
                     weight: FontWeight.bold))),
@@ -96,7 +107,7 @@ class StatesMediumState extends State<StatesMedium> {
             dropdownValue: widget.limit.toString(),
             items: const ["100", "250", "500", "1000", "2500", "5000", "10000"],
             color: primary,
-            textColor: highEmphasis(textOnSurface),
+            textColor: getEmphasis(textOnSurface, emphasis.high),
             selectedValue: (value) {
               debugPrint(value);
               widget.limit = value;
@@ -134,7 +145,7 @@ class StatesMediumState extends State<StatesMedium> {
             child: ValueListenableBuilder(
                 valueListenable: comandsList,
                 builder: (context, value, widget) {
-                  showTableIndicator = false;
+                  showTableIndicator.value = false;
                   return const DataTableD();
                 })),
       ])
@@ -142,7 +153,7 @@ class StatesMediumState extends State<StatesMedium> {
   }
 
   Widget _progressIndicator() {
-    if (showTableIndicator) {
+    if (showTableIndicator.value) {
       return Container(
           margin: const EdgeInsets.only(left: 5, right: 5),
           child: const LinearProgressIndicator(

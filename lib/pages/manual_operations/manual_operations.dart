@@ -6,7 +6,7 @@ import 'package:interface_example1/data_models/manual_operation_data.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
 import 'package:interface_example1/pages/manual_operations/widget/manual_operation_large.dart';
 import 'package:interface_example1/pages/manual_operations/widget/manual_operations_medium.dart';
-import 'package:interface_example1/widgets/custom_text.dart';
+import 'package:interface_example1/widgets/custom/custom_text.dart';
 import 'widget/manual_operations_small.dart';
 
 class ManualOperationsPage extends StatelessWidget {

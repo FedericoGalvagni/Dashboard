@@ -2,8 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/data_models/config.dart';
-import 'package:interface_example1/widgets/custom_text.dart';
-import 'package:interface_example1/widgets/stepper.dart';
+import 'package:interface_example1/widgets/custom/custom_text.dart';
+import 'package:interface_example1/widgets/custom/stepper.dart';
 
 enum Prova { motors, pneumatic }
 
@@ -33,10 +33,10 @@ class ManualOperationCard extends StatelessWidget {
         child: Container(
       height: 100,
       decoration: BoxDecoration(
-        color: surface(2),
+        color: surface(4),
         boxShadow: [
           BoxShadow(
-              offset: const Offset(6, 6), color: surface(2), blurRadius: 12)
+              offset: const Offset(6, 6), color: surface(4), blurRadius: 12)
         ],
       ),
       child: Row(
@@ -48,8 +48,6 @@ class ManualOperationCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Container(
-                        width: 5, height: 50, color: primary.withOpacity(0.8)),
                     const SizedBox(
                       width: 10,
                       height: 50,
@@ -60,7 +58,7 @@ class ManualOperationCard extends StatelessWidget {
                           alignment: Alignment.bottomLeft,
                           child: CustomText(
                             text: title,
-                            color: highEmphasis(textOnSurface),
+                            color: getEmphasis(textOnSurface, emphasis.high),
                             size: 30,
                             weight: FontWeight.bold,
                           ),
@@ -71,15 +69,13 @@ class ManualOperationCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                        width: 5, height: 50, color: primary.withOpacity(0.8)),
-                    Container(
                       width: 10,
                     ),
                     SizedBox(
                       height: 50,
                       child: CustomText(
                         text: "max: 200, min: 200",
-                        color: textOnSecondary.withOpacity(0.7),
+                        color: getEmphasis(textOnSurface, emphasis.medium),
                         size: 15,
                         weight: FontWeight.w300,
                       ),

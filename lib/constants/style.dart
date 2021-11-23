@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 // each off the choice need to planned to avoid issues
 Color tabletext = const Color(0xFFFFFFFF).withOpacity(1);
 Color colorHeaderText = const Color(0xFFFFFFFF).withOpacity(0.6);
-
+Color surfaceColor = const Color(0xFF121212);
 Color background = const Color(0xFF121212); //0dp elevation surface overlay
-
+/// ## Elevazione
 /// L'elevazione della superficie è un effetto che si può generare creando
 /// un colore che derivato da un overlay di una superficie bianca con diversi
 /// valori di opacità (in base a quanto la vogliamo elevare). Valori disponibili
@@ -16,20 +16,16 @@ Color surface(int elevation) {
   Color surface;
   switch (elevation) {
     case 0:
-      surface = Color.alphaBlend(
-          Colors.white.withOpacity(0.0), const Color(0xFF121212));
+      surface = Color.alphaBlend(Colors.white.withOpacity(0.0), surfaceColor);
       break;
     case 1:
-      surface = Color.alphaBlend(
-          Colors.white.withOpacity(0.05), const Color(0xFF121212));
+      surface = Color.alphaBlend(Colors.white.withOpacity(0.05), surfaceColor);
       break;
     case 2:
-      surface = Color.alphaBlend(
-          Colors.white.withOpacity(0.07), const Color(0xFF121212));
+      surface = Color.alphaBlend(Colors.white.withOpacity(0.07), surfaceColor);
       break;
     case 3:
-      surface = Color.alphaBlend(
-          Colors.white.withOpacity(0.08), const Color(0xFF121212));
+      surface = Color.alphaBlend(Colors.white.withOpacity(0.08), surfaceColor);
       break;
     case 4:
       surface = Color.alphaBlend(
@@ -62,6 +58,7 @@ Color surface(int elevation) {
   return surface;
 } //with 1dp elevation surface overlay
 
+Color error = const Color(0xFFCF6679);
 Color primary = const Color(0xFFBB86FC);
 Color secondary = const Color(0xFF03DAC6);
 Color textOnBackground = const Color(0xFFFFFFFF);
@@ -79,20 +76,33 @@ Color focused(Color background, Color foreground) {
 }
 
 Color pressed(Color background, Color foreground) {
+  getEmphasis(textOnSurface, emphasis.high);
   return Color.alphaBlend(foreground.withOpacity(0.1), background);
 }
 
-Color highEmphasis(Color color) {
-  return color.withOpacity(0.87);
+/// ##Emphasis
+/// When light text appears on dark backgrounds it should use the following
+/// opacity levels: for better visibility.
+
+/// High-emphasis text has an opacity of 87%
+/// Medium-emphasis text and hint text have opacities of 60%
+/// Disabled text has an opacity of 38%
+Color getEmphasis(Color color, var emphasisLevel) {
+  switch (emphasisLevel) {
+    case emphasis.high:
+      return color.withOpacity(0.87);
+
+    case emphasis.medium:
+      return color.withOpacity(0.60);
+
+    case emphasis.disabled:
+      return color.withOpacity(0.38);
+    default:
+      return color;
+  }
 }
 
-Color mediumEmphasis(Color color) {
-  return color.withOpacity(0.60);
-}
-
-Color disabledEmphasis(Color color) {
-  return color.withOpacity(0.38);
-}
+enum emphasis { high, medium, disabled }
 
 class CustomColor {
   bool theme = true;

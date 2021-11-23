@@ -6,7 +6,7 @@ import 'package:interface_example1/data_models/config.dart';
 import 'package:interface_example1/data_models/manual_operation_data.dart';
 import 'package:interface_example1/pages/manual_operations/widget/manual_operation_card.dart';
 import 'package:interface_example1/routing/routes.dart';
-import 'package:interface_example1/widgets/custom_text.dart';
+import 'package:interface_example1/widgets/custom/custom_text.dart';
 
 class ManualOperationsGroup extends StatelessWidget {
   final int groupIndex;
@@ -34,7 +34,7 @@ class ManualOperationsGroup extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           boxShadow: [
             BoxShadow(
-                offset: const Offset(6, 6), color: surface(2), blurRadius: 12)
+                offset: const Offset(6, 6), color: surface(4), blurRadius: 12)
           ],
         ),
         child: Material(
@@ -48,7 +48,7 @@ class ManualOperationsGroup extends StatelessWidget {
               navigationController.navigateTo(manualOperationsPageRoute);
             },
             child: Center(
-              child: CustomText(text: "Go Back", color: surface(2)),
+              child: CustomText(text: "Go Back", color: surface(4)),
             ),
           ),
         ),

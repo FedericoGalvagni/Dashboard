@@ -4,7 +4,7 @@ import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/data_models/manual_operation_data.dart';
 import 'package:interface_example1/data_models/config.dart';
 import 'package:interface_example1/routing/routes.dart';
-import 'package:interface_example1/widgets/custom_text.dart';
+import 'package:interface_example1/widgets/custom/custom_text.dart';
 
 class MechanicalGroupIcon extends StatelessWidget {
   final int groupIndex;
@@ -20,15 +20,15 @@ class MechanicalGroupIcon extends StatelessWidget {
         aspectRatio: 1,
         child: Container(
           decoration: BoxDecoration(
-            color: surface(2),
+            color: surface(4),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              hoverColor: hovered(surface(2), Colors.white),
-              splashColor: pressed(surface(2), Colors.white),
-              highlightColor: pressed(surface(2), Colors.white),
+              hoverColor: hovered(surface(4), Colors.white),
+              splashColor: pressed(surface(4), Colors.white),
+              highlightColor: pressed(surface(4), Colors.white),
               borderRadius: BorderRadius.circular(10),
               onTap: () {
                 //print(groupIndex);
@@ -43,7 +43,7 @@ class MechanicalGroupIcon extends StatelessWidget {
                         margin: const EdgeInsets.all(20),
                         child: Image.asset(
                             "assets/icons/" + groupIndex.toString() + ".png",
-                            color: mediumEmphasis(textOnSurface)),
+                            color: getEmphasis(textOnSurface, emphasis.medium)),
                       ),
                     ),
                     Align(
@@ -80,7 +80,8 @@ class MechanicalGroupIcon extends StatelessWidget {
                                 text: mechanicalGroup.groups[groupIndex].name,
                                 size: 13,
                                 weight: FontWeight.w600,
-                                color: highEmphasis(textOnSurface),
+                                color:
+                                    getEmphasis(textOnSurface, emphasis.high),
                               ),
                             ],
                           ),

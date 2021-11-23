@@ -3,8 +3,8 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/data_models/overview_data.dart';
 import 'package:interface_example1/pages/overview/widgets/info_card.dart';
-import 'package:interface_example1/widgets/custom_text.dart';
-import 'package:interface_example1/widgets/default_line_chart.dart';
+import 'package:interface_example1/widgets/custom/custom_text.dart';
+import 'package:interface_example1/widgets/custom/default_line_chart.dart';
 
 class OverviewCardsLarge extends StatelessWidget {
   const OverviewCardsLarge({Key? key}) : super(key: key);
@@ -39,7 +39,6 @@ class OverviewCardsLarge extends StatelessWidget {
                       title: "Produzione totale",
                       value: produzioneTotale.value.toString(),
                       onTap: () {},
-                      topColor: Colors.orange,
                     );
                   }),
               SizedBox(
@@ -51,7 +50,6 @@ class OverviewCardsLarge extends StatelessWidget {
                     return InfoCard(
                       title: "Produzione ultime 24h",
                       value: produzioneUltime24h.value.toString(),
-                      topColor: Colors.lightGreen,
                       onTap: () {},
                     );
                   }),
@@ -64,7 +62,6 @@ class OverviewCardsLarge extends StatelessWidget {
                     return InfoCard(
                       title: "Produzione media giornaliera",
                       value: produzioneMediaGiornaliera.value.toString(),
-                      topColor: Colors.redAccent,
                       onTap: () {},
                     );
                   }),
@@ -93,7 +90,7 @@ class OverviewCardsLarge extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: surface(2),
+                    color: surface(4),
                   ),
                   height: 600,
                   child: ValueListenableBuilder(
@@ -103,6 +100,7 @@ class OverviewCardsLarge extends StatelessWidget {
                           margin: EdgeInsets.all(15),
                           child: SimpleTimeSeriesChart(
                             _createSampleData(),
+                            duration: Duration(milliseconds: 1000),
                             // Disable animations for image tests.
                             animate: true,
                           ),

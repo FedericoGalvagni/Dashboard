@@ -6,7 +6,7 @@ import 'package:interface_example1/helpers/responsivness.dart';
 import 'package:interface_example1/pages/states/widgets/states_large.dart';
 import 'package:interface_example1/pages/states/widgets/states_medium.dart';
 import 'package:interface_example1/pages/states/widgets/states_small.dart';
-import 'package:interface_example1/widgets/custom_text.dart';
+import 'package:interface_example1/widgets/custom/custom_text.dart';
 
 /// Classe [StatesPage] contiene gli elementi grafici della pagina di
 /// visualizzazione dinamica delle tabelle. 
@@ -40,7 +40,7 @@ class StatesPage extends StatelessWidget {
             if (ResponsiveWidget.isLargeScreen(context) ||
                 ResponsiveWidget.isMediumScreen(context))
               if (ResponsiveWidget.isCustomSize(context))
-                StatesMedium()
+                StatesLarge()
               else
                 StatesLarge()
             else

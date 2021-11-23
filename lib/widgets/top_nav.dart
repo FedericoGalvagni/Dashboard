@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
 
-import 'custom_text.dart';
+import 'custom/custom_text.dart';
 
 AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
     AppBar(
@@ -31,14 +31,14 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
           Visibility(
               child: CustomText(
                   text: "Dash",
-                  color: surface(2),
+                  color: getEmphasis(textOnSurface, emphasis.high),
                   size: 20,
                   weight: FontWeight.bold)),
           Expanded(child: Container()),
           IconButton(
             icon: Icon(
               Icons.settings,
-              color: textOnSurface.withOpacity(.7),
+              color: getEmphasis(textOnSurface, emphasis.high),
             ),
             onPressed: () {},
           ),
@@ -46,7 +46,7 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
             children: [
               IconButton(
                   icon: Icon(Icons.notifications,
-                      color: textOnSurface.withOpacity(.7)),
+                      color: getEmphasis(textOnSurface, emphasis.high)),
                   onPressed: () {}),
               Positioned(
                   top: 7,
@@ -56,42 +56,42 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
                     height: 12,
                     padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
-                        color: background,
+                        color: primary,
                         borderRadius: BorderRadius.circular(30),
-                        border: Border.all(color: surface(2), width: 2)),
+                        border: Border.all(color: primary, width: 2)),
                   ))
             ],
           ),
           Container(
             width: 1,
             height: 22,
-            color: surface(2),
+            color: surface(4),
           ),
           const SizedBox(
             width: 24,
           ),
           CustomText(
             text: "Federico Galvagni",
-            color: surface(2),
+            color: getEmphasis(textOnSurface, emphasis.high),
           ),
           const SizedBox(
             width: 16,
           ),
           Container(
               decoration: BoxDecoration(
-                  color: surface(2), borderRadius: BorderRadius.circular(30)),
+                  color: surface(4), borderRadius: BorderRadius.circular(30)),
               child: Container(
                   padding: const EdgeInsets.all(2),
                   margin: const EdgeInsets.all(2),
                   child: CircleAvatar(
-                    backgroundColor: surface(2),
+                    backgroundColor: secondary,
                     child: Icon(
                       Icons.person_outline,
-                      color: highEmphasis(textOnSurface),
+                      color: getEmphasis(textOnSurface, emphasis.high),
                     ),
                   )))
         ],
       ),
       iconTheme: IconThemeData(color: textOnSurface),
-      backgroundColor: surface(2),
+      backgroundColor: surface(8),
     );

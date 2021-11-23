@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/data_models/parameters_data.dart';
-import 'package:interface_example1/widgets/custom_text.dart';
-import 'package:interface_example1/widgets/editable_textfield.dart';
+import 'package:interface_example1/widgets/custom/custom_text.dart';
+import 'package:interface_example1/widgets/custom/editable_textfield.dart';
 
 class ParametersView extends StatefulWidget {
   final String treeviewKey;
@@ -33,68 +33,100 @@ class _ParametersViewState extends State<ParametersView> {
 
       return SizedBox(
           width: 600,
-          child: DataTable(columns: [
-            DataColumn(
-                label: CustomText(
-              text: "Index",
-              size: 20,
-              color: highEmphasis(textOnSurface),
-              weight: FontWeight.w600,
-            )),
-            DataColumn(
-                label: CustomText(
-              text: "Parameter",
-              size: 20,
-              color: highEmphasis(textOnSurface),
-              weight: FontWeight.w600,
-            )),
-            DataColumn(
-                label: CustomText(
-              text: "Value",
-              size: 20,
-              color: highEmphasis(textOnSurface),
-              weight: FontWeight.w600,
-            )),
-            DataColumn(
-                label: CustomText(
-              text: "State",
-              size: 20,
-              color: highEmphasis(textOnSurface),
-              weight: FontWeight.w600,
-            ))
-          ], rows: _buildRow(list)));
+          child: Theme(
+            data: ThemeData(dividerColor: divider),
+            child: DataTable(columns: [
+              DataColumn(
+                  label: Center(
+                    child: Text("index", textAlign: TextAlign.center,),
+                    /* CustomText(
+                align: TextAlign.center,
+                text: "Index",
+                size: 20,
+                color: getEmphasis(textOnSurface, emphasis.high),
+                weight: FontWeight.w600,
+              ),
+                  */)),
+              DataColumn(
+                  label: Center(
+                    child: CustomText(
+                align: TextAlign.center,
+                text: "Parameter",
+                size: 20,
+                color: getEmphasis(textOnSurface, emphasis.high),
+                weight: FontWeight.w600,
+              ),
+                  )),
+              DataColumn(
+                  label: Center(
+                    child: CustomText(
+                align: TextAlign.center,
+                text: "Value",
+                size: 20,
+                color: getEmphasis(textOnSurface, emphasis.high),
+                weight: FontWeight.w600,
+              ),
+                  )),
+              DataColumn(
+                  label: Center(
+                    child: CustomText(
+                align: TextAlign.center,
+                text: "State",
+                size: 20,
+                color: getEmphasis(textOnSurface, emphasis.high),
+                weight: FontWeight.w600,
+              ),
+                  ))
+            ], rows: _buildRow(list)),
+          ));
     }
   }
 
   List<DataRow> _buildRow(List<Parameter> list) {
     List<DataRow> row = [];
-    List<EditableTextState> a;
 
     for (int i = 0; i < list.length; i++) {
       TextEditingController temp;
       temp = TextEditingController(text: list[i].value.toString());
       debugPrint(i.toString());
       row.add(DataRow(cells: [
-        DataCell(Text(i.toString())),
-        DataCell(Text(list[i].name)),
+        DataCell(Center(
+          child: CustomText(
+            align: TextAlign.center,
+            text: i.toString(),
+            color: getEmphasis(textOnSurface, emphasis.high),
+          ),
+        )),
+        DataCell(Center(
+          child: CustomText(
+            align: TextAlign.center,
+            text: list[i].name,
+            color: getEmphasis(textOnSurface, emphasis.high),
+          ),
+        )),
         DataCell(
-          SizedBox(
-            width: 50,
-            child: EditableTextField(
-              initialText: list[i].value,
-              isEditingText: false,
-              editingController: temp,
-              newValue: (st) {
-                parameter.motorParameters[groupIndex].motorList[actuatorIndex]
-                    .parameters[i].value = st;
-                setState(() {});
-              },
+          Center(
+            child: Container(
+              margin: const EdgeInsets.only(top: 5, bottom: 5),
+              child: EditableTextField(
+                align: TextAlign.center,
+                initialText: list[i].value,
+                color: getEmphasis(textOnSurface, emphasis.high),
+                editingController: temp,
+                newValue: (newvalue) {
+                  parameter.motorParameters[groupIndex].motorList[actuatorIndex]
+                      .parameters[i].value = newvalue;
+                  setState(() {});
+                },
+              ),
             ),
           ),
         ),
-        DataCell(_getChild(originalParameter.motorParameters[groupIndex]
-                .motorList[actuatorIndex].parameters[i].value ==
-            list[i].value))
+        DataCell(Center(
+          child: _getChild(originalParameter.motorParameters[groupIndex]
+                  .motorList[actuatorIndex].parameters[i].value ==
+              list[i].value),
+        ))
       ]));
     }
     return row;

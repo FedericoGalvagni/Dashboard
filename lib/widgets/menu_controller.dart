@@ -50,15 +50,15 @@ class MenuController extends GetxController {
       return Icon(
         icon,
         size: 22,
-        color: highEmphasis(textOnSurface),
+        color: getEmphasis(textOnSurface, emphasis.high),
       );
     }
 
     return Icon(
       icon,
       color: isHovering(itemName)
-          ? mediumEmphasis(textOnSurface)
-          : highEmphasis(textOnSurface),
+          ? getEmphasis(textOnSurface, emphasis.medium)
+          : getEmphasis(textOnSurface, emphasis.high),
     );
   }
 }

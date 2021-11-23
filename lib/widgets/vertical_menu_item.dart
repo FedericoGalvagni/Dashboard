@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/constants/style.dart';
 
-import 'custom_text.dart';
+import 'custom/custom_text.dart';
 
 class VerticalMenuItem extends StatelessWidget {
   const VerticalMenuItem(
@@ -22,7 +22,7 @@ class VerticalMenuItem extends StatelessWidget {
         },
         child: Obx(() => Container(
             color: menuController.isHovering(itemName)
-                ? surface(2)
+                ? surface(4)
                 : Colors.transparent,
             child: Row(children: [
               Visibility(
@@ -47,13 +47,13 @@ class VerticalMenuItem extends StatelessWidget {
                       text: itemName,
                       color: menuController.isHovering(itemName)
                           ? textOnSurface
-                          : surface(2),
+                          : surface(4),
                     ))
                   else
                     Flexible(
                         child: CustomText(
                       text: itemName,
-                      color: highEmphasis(textOnSurface),
+                      color: getEmphasis(textOnSurface, emphasis.high),
                       size: 18,
                       weight: FontWeight.bold,
                     ))

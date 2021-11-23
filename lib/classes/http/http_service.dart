@@ -38,7 +38,7 @@ class HttpService {
         String responseBody = response.body.toString();
         String jsonStr = responseBody.toString();
         row.value = json.decode(jsonStr);
-        showTableIndicator = false;
+        
         break;
       case "graficoProduzione":
         final response =

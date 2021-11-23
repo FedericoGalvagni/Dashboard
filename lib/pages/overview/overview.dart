@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
-import 'package:interface_example1/widgets/custom_text.dart';
+import 'package:interface_example1/widgets/custom/custom_text.dart';
 import 'widgets/overview_cards_large.dart';
 import 'widgets/overview_cards_medium.dart';
 import 'widgets/overview_cards_small.dart';
