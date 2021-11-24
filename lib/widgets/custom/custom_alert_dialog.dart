@@ -18,7 +18,7 @@ class CustomAlertDialog extends StatefulWidget {
 }
 
 class _CustomAlertDialogState extends State<CustomAlertDialog> {
-  TextStyle textStyle = TextStyle(color: Colors.black);
+  TextStyle textStyle = TextStyle(color: onSurface);
 
   @override
   Widget build(BuildContext context) {

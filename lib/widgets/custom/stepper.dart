@@ -25,7 +25,7 @@ class ValueStepper extends StatefulWidget {
 class _ValueStepperState extends State<ValueStepper> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController temp = TextEditingController();
+    TextEditingController value = TextEditingController(text: widget.value);
     return Row(children: [
       Center(
         child: Container(
@@ -45,7 +45,7 @@ class _ValueStepperState extends State<ValueStepper> {
                 onPressed: () {
                   if (widget.sendData ?? false) {
                     debugPrint("minus: id" + widget.id.toString() + ".0");
-                    HttpService.post(widget.id);
+                    HttpService.post(widget.id + ".0");
                   }
                 },
               ),
@@ -54,34 +54,35 @@ class _ValueStepperState extends State<ValueStepper> {
       SizedBox(
           height: 30,
           width: 50,
-          //color: Colors.red,
-          child: TextField(
-            controller: temp,
-            readOnly: true,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: getEmphasis(
-              textOnSurface,
-              emphasis.high,
-            )),
-            decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide: BorderSide(
-                      color: getEmphasis(textOnSurface, emphasis.medium),
-                      width: 1)),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide: BorderSide(color: primary, width: 2)),
-              border:
-                  OutlineInputBorder(borderSide: BorderSide(color: primary)),
+          child: Center(
+            child: TextField(
+              controller: value,
+              textAlign: TextAlign.center,
+              textAlignVertical: TextAlignVertical.top,
+              style: TextStyle(
+                  color: getEmphasis(
+                onSurface,
+                emphasis.high,
+              )),
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.zero,
+                    borderSide: BorderSide(
+                        color: getEmphasis(onSurface, emphasis.medium),
+                        width: 1)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.zero,
+                    borderSide: BorderSide(color: primary, width: 2)),
+                border:
+                    OutlineInputBorder(borderSide: BorderSide(color: primary)),
+              ),
+              onSubmitted: (newValue) {
+                setState(() {
+                  widget.value = newValue;
+                  widget.newValue(newValue);
+                });
+              },
             ),
-            onSubmitted: (newValue) {
-              setState(() {
-                widget.value = newValue;
-                widget.newValue(newValue);
-              });
-            },
           )),
       Center(
         child: Container(
@@ -101,7 +102,7 @@ class _ValueStepperState extends State<ValueStepper> {
                 onPressed: () {
                   if (widget.sendData ?? false) {
                     debugPrint("plus: id" + widget.id.toString() + ".1");
-                    HttpService.post(widget.id);
+                    HttpService.post(widget.id + ".1");
                   }
                 },
               ),

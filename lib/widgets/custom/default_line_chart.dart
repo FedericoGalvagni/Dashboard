@@ -6,7 +6,11 @@ class SimpleTimeSeriesChart extends StatelessWidget {
   final List<charts.Series<dynamic, DateTime>> seriesList;
   final bool? animate;
   final Duration? duration;
-  SimpleTimeSeriesChart( this.seriesList, {this.animate, this.duration,});
+  SimpleTimeSeriesChart(
+    this.seriesList, {
+    this.animate,
+    this.duration,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,7 @@ class SimpleTimeSeriesChart extends StatelessWidget {
               // Tick and Label styling here.
               labelStyle: charts.TextStyleSpec(
                   fontSize: 18, // size in Pts.
-                  color: charts.ColorUtil.fromDartColor(textOnBackground)),
+                  color: charts.ColorUtil.fromDartColor(onBackground)),
 
               // Change the line colors to match text color.
               lineStyle: charts.LineStyleSpec(
@@ -33,7 +37,7 @@ class SimpleTimeSeriesChart extends StatelessWidget {
               // Tick and Label styling here.
               labelStyle: charts.TextStyleSpec(
                 fontSize: 18, // size in Pts.
-                color: charts.ColorUtil.fromDartColor(textOnBackground),
+                color: charts.ColorUtil.fromDartColor(onBackground),
               ),
 
               // Change the line colors to match text color.

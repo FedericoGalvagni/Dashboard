@@ -21,7 +21,7 @@ class ParametersPage extends StatelessWidget {
                   margin: EdgeInsets.only(
                       top: ResponsiveWidget.isSmallScreen(context) ? 56 : 6),
                   child: CustomText(
-                    color: textOnBackground,
+                    color: onBackground,
                     text: menuController.activeItem.value,
                     size: 24,
                     weight: FontWeight.bold,

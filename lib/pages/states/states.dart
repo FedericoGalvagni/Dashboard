@@ -9,7 +9,7 @@ import 'package:interface_example1/pages/states/widgets/states_small.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 
 /// Classe [StatesPage] contiene gli elementi grafici della pagina di
-/// visualizzazione dinamica delle tabelle. 
+/// visualizzazione dinamica delle tabelle.
 /// In base alla dimensione del dispositivo
 /// ritorna [StatesLarge], [StatesMedium], [StatesSmall]
 
@@ -26,11 +26,10 @@ class StatesPage extends StatelessWidget {
                   margin: EdgeInsets.only(
                       top: ResponsiveWidget.isSmallScreen(context) ? 56 : 6),
                   child: CustomText(
-                    text: menuController.activeItem.value,
-                    size: 24,
-                    weight: FontWeight.bold,
-                    color: textOnBackground
-                  )),
+                      text: menuController.activeItem.value,
+                      size: 24,
+                      weight: FontWeight.bold,
+                      color: onBackground)),
             ],
           ),
         ),

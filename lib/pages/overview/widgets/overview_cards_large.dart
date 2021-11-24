@@ -3,7 +3,6 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/data_models/overview_data.dart';
 import 'package:interface_example1/pages/overview/widgets/info_card.dart';
-import 'package:interface_example1/widgets/custom/custom_text.dart';
 import 'package:interface_example1/widgets/custom/default_line_chart.dart';
 
 class OverviewCardsLarge extends StatelessWidget {

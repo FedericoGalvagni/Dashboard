@@ -25,7 +25,7 @@ class HorizontalMenuItem extends StatelessWidget {
       // Obx: the value will change
       child: Obx(() => Container(
           color: menuController.isHovering(itemName)
-              ? hovered(surface(4), Colors.white)
+              ? hovered(surface(4), primary)
               : surface(4),
           child: Row(
             children: [
@@ -49,13 +49,13 @@ class HorizontalMenuItem extends StatelessWidget {
                     child: CustomText(
                         text: itemName,
                         color: menuController.isHovering(itemName)
-                            ? textOnSurface
-                            : getEmphasis(textOnSurface, emphasis.medium)))
+                            ? onSurface
+                            : getEmphasis(onSurface, emphasis.medium)))
               else
                 Flexible(
                     child: CustomText(
                   text: itemName,
-                  color: getEmphasis(textOnSurface, emphasis.high),
+                  color: getEmphasis(onSurface, emphasis.high),
                   size: 18,
                   weight: FontWeight.bold,
                 ))
@@ -64,3 +64,4 @@ class HorizontalMenuItem extends StatelessWidget {
     );
   }
 }
+

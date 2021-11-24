@@ -37,7 +37,7 @@ class StatesSmall extends StatelessWidget {
                     debugPrint(comandController.text);
                   },
                   child: CustomText(
-                      color: getEmphasis(textOnSurface, emphasis.high),
+                      color: getEmphasis(onSurface, emphasis.high),
                       text: "GO",
                       size: 18,
                       weight: FontWeight.bold)))

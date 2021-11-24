@@ -18,7 +18,7 @@ class SettingsPage extends StatelessWidget {
                     margin: EdgeInsets.only(
                         top: ResponsiveWidget.isSmallScreen(context) ? 56 : 6),
                     child: CustomText(
-                      color: getEmphasis(textOnSurface, emphasis.high),
+                      color: getEmphasis(onSurface, emphasis.high),
                       text: MenuController.instance.activeItem.value,
                       size: 24,
                       weight: FontWeight.bold,

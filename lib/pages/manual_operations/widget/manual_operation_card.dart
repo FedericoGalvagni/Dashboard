@@ -4,6 +4,7 @@ import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/data_models/config.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 import 'package:interface_example1/widgets/custom/stepper.dart';
+import 'package:interface_example1/widgets/spacer/custom_horizontal_spacer.dart';
 
 enum Prova { motors, pneumatic }
 
@@ -33,32 +34,46 @@ class ManualOperationCard extends StatelessWidget {
         child: Container(
       height: 100,
       decoration: BoxDecoration(
-        color: surface(4),
-        boxShadow: [
-          BoxShadow(
-              offset: const Offset(6, 6), color: surface(4), blurRadius: 12)
-        ],
-      ),
+          borderRadius: BorderRadius.circular(10),
+          color: surface(4),
+          boxShadow: boxShadow),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        
         children: [
+          customHspacer(factor: 256),
           Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Expanded(child: Container()),
+                RichText(
+                    textAlign: TextAlign.left,
+                    text: TextSpan(children: [
+                      TextSpan(
+                          text: "$title\n",
+                          style: TextStyle(
+                              fontSize: 40,
+                              color: getEmphasis(onSurface, emphasis.high))),
+                      TextSpan(
+                          text: "max 200 min 175",
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: getEmphasis(onSurface, emphasis.medium))),
+                    ])),
+                Expanded(child: Container()),
+
+                /*
+
                 Row(
                   children: [
-                    const SizedBox(
-                      width: 10,
-                      height: 50,
-                    ),
+                    
                     SizedBox(
                         height: 50,
                         child: Align(
                           alignment: Alignment.bottomLeft,
                           child: CustomText(
                             text: title,
-                            color: getEmphasis(textOnSurface, emphasis.high),
+                            color: getEmphasis(onSurface, emphasis.high),
                             size: 30,
                             weight: FontWeight.bold,
                           ),
@@ -75,13 +90,13 @@ class ManualOperationCard extends StatelessWidget {
                       height: 50,
                       child: CustomText(
                         text: "max: 200, min: 200",
-                        color: getEmphasis(textOnSurface, emphasis.medium),
+                        color: getEmphasis(onSurface, emphasis.medium),
                         size: 15,
                         weight: FontWeight.w300,
                       ),
                     ),
                   ],
-                ),
+                ),*/
               ]),
           ValueStepper(
             id: id,
@@ -89,7 +104,8 @@ class ManualOperationCard extends StatelessWidget {
             nodeUrl: "http",
             newValue: (newValue) {},
             value: value,
-          )
+          ),
+          customHspacer(factor: 256),
         ],
       ),
     ));

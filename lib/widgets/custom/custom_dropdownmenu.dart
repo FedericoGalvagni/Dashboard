@@ -5,7 +5,7 @@ class CustomDDMenu extends StatefulWidget {
   String dropdownValue;
   List<String> items;
   Color? color;
-  Color textColor;
+  Color? textColor;
   Function(String) selectedValue;
 
   CustomDDMenu({
@@ -13,7 +13,7 @@ class CustomDDMenu extends StatefulWidget {
     required this.dropdownValue,
     required this.items,
     this.color,
-    this.textColor = Colors.black,
+    this.textColor,
     required this.selectedValue,
   }) : super(key: key);
 
@@ -32,7 +32,7 @@ class _CustomDDMenuState extends State<CustomDDMenu> {
       icon: const Icon(Icons.expand_more),
       iconSize: 24,
       elevation: 16,
-      style: TextStyle(color: widget.textColor),
+      style: TextStyle(color: widget.textColor ?? onSurface),
       underline: Container(
         height: 2,
         color: widget.color,

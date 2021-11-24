@@ -31,7 +31,7 @@ class ManualOperationsPage extends StatelessWidget {
                   text: title,
                   size: 24,
                   weight: FontWeight.bold,
-                  color: textOnBackground,
+                  color: onBackground,
                 )),
           ],
         ),

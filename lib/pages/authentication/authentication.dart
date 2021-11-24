@@ -9,15 +9,22 @@ class AuthenticationPage extends StatelessWidget {
   const AuthenticationPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    TextEditingController nome = TextEditingController(text: "");
+    TextEditingController password = TextEditingController(text: "");
+
     return Scaffold(
       body: Center(
         child: Container(
-          constraints: BoxConstraints(maxWidth: 400),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: surface(16),
+          ),
+          constraints: BoxConstraints(maxWidth: 500, maxHeight: 400),
           padding: EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
+              /*Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 12),
@@ -28,43 +35,45 @@ class AuthenticationPage extends StatelessWidget {
               ),
               const SizedBox(
                 height: 30,
-              ),
+              ),*/
               Row(
                 children: [
                   Text("Login",
                       style: GoogleFonts.roboto(
-                          color: getEmphasis(textOnBackground, emphasis.high),
+                          color: getEmphasis(onBackground, emphasis.high),
                           fontSize: 30,
                           fontWeight: FontWeight.bold)),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
                 children: [
                   CustomText(
                     text: "Welcome back to the admin panel.",
-                    color: getEmphasis(textOnBackground, emphasis.medium),
+                    color: getEmphasis(onSurface, emphasis.medium),
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               TextField(
                   textAlign: TextAlign.left,
+                  controller: nome,
                   style: TextStyle(
                       color: getEmphasis(
-                    textOnSurface,
+                    onSurface,
                     emphasis.high,
                   )),
                   decoration: InputDecoration(
                     labelText: "Nome",
+                    labelStyle: TextStyle(color: primary),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(4),
                         borderSide: BorderSide(
-                            color: getEmphasis(textOnSurface, emphasis.medium),
+                            color: getEmphasis(onSurface, emphasis.medium),
                             width: 1)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(4),
@@ -72,17 +81,19 @@ class AuthenticationPage extends StatelessWidget {
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: primary)),
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               TextField(
+                  controller: password,
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: "Password",
+                    labelStyle: TextStyle(color: primary),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(4),
                         borderSide: BorderSide(
-                            color: getEmphasis(textOnSurface, emphasis.medium),
+                            color: getEmphasis(onSurface, emphasis.medium),
                             width: 1)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(4),
@@ -90,7 +101,7 @@ class AuthenticationPage extends StatelessWidget {
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: primary)),
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Row(
@@ -101,14 +112,14 @@ class AuthenticationPage extends StatelessWidget {
                       Checkbox(value: true, onChanged: (value) {}),
                       CustomText(
                         text: "Remeber Me",
-                        color: getEmphasis(textOnBackground, emphasis.high),
+                        color: getEmphasis(onBackground, emphasis.high),
                       ),
                     ],
                   ),
                   CustomText(text: "Forgot password?", color: primary)
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               InkWell(
@@ -123,16 +134,19 @@ class AuthenticationPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 16),
                   child: CustomText(
                     text: "Login",
-                    color: Colors.white,
+                    color: getEmphasis(onPrimary, emphasis.high),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               RichText(
                   text: TextSpan(children: [
-                TextSpan(text: "Do not have admin credentials? "),
+                TextSpan(
+                    text: "Do not have admin credentials? ",
+                    style: TextStyle(
+                        color: getEmphasis(onSurface, emphasis.medium))),
                 TextSpan(
                     text: "Request Credentials! ",
                     style: TextStyle(color: primary))

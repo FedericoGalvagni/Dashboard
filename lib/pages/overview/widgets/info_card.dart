@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
+import 'package:interface_example1/widgets/custom/number_slider.dart';
 import 'package:number_slide_animation/number_slide_animation.dart';
+import 'package:animated_flip_counter/animated_flip_counter.dart';
 
 class InfoCard extends StatelessWidget {
   final String title;
@@ -37,25 +39,35 @@ class InfoCard extends StatelessWidget {
                       text: "$title\n",
                       style: TextStyle(
                           fontSize: 16,
-                          color: getEmphasis(textOnSurface, emphasis.medium))),
+                          color: getEmphasis(onSurface, emphasis.medium))),
                   TextSpan(
                       text: "$value",
                       style: TextStyle(
                           fontSize: 40,
-                          color: getEmphasis(textOnSurface, emphasis.high))),
+                          color: getEmphasis(onSurface, emphasis.high))),
                 ])),*/
             CustomText(
               text: title,
               size: 16,
               color: primary,
             ),
-            NumberSlideAnimation(
+            /* NumberSlideAnimation(
               number: value.toString(),
               duration: const Duration(milliseconds: 1500),
               curve: Curves.decelerate,
               textStyle: TextStyle(
-                  fontSize: 40.0,
-                  color: getEmphasis(textOnSurface, emphasis.high)),
+                  fontSize: 40.0, color: getEmphasis(onSurface, emphasis.high)),
+            ),*/
+            SlidingNumber(
+              number: int.parse(value),
+              style: TextStyle(
+                  color: getEmphasis(
+                    onSurface,
+                    emphasis.high,
+                  ),
+                  fontSize: 40.0),
+              duration: const Duration(milliseconds: 1500),
+              curve: Curves.easeOutQuint,
             ),
             Expanded(child: Container()),
           ],

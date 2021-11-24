@@ -46,9 +46,8 @@ class ParametersTreeState extends State<ParametersTree> {
           type: _expanderType,
           modifier: _expanderModifier,
           position: _expanderPosition,
-          // color: Colors.grey.shade800,
           size: 20,
-          color: textOnSurface),
+          color: onSurface),
       labelStyle: const TextStyle(
         fontSize: 16,
         letterSpacing: 0.3,
@@ -57,11 +56,11 @@ class ParametersTreeState extends State<ParametersTree> {
         fontSize: 16,
         letterSpacing: 0.1,
         fontWeight: FontWeight.w800,
-        color: getEmphasis(textOnSurface, emphasis.high),
+        color: getEmphasis(onSurface, emphasis.high),
       ),
       iconTheme: IconThemeData(
         size: 18,
-        color: getEmphasis(textOnSurface, emphasis.high),
+        color: getEmphasis(onSurface, emphasis.high),
       ),
       colorScheme: Theme.of(context).colorScheme,
     );
@@ -89,7 +88,7 @@ class ParametersTreeState extends State<ParametersTree> {
                         text: "Browser",
                         weight: FontWeight.w600,
                         size: 20,
-                        color: textOnSurface),
+                        color: onSurface),
                   ),
                   SizedBox(
                     width: _width / 4,
@@ -134,7 +133,7 @@ class ParametersTreeState extends State<ParametersTree> {
                         text: "Tool",
                         weight: FontWeight.w600,
                         size: 20,
-                        color: textOnSurface),
+                        color: onSurface),
                   ),
                   Container(height: 10),
                   InkWell(
@@ -155,7 +154,7 @@ class ParametersTreeState extends State<ParametersTree> {
                           CustomText(
                             text: "Restore",
                             size: 15,
-                            color: getEmphasis(textOnSurface, emphasis.high),
+                            color: getEmphasis(onSurface, emphasis.high),
                             weight: FontWeight.normal,
                           )
                         ],

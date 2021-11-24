@@ -42,7 +42,7 @@ class _ParametersViewState extends State<ParametersView> {
                   align: TextAlign.center,
                   text: "Index",
                   size: 20,
-                  color: getEmphasis(textOnSurface, emphasis.high),
+                  color: getEmphasis(onSurface, emphasis.high),
                   weight: FontWeight.w600,
                 ),
               )),
@@ -52,7 +52,7 @@ class _ParametersViewState extends State<ParametersView> {
                   align: TextAlign.center,
                   text: "Parameter",
                   size: 20,
-                  color: getEmphasis(textOnSurface, emphasis.high),
+                  color: getEmphasis(onSurface, emphasis.high),
                   weight: FontWeight.w600,
                 ),
               )),
@@ -62,7 +62,7 @@ class _ParametersViewState extends State<ParametersView> {
                   align: TextAlign.center,
                   text: "Value",
                   size: 20,
-                  color: getEmphasis(textOnSurface, emphasis.high),
+                  color: getEmphasis(onSurface, emphasis.high),
                   weight: FontWeight.w600,
                 ),
               )),
@@ -72,7 +72,7 @@ class _ParametersViewState extends State<ParametersView> {
                   align: TextAlign.center,
                   text: "State",
                   size: 20,
-                  color: getEmphasis(textOnSurface, emphasis.high),
+                  color: getEmphasis(onSurface, emphasis.high),
                   weight: FontWeight.w600,
                 ),
               ))
@@ -93,14 +93,14 @@ class _ParametersViewState extends State<ParametersView> {
           child: CustomText(
             align: TextAlign.center,
             text: i.toString(),
-            color: getEmphasis(textOnSurface, emphasis.high),
+            color: getEmphasis(onSurface, emphasis.high),
           ),
         )),
         DataCell(Center(
           child: CustomText(
             align: TextAlign.center,
             text: list[i].name,
-            color: getEmphasis(textOnSurface, emphasis.high),
+            color: getEmphasis(onSurface, emphasis.high),
           ),
         )),
         DataCell(
@@ -110,7 +110,7 @@ class _ParametersViewState extends State<ParametersView> {
               child: EditableTextField(
                 align: TextAlign.center,
                 initialText: list[i].value,
-                color: getEmphasis(textOnSurface, emphasis.high),
+                color: getEmphasis(onSurface, emphasis.high),
                 editingController: temp,
                 newValue: (newvalue) {
                   parameter.motorParameters[groupIndex].motorList[actuatorIndex]

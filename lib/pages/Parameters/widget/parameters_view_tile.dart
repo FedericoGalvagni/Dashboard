@@ -23,22 +23,21 @@ class ParametersViewTileState extends State<ParametersViewTile> {
       width: 56,
       decoration: BoxDecoration(
         border: Border(
-            top: BorderSide(width: 1, color: Colors.grey.withOpacity(0.6)),
-            left: BorderSide(width: 1, color: Colors.grey.withOpacity(0.6))),
+            top: BorderSide(width: 1, color: divider),
+            left: BorderSide(width: 1, color: divider)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           CustomText(
-              color: getEmphasis(textOnSurface, emphasis.high),
+              color: getEmphasis(onSurface, emphasis.high),
               text: widget.index.toString()),
           Container(
             width: _width / 64,
           ),
           CustomText(
-              color: getEmphasis(textOnSurface, emphasis.high),
-              text: widget.name),
+              color: getEmphasis(onSurface, emphasis.high), text: widget.name),
           Container(
             width: _width / 64,
           ),

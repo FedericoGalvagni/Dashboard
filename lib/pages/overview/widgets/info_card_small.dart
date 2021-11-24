@@ -8,10 +8,7 @@ class InfoCardSmall extends StatelessWidget {
   final VoidCallback onTap;
 
   const InfoCardSmall(
-      {Key? key,
-      required this.title,
-      required this.value,
-      required this.onTap})
+      {Key? key, required this.title, required this.value, required this.onTap})
       : super(key: key);
 
   @override
@@ -25,9 +22,7 @@ class InfoCardSmall extends StatelessWidget {
               color: surface(4),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                  color: getEmphasis(textOnSurface, emphasis.medium),
-                      
-                  width: .5),
+                  color: getEmphasis(onSurface, emphasis.medium), width: .5),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,13 +31,13 @@ class InfoCardSmall extends StatelessWidget {
                   text: title,
                   size: 24,
                   weight: FontWeight.w300,
-                  color: getEmphasis(textOnSurface, emphasis.medium),
+                  color: getEmphasis(onSurface, emphasis.medium),
                 ),
                 CustomText(
                   text: value,
                   size: 24,
                   weight: FontWeight.bold,
-                  color:getEmphasis(textOnSurface, emphasis.medium),
+                  color: getEmphasis(onSurface, emphasis.medium),
                 )
               ],
             )),

@@ -7,7 +7,6 @@ import 'package:interface_example1/data_models/config.dart';
 import 'package:interface_example1/data_models/states_data.dart';
 import 'package:interface_example1/pages/states/widgets/states_datatable.dart';
 import 'package:interface_example1/widgets/custom/autocomplete_textfield.dart';
-import 'package:interface_example1/widgets/custom/custom_alert_dialog.dart';
 import 'package:interface_example1/widgets/custom/custom_dropdownmenu.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 import 'package:interface_example1/widgets/spacer/large_horizontal_spacer.dart';
@@ -55,14 +54,13 @@ class StatesLargeState extends State<StatesLarge> {
                 width: _width / 4,
                 height: 50,
                 child: SimpleAutoCompleteTextField(
-                    style: TextStyle(
-                        color: getEmphasis(textOnSurface, emphasis.high)),
+                    style:
+                        TextStyle(color: getEmphasis(onSurface, emphasis.high)),
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(4),
                           borderSide: BorderSide(
-                              color:
-                                  getEmphasis(textOnSurface, emphasis.medium),
+                              color: getEmphasis(onSurface, emphasis.medium),
                               width: 1)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(4),
@@ -70,7 +68,7 @@ class StatesLargeState extends State<StatesLarge> {
                       border: OutlineInputBorder(
                           borderSide: BorderSide(color: primary)),
                       hintStyle: TextStyle(
-                          color: getEmphasis(textOnSurface, emphasis.medium)),
+                          color: getEmphasis(onSurface, emphasis.medium)),
                       hintText: 'Enter a search term',
                     ),
                     key: key,
@@ -103,7 +101,7 @@ class StatesLargeState extends State<StatesLarge> {
                           .get();
                     },
                     child: CustomText(
-                        color: getEmphasis(textOnSurface, emphasis.high),
+                        color: getEmphasis(onPrimary, emphasis.high),
                         text: "GO",
                         size: 18,
                         weight: FontWeight.bold))),
@@ -126,7 +124,7 @@ class StatesLargeState extends State<StatesLarge> {
                   "10000"
                 ],
                 color: primary,
-                textColor: getEmphasis(textOnSurface, emphasis.high),
+                textColor: getEmphasis(onSurface, emphasis.high),
                 selectedValue: (value) {
                   debugPrint(value);
                   widget.limit = value;

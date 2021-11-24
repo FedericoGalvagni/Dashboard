@@ -43,7 +43,7 @@ class MechanicalGroupIcon extends StatelessWidget {
                         margin: const EdgeInsets.all(20),
                         child: Image.asset(
                             "assets/icons/" + groupIndex.toString() + ".png",
-                            color: getEmphasis(textOnSurface, emphasis.medium)),
+                            color: getEmphasis(onSurface, emphasis.medium)),
                       ),
                     ),
                     Align(
@@ -80,8 +80,7 @@ class MechanicalGroupIcon extends StatelessWidget {
                                 text: mechanicalGroup.groups[groupIndex].name,
                                 size: 13,
                                 weight: FontWeight.w600,
-                                color:
-                                    getEmphasis(textOnSurface, emphasis.high),
+                                color: getEmphasis(onSurface, emphasis.high),
                               ),
                             ],
                           ),

@@ -52,21 +52,20 @@ class StatesMediumState extends State<StatesMedium> {
             width: _width / 4,
             height: 50,
             child: SimpleAutoCompleteTextField(
-                style:
-                    TextStyle(color: getEmphasis(textOnSurface, emphasis.high)),
+                style: TextStyle(color: getEmphasis(onSurface, emphasis.high)),
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(4),
                       borderSide: BorderSide(
-                          color: getEmphasis(textOnSurface, emphasis.medium),
+                          color: getEmphasis(onSurface, emphasis.medium),
                           width: 1)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(4),
                       borderSide: BorderSide(color: primary, width: 2)),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: primary)),
-                  hintStyle: TextStyle(
-                      color: getEmphasis(textOnSurface, emphasis.medium)),
+                  hintStyle:
+                      TextStyle(color: getEmphasis(onSurface, emphasis.medium)),
                   hintText: 'Enter a search term',
                 ),
                 key: key,
@@ -90,7 +89,7 @@ class StatesMediumState extends State<StatesMedium> {
                   });
                 },
                 child: CustomText(
-                    color: getEmphasis(textOnSurface, emphasis.high),
+                    color: getEmphasis(onSurface, emphasis.high),
                     text: "GO",
                     size: 18,
                     weight: FontWeight.bold))),
@@ -107,7 +106,7 @@ class StatesMediumState extends State<StatesMedium> {
             dropdownValue: widget.limit.toString(),
             items: const ["100", "250", "500", "1000", "2500", "5000", "10000"],
             color: primary,
-            textColor: getEmphasis(textOnSurface, emphasis.high),
+            textColor: getEmphasis(onSurface, emphasis.high),
             selectedValue: (value) {
               debugPrint(value);
               widget.limit = value;

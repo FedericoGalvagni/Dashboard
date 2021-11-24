@@ -56,7 +56,7 @@ class DataTableDState extends State<DataTableD> {
     (headers as Map<String, dynamic>).forEach((key, value) {
       columns.add(DataColumn(
           label: CustomText(
-            color: getEmphasis(textOnSurface, emphasis.high),
+            color: getEmphasis(onSurface, emphasis.high),
             text: key,
             size: 13,
             weight: FontWeight.w600,
@@ -119,7 +119,7 @@ class _DataSource extends DataTableSource {
     (element as Map<String, dynamic>).forEach((key, value) {
       cells.add(DataCell(Text(
         value.toString(),
-        style: TextStyle(color: getEmphasis(textOnSurface, emphasis.high)),
+        style: TextStyle(color: getEmphasis(onSurface, emphasis.high)),
       )));
     });
 

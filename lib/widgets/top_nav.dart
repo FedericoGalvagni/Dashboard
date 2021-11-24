@@ -31,14 +31,14 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
           Visibility(
               child: CustomText(
                   text: "Dash",
-                  color: getEmphasis(textOnSurface, emphasis.high),
+                  color: getEmphasis(onSurface, emphasis.high),
                   size: 20,
                   weight: FontWeight.bold)),
           Expanded(child: Container()),
           IconButton(
             icon: Icon(
               Icons.settings,
-              color: getEmphasis(textOnSurface, emphasis.high),
+              color: getEmphasis(onSurface, emphasis.high),
             ),
             onPressed: () {},
           ),
@@ -46,7 +46,7 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
             children: [
               IconButton(
                   icon: Icon(Icons.notifications,
-                      color: getEmphasis(textOnSurface, emphasis.high)),
+                      color: getEmphasis(onSurface, emphasis.high)),
                   onPressed: () {}),
               Positioned(
                   top: 7,
@@ -56,9 +56,9 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
                     height: 12,
                     padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
-                        color: primary,
+                        color: error,
                         borderRadius: BorderRadius.circular(30),
-                        border: Border.all(color: primary, width: 2)),
+                        border: Border.all(color: error, width: 4)),
                   ))
             ],
           ),
@@ -72,7 +72,7 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
           ),
           CustomText(
             text: "Federico Galvagni",
-            color: getEmphasis(textOnSurface, emphasis.high),
+            color: getEmphasis(onSurface, emphasis.high),
           ),
           const SizedBox(
             width: 16,
@@ -84,14 +84,14 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
                   padding: const EdgeInsets.all(2),
                   margin: const EdgeInsets.all(2),
                   child: CircleAvatar(
-                    backgroundColor: secondary,
+                    backgroundColor: primary,
                     child: Icon(
                       Icons.person_outline,
-                      color: getEmphasis(textOnSurface, emphasis.high),
+                      color: getEmphasis(onPrimary, emphasis.high),
                     ),
                   )))
         ],
       ),
-      iconTheme: IconThemeData(color: textOnSurface),
-      backgroundColor: surface(8),
+      iconTheme: IconThemeData(color: onSurface),
+      backgroundColor: surface(4),
     );

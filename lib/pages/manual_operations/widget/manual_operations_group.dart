@@ -32,10 +32,7 @@ class ManualOperationsGroup extends StatelessWidget {
           color: primary,
           border: Border.all(color: primary),
           borderRadius: BorderRadius.circular(5),
-          boxShadow: [
-            BoxShadow(
-                offset: const Offset(6, 6), color: surface(4), blurRadius: 12)
-          ],
+          boxShadow: boxShadow
         ),
         child: Material(
           color: Colors.transparent,

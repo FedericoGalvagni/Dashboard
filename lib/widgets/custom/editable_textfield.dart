@@ -27,13 +27,16 @@ class _EditableTextFieldState extends State<EditableTextField> {
     return Center(
       child: TextField(
         textAlign: widget.align ?? TextAlign.left,
-        style: TextStyle(color: getEmphasis(textOnSurface, emphasis.high,)),
+        style: TextStyle(
+            color: getEmphasis(
+          onSurface,
+          emphasis.high,
+        )),
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(4),
               borderSide: BorderSide(
-                  color: getEmphasis(textOnSurface, emphasis.medium),
-                  width: 1)),
+                  color: getEmphasis(onSurface, emphasis.medium), width: 1)),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(4),
               borderSide: BorderSide(color: primary, width: 2)),

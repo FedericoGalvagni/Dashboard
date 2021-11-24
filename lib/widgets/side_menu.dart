@@ -38,7 +38,7 @@ class SideMenu extends StatelessWidget {
                         text: "Overview",
                         size: 20,
                         weight: FontWeight.bold,
-                        color: getEmphasis(textOnSurface, emphasis.high),
+                        color: getEmphasis(onSurface, emphasis.high),
                       ),
                     ),
                     SizedBox(width: _width / 48),
