@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 import 'package:interface_example1/widgets/custom/number_slider.dart';
-import 'package:number_slide_animation/number_slide_animation.dart';
-import 'package:animated_flip_counter/animated_flip_counter.dart';
 
 class InfoCard extends StatelessWidget {
   final String title;

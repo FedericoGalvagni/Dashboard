@@ -45,7 +45,7 @@ class _ValueStepperState extends State<ValueStepper> {
                 onPressed: () {
                   if (widget.sendData ?? false) {
                     debugPrint("minus: id" + widget.id.toString() + ".0");
-                    HttpService.post(widget.id + ".0");
+                    // TODO: implement http post 
                   }
                 },
               ),
@@ -102,7 +102,7 @@ class _ValueStepperState extends State<ValueStepper> {
                 onPressed: () {
                   if (widget.sendData ?? false) {
                     debugPrint("plus: id" + widget.id.toString() + ".1");
-                    HttpService.post(widget.id + ".1");
+                    // TODO: implement http post 
                   }
                 },
               ),

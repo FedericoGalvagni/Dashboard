@@ -38,6 +38,7 @@ class ParametersPage extends StatelessWidget {
                 const ParametersLarge() //medium
               else
                 const ParametersLarge() //large
+                
             else
               const ParametersSmall(), //small
           ],

@@ -7,10 +7,12 @@ class EditableTextField extends StatefulWidget {
   final TextEditingController editingController;
   Function(String) newValue;
   final TextAlign? align;
+  TextInputType? inputType;
 
   EditableTextField(
       {Key? key,
       this.align,
+      this.inputType,
       required this.color,
       required this.editingController,
       required this.initialText,
@@ -26,7 +28,10 @@ class _EditableTextFieldState extends State<EditableTextField> {
   Widget build(BuildContext context) {
     return Center(
       child: TextField(
+
+        keyboardType: widget.inputType ?? TextInputType.text,
         textAlign: widget.align ?? TextAlign.left,
+        textAlignVertical: TextAlignVertical.center,
         style: TextStyle(
             color: getEmphasis(
           onSurface,

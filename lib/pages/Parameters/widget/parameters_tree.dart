@@ -9,15 +9,15 @@ import 'package:interface_example1/widgets/spacer/large_horizontal_spacer.dart';
 import 'package:interface_example1/widgets/spacer/large_vertical_spacer.dart';
 
 class ParametersTree extends StatefulWidget {
-  const ParametersTree({Key? key, required this.title}) : super(key: key);
+  ParametersTree({Key? key, required this.title, this.selectedNode = ""})
+      : super(key: key);
   final String title;
-
+  String? selectedNode = "";
   @override
   ParametersTreeState createState() => ParametersTreeState();
 }
 
 class ParametersTreeState extends State<ParametersTree> {
-  String _selectedNode = "";
   late TreeViewController _treeViewController;
   bool docsOpen = false;
   bool deepExpanded = false;
@@ -31,7 +31,7 @@ class ParametersTreeState extends State<ParametersTree> {
   void initState() {
     _treeViewController = TreeViewController(
       children: _buildMainNode(),
-      selectedKey: _selectedNode,
+      selectedKey: widget.selectedNode,
     );
 
     super.initState();
@@ -66,7 +66,6 @@ class ParametersTreeState extends State<ParametersTree> {
     );
     return Column(
       children: [
-        const LargeVSpacer(),
         Row(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,10 +84,10 @@ class ParametersTreeState extends State<ParametersTree> {
                     width: (_width / 4) - 40,
                     margin: const EdgeInsets.only(left: 20),
                     child: CustomText(
-                        text: "Browser",
+                        text: "Explorer",
                         weight: FontWeight.w600,
                         size: 20,
-                        color: onSurface),
+                        color: getEmphasis(onSurface, emphasis.high)),
                   ),
                   SizedBox(
                     width: _width / 4,
@@ -106,9 +105,10 @@ class ParametersTreeState extends State<ParametersTree> {
                           onExpansionChanged: (key, expanded) =>
                               _expandNode(key, expanded),
                           onNodeTap: (key) {
+                            selected.value = key;
                             debugPrint('Selected: $key');
                             setState(() {
-                              _selectedNode = key;
+                              widget.selectedNode = key;
                               _treeViewController = _treeViewController
                                   .copyWith(selectedKey: key);
                             });
@@ -133,7 +133,7 @@ class ParametersTreeState extends State<ParametersTree> {
                         text: "Tool",
                         weight: FontWeight.w600,
                         size: 20,
-                        color: onSurface),
+                        color: getEmphasis(onSurface, emphasis.high)),
                   ),
                   Container(height: 10),
                   InkWell(
@@ -164,20 +164,6 @@ class ParametersTreeState extends State<ParametersTree> {
                 ],
               ),
             ),
-            const LargeHSpacer(),
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                    color: surface(4), borderRadius: BorderRadius.circular(10)),
-                child: Container(
-                    margin: const EdgeInsets.only(left: 10, right: 10),
-                    decoration: BoxDecoration(
-                        color: surface(4),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: ParametersView(treeviewKey: _selectedNode)),
-              ),
-            ),
-            const LargeHSpacer(),
           ],
         ),
       ],
@@ -185,12 +171,11 @@ class ParametersTreeState extends State<ParametersTree> {
   }
 
   _expandNode(String key, bool expanded) {
-    String msg = '${expanded ? "Expanded" : "Collapsed"}: $key';
+    String msg = '${expanded ? "Expanded" : "Collapsed"}: $key ';
     debugPrint(msg);
     Node? node = _treeViewController.getNode(key);
     if (node != null) {
       List<Node> updated;
-
       updated = _treeViewController.updateNode(
           key,
           node.copyWith(
@@ -211,7 +196,7 @@ class ParametersTreeState extends State<ParametersTree> {
         key: "motor parameter",
         expanded: false,
         icon: docsOpen ? Icons.folder_open : Icons.folder,
-        label: "Motors Parameter",
+        label: "Parametri Motori",
         children: _buildGroupNode()));
     return node;
   }
@@ -219,26 +204,26 @@ class ParametersTreeState extends State<ParametersTree> {
   List<Node<dynamic>> _buildGroupNode() {
     List<Node<dynamic>> node = [];
     int i = 0;
-    for (var item in parameter.motorParameters) {
+    for (var item in parametri) {
       node.add(Node(
-          key: item.groupName,
+          key: item.gruppo,
           expanded: false,
           icon: docsOpen ? Icons.folder_open : Icons.folder,
-          label: item.groupName,
-          children: _buildMotorNode(item.motorList, i)));
+          label: item.gruppo,
+          children: _buildMotorNode(item.listaMotori, i)));
       i++;
     }
     return node;
   }
 
-  List<Node<dynamic>> _buildMotorNode(List<MotorList> motorlist, int key) {
+  List<Node<dynamic>> _buildMotorNode(List<motore> motorlist, int key) {
     List<Node<dynamic>> node = [];
     int i = 0;
     for (var item in motorlist) {
       node.add(Node(
         key: key.toString() + "." + i.toString(),
         icon: Icons.tune,
-        label: item.motorName,
+        label: item.nomeMotore,
       ));
       i++;
     }

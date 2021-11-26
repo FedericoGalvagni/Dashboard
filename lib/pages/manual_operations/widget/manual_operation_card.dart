@@ -1,8 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:interface_example1/constants/style.dart';
-import 'package:interface_example1/data_models/config.dart';
-import 'package:interface_example1/widgets/custom/custom_text.dart';
 import 'package:interface_example1/widgets/custom/stepper.dart';
 import 'package:interface_example1/widgets/spacer/custom_horizontal_spacer.dart';
 
@@ -38,74 +36,76 @@ class ManualOperationCard extends StatelessWidget {
           color: surface(4),
           boxShadow: boxShadow),
       child: Row(
-        
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          customHspacer(factor: 256),
-          Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(child: Container()),
-                RichText(
-                    textAlign: TextAlign.left,
-                    text: TextSpan(children: [
-                      TextSpan(
-                          text: "$title\n",
-                          style: TextStyle(
-                              fontSize: 40,
-                              color: getEmphasis(onSurface, emphasis.high))),
-                      TextSpan(
-                          text: "max 200 min 175",
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: getEmphasis(onSurface, emphasis.medium))),
-                    ])),
-                Expanded(child: Container()),
+          Container(
+            margin: const EdgeInsets.only(left: 10),
+            child: Column(
+                children: [
+                  Expanded(child: Container()),
+                  RichText(
+                      textAlign: TextAlign.left,
+                      text: TextSpan(children: [
+                        TextSpan(
+                            text: "$title\n",
+                            style: TextStyle(
+                                fontSize: 40,
+                                color: getEmphasis(onSurface, emphasis.high))),
+                        TextSpan(
+                            text: "max 200 min 175",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: getEmphasis(onSurface, emphasis.medium))),
+                      ])),
+                  Expanded(child: Container()),
 
-                /*
+                  /*
 
-                Row(
-                  children: [
-                    
-                    SizedBox(
-                        height: 50,
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: CustomText(
-                            text: title,
-                            color: getEmphasis(onSurface, emphasis.high),
-                            size: 30,
-                            weight: FontWeight.bold,
-                          ),
-                        )),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: 10,
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: CustomText(
-                        text: "max: 200, min: 200",
-                        color: getEmphasis(onSurface, emphasis.medium),
-                        size: 15,
-                        weight: FontWeight.w300,
+                  Row(
+                    children: [
+                      
+                      SizedBox(
+                          height: 50,
+                          child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: CustomText(
+                              text: title,
+                              color: getEmphasis(onSurface, emphasis.high),
+                              size: 30,
+                              weight: FontWeight.bold,
+                            ),
+                          )),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 10,
                       ),
-                    ),
-                  ],
-                ),*/
-              ]),
-          ValueStepper(
-            id: id,
-            sendData: true,
-            nodeUrl: "http",
-            newValue: (newValue) {},
-            value: value,
+                      SizedBox(
+                        height: 50,
+                        child: CustomText(
+                          text: "max: 200, min: 200",
+                          color: getEmphasis(onSurface, emphasis.medium),
+                          size: 15,
+                          weight: FontWeight.w300,
+                        ),
+                      ),
+                    ],
+                  ),*/
+                ]),
           ),
-          customHspacer(factor: 256),
+          Container(
+            margin: const EdgeInsets.only(right: 10),
+            child: ValueStepper(
+              id: id,
+              sendData: true,
+              nodeUrl: "http",
+              newValue: (newValue) {},
+              value: value,
+            ),
+          ),
         ],
       ),
     ));

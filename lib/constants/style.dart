@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
 
-//TODO: need to define a color palette for each of the theme we want to implement
-// two ways, either define a theme for myApp, or manually set every widget color
-// each off the choice need to planned to avoid issues
-
-/* DARK THEME */
-
 //Color
 Color overlay = const Color(0xFFFFFFFF);
 Color primary = const Color(0xFFBB86FC);
@@ -17,18 +11,20 @@ Color surfaceColor = const Color(0xFF121212);
 Color error = const Color(0xFFCF6679);
 Color onPrimary = const Color(0xFF000000);
 Color onSecondary = const Color(0xFF000000);
-Color onBackground = Color(0xFFFFFFFF);
+Color onBackground = const Color(0xFFFFFFFF);
 Color onSurface = const Color(0xFFFFFFFF);
 Color onError = const Color(0xFF000000);
 // extra
 Color divider = const Color(0xFF646464);
 Color valid = Colors.green;
+Color warning = Colors.orange.shade700;
 
 // shadow
 List<BoxShadow> boxShadow = [
   //BoxShadow(offset: const Offset(6, 6), color: surface(4), blurRadius: 12)
 ];
 
+/// Funzione che modifica la palette dei colori in base a [light]
 themeSelection(bool light) {
   if (!light) {
     // dark theme palette
@@ -46,7 +42,7 @@ themeSelection(bool light) {
     onSurface = const Color(0xFFFFFFFF);
     onError = const Color(0xFF000000);
     divider = const Color(0xFF646464);
-    boxShadow = [BoxShadow()];
+    boxShadow = const [BoxShadow()];
   } else {
     overlay = const Color(0xFF000000);
     primary = const Color(0xFF6200EE);
@@ -112,7 +108,7 @@ Color surface(int elevation) {
       surface = Color.alphaBlend(overlay.withOpacity(0.05), surfaceColor);
   }
   return surface;
-} //with 1dp elevation surface overlay
+}
 
 /// ## Emphasis
 /// When light text appears on dark backgrounds it should use the following
@@ -138,6 +134,7 @@ Color getEmphasis(Color color, var emphasisLevel) {
   }
 }
 
+/// Determina il livello di emfasi, valori disponibili [high], [medium], [disabled]
 enum emphasis { high, medium, disabled }
 
 Color hovered(Color background, Color foreground) {
