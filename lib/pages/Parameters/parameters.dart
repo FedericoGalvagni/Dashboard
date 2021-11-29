@@ -14,7 +14,7 @@ class ParametersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Obx(
+        /*Obx(
           () => Row(
             children: [
               Container(
@@ -28,7 +28,7 @@ class ParametersPage extends StatelessWidget {
                   )),
             ],
           ),
-        ),
+        ),*/
         Expanded(
             child: ListView(
           children: [

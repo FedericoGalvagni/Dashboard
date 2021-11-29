@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/data_models/parameters_data.dart';
-import 'package:interface_example1/pages/Parameters/widget/parameters_view.dart';
-import 'package:interface_example1/widgets/custom/custom_text.dart';
-import 'package:interface_example1/widgets/spacer/large_horizontal_spacer.dart';
-import 'package:interface_example1/widgets/spacer/large_vertical_spacer.dart';
 
 class ParametersTree extends StatefulWidget {
-  ParametersTree({Key? key, required this.title, this.selectedNode = ""})
-      : super(key: key);
+  ParametersTree(
+      {Key? key,
+      required this.width,
+      required this.title,
+      this.selectedNode = ""});
   final String title;
+  final double width;
   String? selectedNode = "";
   @override
   ParametersTreeState createState() => ParametersTreeState();
@@ -55,7 +55,7 @@ class ParametersTreeState extends State<ParametersTree> {
       parentLabelStyle: TextStyle(
         fontSize: 16,
         letterSpacing: 0.1,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w300,
         color: getEmphasis(onSurface, emphasis.high),
       ),
       iconTheme: IconThemeData(
@@ -71,98 +71,91 @@ class ParametersTreeState extends State<ParametersTree> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const LargeHSpacer(),
-            Container(
-              decoration: BoxDecoration(
-                  color: surface(2), borderRadius: BorderRadius.circular(10)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(height: 20),
-                  Container(
-                    width: (_width / 4) - 40,
-                    margin: const EdgeInsets.only(left: 20),
-                    child: CustomText(
-                        text: "Explorer",
-                        weight: FontWeight.w600,
-                        size: 20,
-                        color: getEmphasis(onSurface, emphasis.high)),
-                  ),
-                  SizedBox(
-                    width: _width / 4,
-                    child: GestureDetector(
-                      onTap: () {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(20),
-                        child: TreeView(
-                          shrinkWrap: true,
-                          controller: _treeViewController,
-                          allowParentSelect: _allowParentSelect,
-                          supportParentDoubleTap: _supportParentDoubleTap,
-                          onExpansionChanged: (key, expanded) =>
-                              _expandNode(key, expanded),
-                          onNodeTap: (key) {
-                            selected.value = key;
-                            debugPrint('Selected: $key');
-                            setState(() {
-                              widget.selectedNode = key;
-                              _treeViewController = _treeViewController
-                                  .copyWith(selectedKey: key);
-                            });
-                          },
-                          theme: _treeViewTheme,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 20),
-                      width: (_width / 4) - 40,
-                      height: 1,
-                      decoration: BoxDecoration(
-                        color: divider,
-                        borderRadius: BorderRadius.circular(1),
-                      )),
-                  Container(
-                    width: (_width / 4) - 40,
-                    margin: EdgeInsets.only(left: 20),
-                    child: CustomText(
-                        text: "Tool",
-                        weight: FontWeight.w600,
-                        size: 20,
-                        color: getEmphasis(onSurface, emphasis.high)),
-                  ),
-                  Container(height: 10),
-                  InkWell(
-                    onTap: () {},
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                /*Container(height: 20),
+                Container(
+                  
+                  //margin: const EdgeInsets.only(left: 20, right: 20),
+                  child: CustomText(
+                      text: "Explorer",
+                      weight: FontWeight.w600,
+                      size: 20,
+                      color: getEmphasis(onSurface, emphasis.high)),
+                ),*/
+                SizedBox(
+                  width: widget.width,
+                  child: GestureDetector(
+                    onTap: () {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                    },
                     child: Container(
-                      width: (_width / 4) - 40,
-                      margin: EdgeInsets.only(left: 20),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.restore,
-                            color: Colors.green,
-                          ),
-                          Container(
-                            width: 5,
-                          ),
-                          //TODO: implement restore function
-                          CustomText(
-                            text: "Restore",
-                            size: 15,
-                            color: getEmphasis(onSurface, emphasis.high),
-                            weight: FontWeight.normal,
-                          )
-                        ],
+                      padding: const EdgeInsets.all(20),
+                      child: TreeView(
+                        shrinkWrap: true,
+                        controller: _treeViewController,
+                        allowParentSelect: _allowParentSelect,
+                        supportParentDoubleTap: _supportParentDoubleTap,
+                        onExpansionChanged: (key, expanded) =>
+                            _expandNode(key, expanded),
+                        onNodeTap: (key) {
+                          selected.value = key;
+                          debugPrint('Selected: $key');
+                          setState(() {
+                            widget.selectedNode = key;
+                            _treeViewController = _treeViewController
+                                .copyWith(selectedKey: key);
+                          });
+                        },
+                        theme: _treeViewTheme,
                       ),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+                /*Container(
+                    //margin: const EdgeInsets.only(bottom: 20),
+                    height: 1,
+                    decoration: BoxDecoration(
+                      color: divider,
+                      borderRadius: BorderRadius.circular(1),
+                    )),
+                Container(
+                  //margin: EdgeInsets.only(left: 20),
+                  child: CustomText(
+                      text: "Tool",
+                      weight: FontWeight.w600,
+                      size: 20,
+                      color: getEmphasis(onSurface, emphasis.high)),
+                ),
+                Container(height: 10),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    
+                    //margin: EdgeInsets.only(left: 20),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.restore,
+                          color: Colors.green,
+                        ),
+                        Container(
+                          width: 5,
+                        ),
+                        //TODO: implement restore function
+                        CustomText(
+                          text: "Restore",
+                          size: 15,
+                          color: getEmphasis(onSurface, emphasis.high),
+                          weight: FontWeight.normal,
+                        )
+                      ],
+                    ),
+                  ),
+                )*/
+              ],
             ),
           ],
         ),
@@ -216,7 +209,7 @@ class ParametersTreeState extends State<ParametersTree> {
     return node;
   }
 
-  List<Node<dynamic>> _buildMotorNode(List<motore> motorlist, int key) {
+  List<Node<dynamic>> _buildMotorNode(List<Motore> motorlist, int key) {
     List<Node<dynamic>> node = [];
     int i = 0;
     for (var item in motorlist) {

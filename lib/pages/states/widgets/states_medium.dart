@@ -9,6 +9,8 @@ import 'package:interface_example1/pages/states/widgets/states_datatable.dart';
 import 'package:interface_example1/widgets/custom/autocomplete_textfield.dart';
 import 'package:interface_example1/widgets/custom/custom_dropdownmenu.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
+import 'package:interface_example1/widgets/spacer/medium_horizontal_spacer.dart';
+import 'package:interface_example1/widgets/spacer/medium_vertical_spacer.dart';
 
 /// Ritorna degli elementi di controllo della tabella.
 /// Un [ElevatedButton] che può essere premuto per inviare un Http request
@@ -23,8 +25,8 @@ class StatesMedium extends StatefulWidget {
   String limit;
 
   /// Identificativo richiesta http
-  String id;
-  StatesMedium({Key? key, this.limit = "100", this.id = ""}) : super(key: key);
+  String? id;
+  StatesMedium({Key? key, this.limit = "100", this.id}) : super(key: key);
 
   @override
   StatesMediumState createState() => StatesMediumState();
@@ -42,10 +44,9 @@ class StatesMediumState extends State<StatesMedium> {
     double _width = MediaQuery.of(context).size.width;
 
     return Column(children: [
+      const MediumVSpacer(),
       Row(children: [
-        SizedBox(
-          width: _width / 100,
-        ),
+        const MediumHSpacer(),
         Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4), color: surface(4)),
@@ -71,9 +72,16 @@ class StatesMediumState extends State<StatesMedium> {
                 key: key,
                 clearOnSubmit: false,
                 suggestions: suggestions,
-                textSubmitted: (text) {
+                textChanged: (text) {
                   widget.id = text;
-                  HttpService(id: widget.id, limit: widget.limit).get();
+                },
+                textSubmitted: (text) {
+                  setState(() {
+                    showTableIndicator.value = true;
+                  });
+                  widget.id = text;
+                  HttpService(id: widget.id.toString(), limit: widget.limit)
+                      .get();
                 })),
         SizedBox(
             width: 60,
@@ -84,18 +92,18 @@ class StatesMediumState extends State<StatesMedium> {
                         MaterialStateColor.resolveWith((states) => primary)),
                 onPressed: () {
                   setState(() {
-                    HttpService(id: widget.id, limit: widget.limit).get();
-                    widget.id = "";
+                    showTableIndicator.value = true;
                   });
+
+                  HttpService(id: widget.id.toString(), limit: widget.limit)
+                      .get();
                 },
                 child: CustomText(
-                    color: getEmphasis(onSurface, emphasis.high),
+                    color: getEmphasis(onPrimary, emphasis.high),
                     text: "GO",
                     size: 18,
                     weight: FontWeight.bold))),
-        SizedBox(
-          width: _width / 100,
-        ),
+        const MediumHSpacer(),
         //
         Expanded(
           child: Container(),
@@ -113,51 +121,61 @@ class StatesMediumState extends State<StatesMedium> {
             },
           ),
         ),
-        // SPACER
-        SizedBox(
-          width: _width / 100,
-        )
+        const MediumHSpacer()
       ]),
       // TABLE
-      Row(
-        children: [
-          Container(
-            height: 5,
-          )
-        ],
-      ),
+      const MediumVSpacer(),
       ValueListenableBuilder(
-          valueListenable: comandsList,
+          valueListenable: row,
           builder: (context, value, widget) {
             return _progressIndicator();
           }),
-      Row(
-        children: [
-          Container(
-            height: 5,
-          )
-        ],
-      ),
       Row(children: [
+        const MediumHSpacer(),
         Expanded(
             flex: 1,
             child: ValueListenableBuilder(
-                valueListenable: comandsList,
+                valueListenable: rowLenght,
                 builder: (context, value, widget) {
-                  showTableIndicator.value = false;
-                  return const DataTableD();
+                  return ValueListenableBuilder(
+                      valueListenable: row,
+                      builder: (context, value, widget) {
+                        showTableIndicator.value = false;
+                        if (row.value.isNotEmpty) {
+                          return Container(
+                              decoration: BoxDecoration(
+                                  color: surface(4),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Container(
+                                  margin: const EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  // ignore: prefer_const_constructors
+                                  child: DataTableD()));
+                        } else {
+                          return Container();
+                        }
+                      });
                 })),
+        const MediumHSpacer(),
       ])
     ]);
   }
 
   Widget _progressIndicator() {
+    double _width = MediaQuery.of(context).size.width;
     if (showTableIndicator.value) {
-      return Container(
-          margin: const EdgeInsets.only(left: 5, right: 5),
-          child: const LinearProgressIndicator(
-            minHeight: 10,
-          ));
+      return Column(
+        children: [
+          Container(
+              margin: EdgeInsets.only(left: _width / 64, right: _width / 64),
+              child: LinearProgressIndicator(
+                backgroundColor: primary.withOpacity(0.3),
+                color: primary,
+                minHeight: 10,
+              )),
+          const MediumVSpacer(),
+        ],
+      );
     } else {
       return Container();
     }

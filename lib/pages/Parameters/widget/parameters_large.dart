@@ -3,40 +3,105 @@ import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/data_models/parameters_data.dart';
 import 'package:interface_example1/pages/Parameters/widget/parameters_tree.dart';
 import 'package:interface_example1/pages/Parameters/widget/parameters_view.dart';
+import 'package:interface_example1/widgets/custom/custom_text.dart';
 import 'package:interface_example1/widgets/spacer/large_horizontal_spacer.dart';
+import 'package:interface_example1/widgets/spacer/large_vertical_spacer.dart';
 
 class ParametersLarge extends StatelessWidget {
   const ParametersLarge({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    ParametersTree parametersTree = ParametersTree(title: "");
+    double _width = MediaQuery.of(context).size.width;
+    ParametersTree parametersTree = ParametersTree(
+      title: "",
+      width: (_width / 4),
+    );
 
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start  ,
-      mainAxisAlignment: MainAxisAlignment.start,
+    return Column(
       children: [
-        const LargeHSpacer(),
-        parametersTree,
-        const LargeHSpacer(),
-        ValueListenableBuilder(
-            valueListenable: selected,
-            builder: (context, widget, value) {
-              return Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: surface(4),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Container(
-                      margin: const EdgeInsets.only(left: 10, right: 10),
+        const LargeVSpacer(),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const LargeHSpacer(),
+            Container(
+              decoration: BoxDecoration(
+                  color: surface(4), borderRadius: BorderRadius.circular(10)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const LargeVSpacer(),
+                  Container(
+                    margin: const EdgeInsets.only(left: 20),
+                    child: CustomText(
+                        text: "Explorer",
+                        align: TextAlign.left,
+                        weight: FontWeight.w600,
+                        size: 20,
+                        color: getEmphasis(onSurface, emphasis.high)),
+                  ),
+                  const LargeVSpacer(),
+                  parametersTree,
+                  const LargeVSpacer(),
+                  Container(
+                    margin: const EdgeInsets.only(left: 20),
+                    child: CustomText(
+                        align: TextAlign.left,
+                        text: "Tool",
+                        weight: FontWeight.w600,
+                        size: 20,
+                        color: getEmphasis(onSurface, emphasis.high)),
+                  ),
+                  Container(),
+                  InkWell(
+                    onTap: () {},
+                    child: Container(
+                      //margin: EdgeInsets.only(left: 20),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.restore,
+                            color: Colors.green,
+                          ),
+                          Container(
+                            width: 5,
+                          ),
+                          //TODO: implement restore function
+                          CustomText(
+                            text: "Restore",
+                            size: 15,
+                            color: getEmphasis(onSurface, emphasis.high),
+                            weight: FontWeight.normal,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            LargeHSpacer(),
+            ValueListenableBuilder(
+                valueListenable: selected,
+                builder: (context, widget, value) {
+                  return Container(
+                      
                       decoration: BoxDecoration(
                           color: surface(4),
                           borderRadius: BorderRadius.circular(10)),
-                      child: ParametersView(treeviewKey: selected.value)),
-                ),
-              );
-            }),
-        const LargeHSpacer(),
+                      child: ParametersView(
+                          treeviewKey: selected.value,
+                          width: _width -
+                              (3 * (_width / 128) //spacer
+                              ) -
+                              (_width / 6) -
+                              _width / 4)); 
+                }),
+          ],
+        ),
       ],
     );
   }

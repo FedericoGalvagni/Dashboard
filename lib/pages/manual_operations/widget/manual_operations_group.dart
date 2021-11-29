@@ -24,16 +24,18 @@ class ManualOperationsGroup extends StatelessWidget {
     //print(mechanicalGroup.groups[0].actuators[2].name);
 
     List<Widget> actuatorsWidget = [];
+    actuatorsWidget.add(Container(
+      height: 10,
+    ));
     actuatorsWidget.add(
       Container(
         height: 30,
         margin: EdgeInsets.only(left: _width / 64, right: _width / 64),
         decoration: BoxDecoration(
-          color: primary,
-          border: Border.all(color: primary),
-          borderRadius: BorderRadius.circular(5),
-          boxShadow: boxShadow
-        ),
+            color: primary,
+            border: Border.all(color: primary),
+            borderRadius: BorderRadius.circular(5),
+            boxShadow: boxShadow),
         child: Material(
           color: Colors.transparent,
           child: InkWell(

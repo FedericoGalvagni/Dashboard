@@ -35,6 +35,7 @@ class OverviewCardsLarge extends StatelessWidget {
                   valueListenable: produzioneTotale,
                   builder: (context, value, widget) {
                     return InfoCard(
+                      height: 136,
                       title: "Produzione totale",
                       value: produzioneTotale.value.toString(),
                       onTap: () {},
@@ -47,6 +48,7 @@ class OverviewCardsLarge extends StatelessWidget {
                   valueListenable: produzioneUltime24h,
                   builder: (context, value, widget) {
                     return InfoCard(
+                      height: 136,
                       title: "Produzione ultime 24h",
                       value: produzioneUltime24h.value.toString(),
                       onTap: () {},
@@ -59,6 +61,7 @@ class OverviewCardsLarge extends StatelessWidget {
                   valueListenable: produzioneMediaGiornaliera,
                   builder: (context, value, widget) {
                     return InfoCard(
+                      height: 136,
                       title: "Produzione media giornaliera",
                       value: produzioneMediaGiornaliera.value.toString(),
                       onTap: () {},
@@ -71,6 +74,7 @@ class OverviewCardsLarge extends StatelessWidget {
                   valueListenable: produzioneMediaOraria,
                   builder: (context, value, widget) {
                     return InfoCard(
+                      height: 136,
                       title: "Produzione media oraria",
                       value: produzioneMediaOraria.value.toString(),
                       onTap: () {},
@@ -99,7 +103,7 @@ class OverviewCardsLarge extends StatelessWidget {
                           margin: EdgeInsets.all(15),
                           child: SimpleTimeSeriesChart(
                             _createSampleData(),
-                            duration: Duration(milliseconds: 1000),
+                            duration: Duration(milliseconds: 1500),
                             // Disable animations for image tests.
                             animate: true,
                           ),

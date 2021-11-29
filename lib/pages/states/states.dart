@@ -19,7 +19,8 @@ class StatesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Obx(
+        
+        /*Obx(
           () => Row(
             children: [
               Container(
@@ -32,7 +33,7 @@ class StatesPage extends StatelessWidget {
                       color: onBackground)),
             ],
           ),
-        ),
+        ),*/
         Expanded(
             child: ListView(
           children: [

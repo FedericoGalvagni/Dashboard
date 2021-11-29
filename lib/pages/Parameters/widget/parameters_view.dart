@@ -7,7 +7,9 @@ import 'package:interface_example1/widgets/custom/custom_text.dart';
 
 class ParametersView extends StatefulWidget {
   final String treeviewKey;
-  const ParametersView({Key? key, required this.treeviewKey}) : super(key: key);
+  double width;
+  ParametersView({Key? key, required this.width, required this.treeviewKey})
+      : super(key: key);
 
   @override
   State<ParametersView> createState() => _ParametersViewState();
@@ -16,8 +18,10 @@ class ParametersView extends StatefulWidget {
 class _ParametersViewState extends State<ParametersView> {
   int iGruppi = -1;
   int iMotori = -1;
+  int iParametri = 0;
   @override
   Widget build(BuildContext context) {
+    GlobalKey stickyKey = GlobalKey();
     List<Parametro> list;
 
     var parts = widget.treeviewKey.split('.');
@@ -30,10 +34,10 @@ class _ParametersViewState extends State<ParametersView> {
       iGruppi = int.parse(a);
       iMotori = int.parse(b);
       list = parametri[iGruppi].listaMotori[iMotori].parametri;
-
       return Container(
-          color: surface(4),
-          width: 600,
+          width: widget.width,
+          decoration: BoxDecoration(
+              color: surface(4), borderRadius: BorderRadius.circular(10)),
           child: Theme(
             data: ThemeData(dividerColor: divider),
             child: DataTable(columns: [
@@ -77,6 +81,7 @@ class _ParametersViewState extends State<ParametersView> {
   List<DataRow> _buildRow(List<Parametro> list) {
     List<DataRow> row = [];
     for (int i = 0; i < list.length; i++) {
+      iParametri = i;
       TextEditingController temp;
       temp = TextEditingController(text: list[i].valore.toString());
       row.add(DataRow(cells: [
@@ -120,6 +125,7 @@ class _ParametersViewState extends State<ParametersView> {
                   OutlineInputBorder(borderSide: BorderSide(color: primary)),
             ),
             onFieldSubmitted: (newValue) {
+              statoParametri.value = !statoParametri.value;
               setState(() {});
               parametri[iGruppi].listaMotori[iMotori].parametri[i].valore =
                   newValue;
@@ -130,6 +136,7 @@ class _ParametersViewState extends State<ParametersView> {
                   .listaMotori[iMotori]
                   .parametri[i]
                   .nomeParametro;
+
               debugPrint("Assegnato: " +
                   nomeGruppo +
                   ">" +
@@ -157,41 +164,71 @@ class _ParametersViewState extends State<ParametersView> {
           ),
         )),
         DataCell(ValueListenableBuilder(
-          valueListenable: parametriDatabase,
-          builder: (context, widget, value) {
-            return _getState(
-              parametriOriginali[iGruppi].listaMotori[iMotori].parametri[i].valore,
-              parametri[iGruppi].listaMotori[iMotori].parametri[i].valore,
-              parametriDatabase.value[iGruppi].listaMotori[iMotori].parametri[i].valore,
-              parametri[iGruppi].listaMotori[iMotori].parametri[i].nomeParametro,
-            );
-          }
-        ))
+            valueListenable: statoParametri,
+            builder: (context, widget, value) {
+              return _getState(
+                  parametriOriginali[iGruppi]
+                      .listaMotori[iMotori]
+                      .parametri[i]
+                      .valore,
+                  parametri[iGruppi].listaMotori[iMotori].parametri[i].valore,
+                  parametriDatabase
+                      .value[iGruppi].listaMotori[iMotori].parametri[i].valore,
+                  parametri[iGruppi]
+                      .listaMotori[iMotori]
+                      .parametri[i]
+                      .nomeParametro,
+                  iGruppi,
+                  iMotori,
+                  i, () {
+                setState(() {});
+                parametri[iGruppi].listaMotori[iMotori].parametri[i].valore =
+                    parametriOriginali[iGruppi]
+                        .listaMotori[iMotori]
+                        .parametri[i]
+                        .valore;
+                HttpService(id: "modifica parametro", parametriHeaders: {
+                  "indicegruppi": iGruppi,
+                  "indicemotori": iMotori,
+                  "indiceparametri": i,
+                  "nuovovalore": double.parse(parametriOriginali[iGruppi]
+                      .listaMotori[iMotori]
+                      .parametri[i]
+                      .valore),
+                }).post();
+              });
+            }))
       ]));
     }
     return row;
   }
 
-
-/// Verifica lo stato del valore del parametro, il risultato varia in base
-/// ad un confronto fra il valore originale, quello nel database e quello 
-/// nell'interfaccia. Ci sono 3 possibilità:
-/// -  Il dato è sincronizzato e non ha subito variamenti, quindi tutti e 3 i valori
-///    sono uguali
-/// - Il dato è stato cambiato, ma il database deve ancora essere aggiornato, quindi
-///   il valore originale differisce da quello nel database e il valore visualizzato 
-///   sull'interfaccia differisce da quello contenuto nel database
-/// - Il dato è stato cambiato ed è sincronizzato con il server, quindi il valore
-///   originale differisce da quello sul database, mentre il valore visualizzato
-///   sull'interfaccia coincide con quello nel database
-  Widget _getState(String valoreOriginale, String valoreInterfaccia,
-      String valoreDatabase, String nomeParametro) {
+  /// Verifica lo stato del valore del parametro, il risultato varia in base
+  /// ad un confronto fra il valore originale, quello nel database e quello
+  /// nell'interfaccia. Ci sono 3 possibilità:
+  /// -  Il dato è sincronizzato e non ha subito variamenti, quindi tutti e 3 i valori
+  ///    sono uguali
+  /// - Il dato è stato cambiato, ma il database deve ancora essere aggiornato, quindi
+  ///   il valore originale differisce da quello nel database e il valore visualizzato
+  ///   sull'interfaccia differisce da quello contenuto nel database
+  /// - Il dato è stato cambiato ed è sincronizzato con il server, quindi il valore
+  ///   originale differisce da quello sul database, mentre il valore visualizzato
+  ///   sull'interfaccia coincide con quello nel database
+  _getState(
+      String valoreOriginale,
+      String valoreInterfaccia,
+      String valoreDatabase,
+      String nomeParametro,
+      int x,
+      int y,
+      int z,
+      Function ripristinaOriginale) {
     //debugPrint("DB: " + valoreDatabase);
     //debugPrint("OR: " + valoreOriginale);
     //debugPrint("UI :" + valoreInterfaccia);
 
-  
-    if (valoreDatabase == valoreInterfaccia && valoreOriginale == valoreDatabase) {
+    if (valoreDatabase == valoreInterfaccia &&
+        valoreOriginale == valoreDatabase) {
       return Tooltip(
         message: nomeParametro +
             " è sincronizzato con il database\n e non ha subito cambiamenti",
@@ -208,10 +245,17 @@ class _ParametersViewState extends State<ParametersView> {
           message: nomeParametro +
               " è stato cambiato ed è sincronizzato con il database.\n Valore originale:  " +
               valoreOriginale,
-          child: Icon(
-            Icons.published_with_changes,
-            color: Colors.amber.shade700,
-            size: 20,
+          child: IconButton(
+            padding: EdgeInsets.zero,
+            iconSize: 20,
+            icon: Icon(
+              Icons.published_with_changes,
+              color: Colors.amber.shade700,
+              size: 20,
+            ),
+            onPressed: () {
+              ripristinaOriginale();
+            },
           ),
         );
       } else {

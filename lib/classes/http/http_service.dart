@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:interface_example1/data_models/config.dart';
@@ -63,8 +62,9 @@ class HttpService {
     try {
       final response = await dio.post(nodeUrl.toString());
       parametriDatabase.value = (response.data as List)
-          .map((x) => parametriMotori.fromJson(x))
+          .map((x) => ParametriMotori.fromJson(x))
           .toList();
+      statoParametri.value = !statoParametri.value;
     } on DioError catch (e) {
       debugPrint(e.message);
       assert(e.response!.statusCode == 404);
@@ -84,11 +84,12 @@ class HttpService {
 
       case "parametri":
         parametri =
-            (res.data as List).map((x) => parametriMotori.fromJson(x)).toList();
+            (res.data as List).map((x) => ParametriMotori.fromJson(x)).toList();
         parametriOriginali =
-            (res.data as List).map((x) => parametriMotori.fromJson(x)).toList();
+            (res.data as List).map((x) => ParametriMotori.fromJson(x)).toList();
         parametriDatabase.value =
-            (res.data as List).map((x) => parametriMotori.fromJson(x)).toList();
+            (res.data as List).map((x) => ParametriMotori.fromJson(x)).toList();
+
         break;
 
       default:

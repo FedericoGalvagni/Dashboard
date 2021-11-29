@@ -14,12 +14,11 @@ class OverviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Obx(
-          () => Row(
+        /*Row(
             children: [
               Container(
                   margin: EdgeInsets.only(
-                      top: ResponsiveWidget.isSmallScreen(context) ? 56 : 6),
+                      top: ResponsiveWidget.isSmallScreen(context) ? 6: 5),
                   child: CustomText(
                     color: onBackground,
                     text: menuController.activeItem.value,
@@ -27,8 +26,8 @@ class OverviewPage extends StatelessWidget {
                     weight: FontWeight.bold,
                   )),
             ],
-          ),
-        ),
+          ),*/
+
         Expanded(
             child: ListView(
           children: [

@@ -1,33 +1,33 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 
 ValueNotifier<String> selected = ValueNotifier<String>("");
-List<parametriMotori> parametriOriginali = [];
-List<parametriMotori> parametri = [];
-ValueNotifier<List<parametriMotori>> parametriDatabase =
-    ValueNotifier<List<parametriMotori>>([]);
+ValueNotifier<bool> statoParametri = ValueNotifier<bool>(true);
+List<ParametriMotori> parametriOriginali = [];
+List<ParametriMotori> parametri = [];
+ValueNotifier<List<ParametriMotori>> parametriDatabase =
+    ValueNotifier<List<ParametriMotori>>([]);
 
-List<parametriMotori> parameterFromJson(String str) =>
-    List<parametriMotori>.from(
-        json.decode(str).map((x) => parametriMotori.fromJson(x)));
+List<ParametriMotori> parameterFromJson(String str) =>
+    List<ParametriMotori>.from(
+        json.decode(str).map((x) => ParametriMotori.fromJson(x)));
 
-String parameterToJson(List<parametriMotori> data) =>
+String parameterToJson(List<ParametriMotori> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class parametriMotori {
-  parametriMotori({
+class ParametriMotori {
+  ParametriMotori({
     required this.gruppo,
     required this.listaMotori,
   });
-  List<motore> listaMotori;
+  List<Motore> listaMotori;
   String gruppo;
 
-  factory parametriMotori.fromJson(Map<String, dynamic> json) =>
-      parametriMotori(
+  factory ParametriMotori.fromJson(Map<String, dynamic> json) =>
+      ParametriMotori(
         gruppo: json["gruppo"],
-        listaMotori: List<motore>.from(
-            json["listaMotori"].map((x) => motore.fromJson(x))),
+        listaMotori: List<Motore>.from(
+            json["listaMotori"].map((x) => Motore.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,8 +36,8 @@ class parametriMotori {
       };
 }
 
-class motore {
-  motore({
+class Motore {
+  Motore({
     required this.nomeMotore,
     required this.parametri,
   });
@@ -45,7 +45,7 @@ class motore {
   String nomeMotore;
   List<Parametro> parametri;
 
-  factory motore.fromJson(Map<String, dynamic> json) => motore(
+  factory Motore.fromJson(Map<String, dynamic> json) => Motore(
         nomeMotore: json["nomeMotore"],
         parametri: List<Parametro>.from(
             json["parametri"].map((x) => Parametro.fromJson(x))),

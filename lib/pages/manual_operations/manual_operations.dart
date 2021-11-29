@@ -22,19 +22,20 @@ class ManualOperationsPage extends StatelessWidget {
     }
     return Column(
       children: [
-        Row(
-          children: [
-            Container(
-                margin: EdgeInsets.only(
-                    top: ResponsiveWidget.isSmallScreen(context) ? 56 : 6),
-                child: CustomText(
-                  text: title,
-                  size: 24,
-                  weight: FontWeight.bold,
-                  color: onBackground,
-                )),
-          ],
-        ),
+        /*Center(
+          child: Container(
+            height: 30,
+            width: 200,
+            color:  Colors.red,
+            child: CustomText(
+              text: title,
+              align: TextAlign.center,
+              size: 24,
+              weight: FontWeight.bold,
+              color: primary,
+            ),
+          ),
+        ),*/
         Expanded(
             child: ListView(
           children: [

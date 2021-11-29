@@ -43,146 +43,139 @@ class StatesLargeState extends State<StatesLarge> {
 
     double _width = MediaQuery.of(context).size.width;
 
-    return Stack(
-      children: [
-        Column(children: [
-          Row(children: [
-            const LargeHSpacer(),
-            Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4), color: surface(4)),
-                width: _width / 4,
-                height: 50,
-                child: SimpleAutoCompleteTextField(
-                    style:
-                        TextStyle(color: getEmphasis(onSurface, emphasis.high)),
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4),
-                          borderSide: BorderSide(
-                              color: getEmphasis(onSurface, emphasis.medium),
-                              width: 1)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4),
-                          borderSide: BorderSide(color: primary, width: 2)),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: primary)),
-                      hintStyle: TextStyle(
-                          color: getEmphasis(onSurface, emphasis.medium)),
-                      hintText: 'Enter a search term',
-                    ),
-                    key: key,
-                    clearOnSubmit: false,
-                    suggestions: suggestions,
-                    textChanged: (text) {
-                      widget.id = text;
-                    },
-                    textSubmitted: (text) {
-                      setState(() {
-                        showTableIndicator.value = true;
-                      });
-                      widget.id = text;
-                      HttpService(id: widget.id.toString(), limit: widget.limit)
-                          .get();
-                    })),
-            SizedBox(
-                width: 60,
-                height: 50,
-                child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateColor.resolveWith(
-                            (states) => primary)),
-                    onPressed: () {
-                      setState(() {
-                        showTableIndicator.value = true;
-                      });
-
-                      HttpService(id: widget.id.toString(), limit: widget.limit)
-                          .get();
-                    },
-                    child: CustomText(
-                        color: getEmphasis(onPrimary, emphasis.high),
-                        text: "GO",
-                        size: 18,
-                        weight: FontWeight.bold))),
-            const LargeHSpacer(),
-            //
-            Expanded(
-              child: Container(),
-            ),
-            SizedBox(
-              height: 50,
-              child: CustomDDMenu(
-                dropdownValue: widget.limit.toString(),
-                items: const [
-                  "100",
-                  "250",
-                  "500",
-                  "1000",
-                  "2500",
-                  "5000",
-                  "10000"
-                ],
-                color: primary,
-                textColor: getEmphasis(onSurface, emphasis.high),
-                selectedValue: (value) {
-                  debugPrint(value);
-                  widget.limit = value;
+    return Column(children: [
+      const LargeVSpacer(),
+      Row(children: [
+        const LargeHSpacer(),
+        Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4), color: surface(4)),
+            width: _width / 4,
+            height: 50,
+            child: SimpleAutoCompleteTextField(
+                style: TextStyle(color: getEmphasis(onSurface, emphasis.high)),
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide(
+                          color: getEmphasis(onSurface, emphasis.medium),
+                          width: 1)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide(color: primary, width: 2)),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: primary)),
+                  hintStyle:
+                      TextStyle(color: getEmphasis(onSurface, emphasis.medium)),
+                  hintText: 'Enter a search term',
+                ),
+                key: key,
+                clearOnSubmit: false,
+                suggestions: suggestions,
+                textChanged: (text) {
+                  widget.id = text;
                 },
-              ),
-            ),
-            const LargeHSpacer()
-          ]),
-          // TABLE
-          const LargeVSpacer(),
-          ValueListenableBuilder(
-              valueListenable: row,
-              builder: (context, value, widget) {
-                return _progressIndicator();
-              }),
-          const LargeVSpacer(),
-          Row(children: [
-            const LargeHSpacer(),
-            Expanded(
-                flex: 1,
-                child: ValueListenableBuilder(
-                    valueListenable: rowLenght,
-                    builder: (context, value, widget) {
-                      return ValueListenableBuilder(
-                          valueListenable: row,
-                          builder: (context, value, widget) {
-                            showTableIndicator.value = false;
-                            if (row.value.isNotEmpty) {
-                              return Container(
-                                  decoration: BoxDecoration(
-                                      color: surface(4),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Container(
-                                      margin: const EdgeInsets.only(
-                                          left: 10, right: 10),
-                                      // ignore: prefer_const_constructors
-                                      child: DataTableD()));
-                            } else {
-                              return Container();
-                            }
-                          });
-                    })),
-            const LargeHSpacer(),
-          ])
-        ]),
-      ],
-    );
+                textSubmitted: (text) {
+                  setState(() {
+                    showTableIndicator.value = true;
+                  });
+                  widget.id = text;
+                  HttpService(id: widget.id.toString(), limit: widget.limit)
+                      .get();
+                })),
+        SizedBox(
+            width: 60,
+            height: 50,
+            child: ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateColor.resolveWith((states) => primary)),
+                onPressed: () {
+                  setState(() {
+                    showTableIndicator.value = true;
+                  });
+
+                  HttpService(id: widget.id.toString(), limit: widget.limit)
+                      .get();
+                },
+                child: CustomText(
+                    color: getEmphasis(onPrimary, emphasis.high),
+                    text: "GO",
+                    size: 18,
+                    weight: FontWeight.bold))),
+        const LargeHSpacer(),
+        //
+        Expanded(
+          child: Container(),
+        ),
+        SizedBox(
+          height: 50,
+          child: CustomDDMenu(
+            dropdownValue: widget.limit.toString(),
+            items: const ["100", "250", "500", "1000", "2500", "5000", "10000"],
+            color: primary,
+            textColor: getEmphasis(onSurface, emphasis.high),
+            selectedValue: (value) {
+              debugPrint(value);
+              widget.limit = value;
+            },
+          ),
+        ),
+        const LargeHSpacer()
+      ]),
+      // TABLE
+      const LargeVSpacer(),
+      ValueListenableBuilder(
+          valueListenable: row,
+          builder: (context, value, widget) {
+            return _progressIndicator();
+          }),
+      Row(children: [
+        const LargeHSpacer(),
+        Expanded(
+            flex: 1,
+            child: ValueListenableBuilder(
+                valueListenable: rowLenght,
+                builder: (context, value, widget) {
+                  return ValueListenableBuilder(
+                      valueListenable: row,
+                      builder: (context, value, widget) {
+                        showTableIndicator.value = false;
+                        if (row.value.isNotEmpty) {
+                          return Container(
+                              decoration: BoxDecoration(
+                                  color: surface(4),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Container(
+                                  margin: const EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  // ignore: prefer_const_constructors
+                                  child: DataTableD()));
+                        } else {
+                          return Container();
+                        }
+                      });
+                })),
+        const LargeHSpacer(),
+      ])
+    ]);
   }
 
   Widget _progressIndicator() {
+    double _width = MediaQuery.of(context).size.width;
     if (showTableIndicator.value) {
-      return Container(
-          margin: const EdgeInsets.only(left: 5, right: 5),
-          child: LinearProgressIndicator(
-            backgroundColor: background,
-            color: primary,
-            minHeight: 10,
-          ));
+      return Column(
+        children: [
+          Container(
+              margin: EdgeInsets.only(left: _width / 128, right: _width / 128),
+              child: LinearProgressIndicator(
+                backgroundColor: primary.withOpacity(0.3),
+                color: primary,
+                minHeight: 10,
+              )),
+          const LargeVSpacer(),
+        ],
+      );
     } else {
       return Container();
     }
