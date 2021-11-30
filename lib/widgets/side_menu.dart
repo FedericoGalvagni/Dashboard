@@ -46,13 +46,6 @@ class SideMenu extends StatelessWidget {
                 ),
               ],
             ),
-          const SizedBox(
-            height: 30,
-          ),
-          Divider(
-            height: 1,
-            color: divider,
-          ),
           Column(
             mainAxisSize: MainAxisSize.min,
             //Autopopulating sidemenu

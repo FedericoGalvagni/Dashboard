@@ -1,8 +1,12 @@
+import 'dart:html';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:interface_example1/data_models/config.dart';
+import 'package:interface_example1/data_models/manual_operation_data.dart';
 import 'package:interface_example1/data_models/overview_data.dart';
 import 'package:interface_example1/data_models/parameters_data.dart';
+
 import 'package:interface_example1/data_models/states_data.dart';
 
 /// ## HTTP
@@ -61,9 +65,10 @@ class HttpService {
 
     try {
       final response = await dio.post(nodeUrl.toString());
-      parametriDatabase.value = (response.data as List)
-          .map((x) => ParametriMotori.fromJson(x))
-          .toList();
+
+      parametriDatabase.value =
+          (response.data as List).map((x) => ParametriAttuatori.fromJson(x)).toList();
+
       statoParametri.value = !statoParametri.value;
     } on DioError catch (e) {
       debugPrint(e.message);
@@ -83,13 +88,15 @@ class HttpService {
         break;
 
       case "parametri":
+        debugPrint("1");
         parametri =
-            (res.data as List).map((x) => ParametriMotori.fromJson(x)).toList();
+            (res.data as List).map((x) => ParametriAttuatori.fromJson(x)).toList();
+            debugPrint("1");
         parametriOriginali =
-            (res.data as List).map((x) => ParametriMotori.fromJson(x)).toList();
+            (res.data as List).map((x) => ParametriAttuatori.fromJson(x)).toList();
         parametriDatabase.value =
-            (res.data as List).map((x) => ParametriMotori.fromJson(x)).toList();
-
+            (res.data as List).map((x) => ParametriAttuatori.fromJson(x)).toList();
+        costruzioneGruppi(parametri);
         break;
 
       default:

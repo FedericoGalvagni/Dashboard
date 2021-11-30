@@ -149,3 +149,60 @@ Color pressed(Color background, Color foreground) {
   getEmphasis(onSurface, emphasis.high);
   return Color.alphaBlend(foreground.withOpacity(0.1), background);
 }
+
+class PrimaryContainers {
+  Color container = primary;
+  Color overlay = Colors.white;
+  Color content = onPrimary;
+
+  Color hovered() {
+    return Color.alphaBlend(overlay.withOpacity(0.04), container);
+  }
+
+  Color focused() {
+    return Color.alphaBlend(overlay.withOpacity(0.12), container);
+  }
+
+  Color pressed() {
+    return Color.alphaBlend(overlay.withOpacity(0.1), container);
+  }
+}
+
+class SurfaceContainer {
+  Color hovered(Color background, Color foreground) {
+    return Color.alphaBlend(overlay.withOpacity(0.04), background);
+  }
+
+  Color focused(Color background, Color foreground) {
+    return Color.alphaBlend(foreground.withOpacity(0.12), background);
+  }
+
+  Color pressed(Color background, Color foreground) {
+    getEmphasis(onSurface, emphasis.high);
+    return Color.alphaBlend(foreground.withOpacity(0.1), background);
+  }
+}
+
+/// The enabled, hovered, focused, pressed, and dragged states for
+/// containers using the semi-transparent primary color.
+/// - Container:	Primary 24%
+/// - Content:	Primary
+/// - Overlay: color	White
+
+class PrimaryTrContainers {
+  Color container = primary.withOpacity(0.24);
+  Color overlay = Colors.white;
+  Color content = primary;
+
+  Color hovered() {
+    return Color.alphaBlend(overlay.withOpacity(0.04), container);
+  }
+
+  Color focused() {
+    return Color.alphaBlend(overlay.withOpacity(0.12), container);
+  }
+
+  Color pressed() {
+    return Color.alphaBlend(overlay.withOpacity(0.1), container);
+  }
+}

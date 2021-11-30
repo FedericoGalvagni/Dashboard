@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:interface_example1/constants/style.dart';
+import 'package:interface_example1/data_models/manual_operation_data.dart';
 import 'package:interface_example1/data_models/parameters_data.dart';
 
 class ParametersTree extends StatefulWidget {
@@ -20,7 +21,7 @@ class ParametersTree extends StatefulWidget {
 class ParametersTreeState extends State<ParametersTree> {
   late TreeViewController _treeViewController;
   bool docsOpen = false;
-  bool deepExpanded = false;
+  bool deepExpanded = true;
   final ExpanderPosition _expanderPosition = ExpanderPosition.start;
   final ExpanderType _expanderType = ExpanderType.caret;
   final ExpanderModifier _expanderModifier = ExpanderModifier.none;
@@ -105,8 +106,8 @@ class ParametersTreeState extends State<ParametersTree> {
                           debugPrint('Selected: $key');
                           setState(() {
                             widget.selectedNode = key;
-                            _treeViewController = _treeViewController
-                                .copyWith(selectedKey: key);
+                            _treeViewController =
+                                _treeViewController.copyWith(selectedKey: key);
                           });
                         },
                         theme: _treeViewTheme,
@@ -203,20 +204,20 @@ class ParametersTreeState extends State<ParametersTree> {
           expanded: false,
           icon: docsOpen ? Icons.folder_open : Icons.folder,
           label: item.gruppo,
-          children: _buildMotorNode(item.listaMotori, i)));
+          children: _buildMotorNode(item.attuatori, i)));
       i++;
     }
     return node;
   }
 
-  List<Node<dynamic>> _buildMotorNode(List<Motore> motorlist, int key) {
+  List<Node<dynamic>> _buildMotorNode(List<Attuatori> motorlist, int key) {
     List<Node<dynamic>> node = [];
     int i = 0;
     for (var item in motorlist) {
       node.add(Node(
         key: key.toString() + "." + i.toString(),
         icon: Icons.tune,
-        label: item.nomeMotore,
+        label: item.nome,
       ));
       i++;
     }

@@ -17,6 +17,7 @@ class OverviewCardsMedium extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        const MediumVSpacer(),
         Row(
           children: [
             const MediumHSpacer(),

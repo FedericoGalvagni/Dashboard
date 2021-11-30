@@ -22,7 +22,7 @@ class _ParametersViewState extends State<ParametersView> {
   @override
   Widget build(BuildContext context) {
     GlobalKey stickyKey = GlobalKey();
-    List<Parametro> list;
+    List<Parametri> list;
 
     var parts = widget.treeviewKey.split('.');
     var a = parts[0].trim();
@@ -33,7 +33,7 @@ class _ParametersViewState extends State<ParametersView> {
     } else {
       iGruppi = int.parse(a);
       iMotori = int.parse(b);
-      list = parametri[iGruppi].listaMotori[iMotori].parametri;
+      list = parametri[iGruppi].attuatori[iMotori].parametri;
       return Container(
           width: widget.width,
           decoration: BoxDecoration(
@@ -78,7 +78,7 @@ class _ParametersViewState extends State<ParametersView> {
     }
   }
 
-  List<DataRow> _buildRow(List<Parametro> list) {
+  List<DataRow> _buildRow(List<Parametri> list) {
     List<DataRow> row = [];
     for (int i = 0; i < list.length; i++) {
       iParametri = i;
@@ -127,13 +127,13 @@ class _ParametersViewState extends State<ParametersView> {
             onFieldSubmitted: (newValue) {
               statoParametri.value = !statoParametri.value;
               setState(() {});
-              parametri[iGruppi].listaMotori[iMotori].parametri[i].valore =
+              parametri[iGruppi].attuatori[iMotori].parametri[i].valore =
                   newValue;
               String nomeMotore =
-                  parametri[iGruppi].listaMotori[iMotori].nomeMotore.toString();
+                  parametri[iGruppi].attuatori[iMotori].nome.toString();
               String nomeGruppo = parametri[iGruppi].gruppo.toString();
               String nomeParametro = parametri[iGruppi]
-                  .listaMotori[iMotori]
+                  .attuatori[iMotori]
                   .parametri[i]
                   .nomeParametro;
 
@@ -168,23 +168,23 @@ class _ParametersViewState extends State<ParametersView> {
             builder: (context, widget, value) {
               return _getState(
                   parametriOriginali[iGruppi]
-                      .listaMotori[iMotori]
+                      .attuatori[iMotori]
                       .parametri[i]
                       .valore,
-                  parametri[iGruppi].listaMotori[iMotori].parametri[i].valore,
+                  parametri[iGruppi].attuatori[iMotori].parametri[i].valore,
                   parametriDatabase
-                      .value[iGruppi].listaMotori[iMotori].parametri[i].valore,
+                      .value[iGruppi].attuatori[iMotori].parametri[i].valore,
                   parametri[iGruppi]
-                      .listaMotori[iMotori]
+                      .attuatori[iMotori]
                       .parametri[i]
                       .nomeParametro,
                   iGruppi,
                   iMotori,
                   i, () {
                 setState(() {});
-                parametri[iGruppi].listaMotori[iMotori].parametri[i].valore =
+                parametri[iGruppi].attuatori[iMotori].parametri[i].valore =
                     parametriOriginali[iGruppi]
-                        .listaMotori[iMotori]
+                        .attuatori[iMotori]
                         .parametri[i]
                         .valore;
                 HttpService(id: "modifica parametro", parametriHeaders: {
@@ -192,7 +192,7 @@ class _ParametersViewState extends State<ParametersView> {
                   "indicemotori": iMotori,
                   "indiceparametri": i,
                   "nuovovalore": double.parse(parametriOriginali[iGruppi]
-                      .listaMotori[iMotori]
+                      .attuatori[iMotori]
                       .parametri[i]
                       .valore),
                 }).post();

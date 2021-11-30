@@ -1,12 +1,14 @@
 import 'dart:convert';
 
-String responseBody = a2;
-final mechanicalGroup = groupFromJson(responseBody);
+import 'package:flutter/material.dart';
+import 'package:interface_example1/data_models/parameters_data.dart';
 
-Group groupFromJson(String str) => Group.fromJson(json.decode(str));
+// TODO: TRADURRE IN ITALIANO
+List<Gruppo> gruppi = [];
+//Group groupFromJson(String str) => Group.fromJson(json.decode(str));
+//String groupToJson(Group data) => json.encode(data.toJson());
 
-String groupToJson(Group data) => json.encode(data.toJson());
-
+/*
 class Group {
   Group({
     required this.groups,
@@ -23,53 +25,111 @@ class Group {
         "Groups": List<dynamic>.from(groups.map((x) => x.toJson())),
       };
 }
-
-class GroupElement {
-  GroupElement({
-    required this.name,
-    required this.actuators,
+*/
+class Gruppo {
+  Gruppo({
+    required this.nome,
+    required this.attuatori,
   });
 
-  String name;
-  List<Actuator> actuators;
+  String nome;
+  List<Attuatore> attuatori;
 
-  factory GroupElement.fromJson(Map<String, dynamic> json) => GroupElement(
-        name: json["name"],
-        actuators: List<Actuator>.from(
-            json["actuators"].map((x) => Actuator.fromJson(x))),
+  factory Gruppo.fromJson(Map<String, dynamic> json) => Gruppo(
+        nome: json["name"],
+        attuatori: List<Attuatore>.from(
+            json["actuators"].map((x) => Attuatore.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "name": name,
-        "actuators": List<dynamic>.from(actuators.map((x) => x.toJson())),
+        "name": nome,
+        "actuators": List<dynamic>.from(attuatori.map((x) => x.toJson())),
       };
 }
 
-class Actuator {
-  Actuator(
-      {required this.name,
-      required this.type,
-      required this.value,
-      required this.id});
+class Attuatore {
+  Attuatore(
+      {required this.nome,
+      required this.tipo,
+      required this.valore,
+      required this.id,
+      required this.limiteNegativo,
+      required this.limitePositivo,
+      required this.manualeAttivo});
 
-  String name;
-  String type;
-  String value;
+  String nome;
+  String tipo;
+  String valore;
   String id;
+  String limitePositivo;
+  String limiteNegativo;
+  ValueNotifier<bool> manualeAttivo;
 
-  factory Actuator.fromJson(Map<String, dynamic> json) => Actuator(
-      name: json["name"],
-      type: json["type"],
-      value: json["value"],
+  factory Attuatore.fromJson(Map<String, dynamic> json) => Attuatore(
+      manualeAttivo: ValueNotifier<bool>(false),
+      limiteNegativo: "",
+      limitePositivo: "",
+      nome: json["name"],
+      tipo: json["type"],
+      valore: json["value"],
       id: json["id"]);
 
   Map<String, dynamic> toJson() => {
-        "name": name,
-        "type": type,
-        "value": value,
+        "name": nome,
+        "type": tipo,
+        "value": valore,
         "id": id,
       };
 }
 
-String a2 =
-    '{"Groups":[{"name":"Laser","actuators":[{"name":"asseX","type":"motor","value":"10","id":"0"},{"name":"asseY","type":"motor","value":"2","id":"1"},{"name":"asseZ","type":"motor","value":"10","id":"2"},{"name":"cassetto","type":"pneumatic","value":"1","id":"3"},{"name":"bo","type":"pneumatic","value":"0","id":"4"}]},{"name":"Portale","actuators":[{"name":"asseX","type":"motor","value":"10","id":"0"},{"name":"asseY","type":"motor","value":"2","id":"1"},{"name":"asseZ","type":"motor","value":"10","id":"2"},{"name":"cassetto","type":"pneumatic","value":"1","id":"3"},{"name":"bo","type":"pneumatic","value":"0","id":"4"}]},{"name":"Pulizia","actuators":[{"name":"asseX","type":"motor","value":"10","id":"0"},{"name":"asseY","type":"motor","value":"2","id":"1"},{"name":"asseZ","type":"motor","value":"10","id":"2"},{"name":"cassetto","type":"pneumatic","value":"1","id":"3"},{"name":"bo","type":"pneumatic","value":"0","id":"4"}]},{"name":"Conveyor","actuators":[{"name":"asseX","type":"motor","value":"10","id":"5"},{"name":"asseY","type":"motor","value":"2","id":"6"},{"name":"asseZ","type":"motor","value":"10","id":"7"},{"name":"cassetto","type":"pneumatic","value":"1","id":"8"},{"name":"bo","type":"pneumatic","value":"0","id":"9"}]}]}';
+/// Inserimento dei dati dei motori contenuti nei parametri nel modello [Gruppo]che
+/// li rappresenta.
+///
+costruzioneGruppi(List<ParametriAttuatori> parametri) {
+  debugPrint("Inserimento dati motori nel modello");
+  for (var gruppoItem in parametri) {
+    List<Attuatore> motori = [];
+    //debugPrint("Nuovo gruppo Item: " + gruppoItem.gruppo.toString());
+    for (var motoreItem in gruppoItem.attuatori) {
+      String limiteNegativo = "";
+      String limitePositivo = "";
+      //debugPrint("Nuovo motore Item: " + motoreItem.nomeMotore.toString());
+      for (var parametriItem in motoreItem.parametri) {
+        if (parametriItem.nomeParametro == "Limite Negativo") {
+          limiteNegativo = parametriItem.valore;
+        }
+        if (parametriItem.nomeParametro == "Limite Positivo") {
+          limitePositivo = parametriItem.valore;
+        }
+      }
+      Attuatore motore = Attuatore(
+          manualeAttivo: ValueNotifier<bool>(false),
+          nome: motoreItem.nome,
+          tipo: "motore",
+          valore: "45",
+          id: "id",
+          limiteNegativo: limiteNegativo,
+          limitePositivo: limitePositivo);
+      motori.add(motore);
+    }
+    Gruppo gruppoMeccanico = Gruppo(nome: gruppoItem.gruppo, attuatori: motori);
+    gruppi.add(gruppoMeccanico);
+  }
+  //debugPrint(gruppi[1].attuatori[0].nome.toString());
+}
+
+/// Disattiva l'abilitazione al comando manule di tutti gli attuatori, tranne
+/// a quello che è stato attivato in modo da evitare conflitti
+disattivazioneComandiManuali(int iGruppi, int iAttuatori) {
+  for (var i = 0; i < gruppi.length; i++) {
+    for (var j = 0; j < gruppi[i].attuatori.length; j++) {
+      if (i == iGruppi && j == iAttuatori) {
+        // Non faccio nulla in quanto si tratta dell'attuatore appena abilitato
+        debugPrint("Abilitato");
+      } else {
+        // Disabilito in quanto non si tratta dell'attuatore appena abilitato
+        gruppi[i].attuatori[j].manualeAttivo.value = false;
+      }
+    }
+  }
+}

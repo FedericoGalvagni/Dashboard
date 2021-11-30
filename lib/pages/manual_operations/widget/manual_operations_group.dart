@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/constants/style.dart';
@@ -8,109 +7,109 @@ import 'package:interface_example1/pages/manual_operations/widget/manual_operati
 import 'package:interface_example1/routing/routes.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 
-class ManualOperationsGroup extends StatelessWidget {
-  final int groupIndex;
-  final int mControllPerRow;
+class ManualOperationsGroup extends StatefulWidget {
+  final int indiceGruppi;
+  final int attuatoriPerRiga;
   const ManualOperationsGroup(
-      {Key? key, required this.groupIndex, required this.mControllPerRow})
+      {Key? key, required this.indiceGruppi, required this.attuatoriPerRiga})
       : super(key: key);
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
-    double _width = MediaQuery.of(context).size.width;
+  State<ManualOperationsGroup> createState() => _ManualOperationsGroupState();
+}
 
-    //print(mechanicalGroup.groups[0].actuators[2].name);
+class _ManualOperationsGroupState extends State<ManualOperationsGroup> {
+  @override
+  Widget build(BuildContext context) {
+    //print("length: " + mechanicalGroup.groups.length.toString());
 
-    List<Widget> actuatorsWidget = [];
-    actuatorsWidget.add(Container(
-      height: 10,
-    ));
-    actuatorsWidget.add(
-      Container(
-        height: 30,
-        margin: EdgeInsets.only(left: _width / 64, right: _width / 64),
-        decoration: BoxDecoration(
-            color: primary,
-            border: Border.all(color: primary),
-            borderRadius: BorderRadius.circular(5),
-            boxShadow: boxShadow),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            hoverColor: primary.withOpacity(0.1),
-            splashColor: primary,
-            highlightColor: primary.withOpacity(0.3),
-            onTap: () {
-              mechanicalGroupSelector = -1;
-              navigationController.navigateTo(manualOperationsPageRoute);
-            },
-            child: Center(
-              child: CustomText(text: "Go Back", color: surface(4)),
-            ),
-          ),
-        ),
-      ),
-    );
-    actuatorsWidget.add(Row(children: const [SizedBox(height: 20)]));
-    if (mechanicalGroup.groups[groupIndex].actuators.isEmpty) {
-      actuatorsWidget.add(Container());
-    } else {
-      for (var i = 0;
-          i < mechanicalGroup.groups[groupIndex].actuators.length - 1;
-          i = i + mControllPerRow) {
-        debugPrint("lenght: " +
-            mechanicalGroup.groups[groupIndex].actuators.length.toString());
-        actuatorsWidget.add(Row(
-            children: _getActuatorsRow(
-                mechanicalGroup.groups[groupIndex].actuators, i, context)));
-        actuatorsWidget.add(Row(children: const [SizedBox(height: 20)]));
-      }
-    }
-
-    return Column(children: actuatorsWidget);
+    return Column(children: buildRow(gruppi[widget.indiceGruppi].attuatori));
   }
 
-  List<Widget> _getActuatorsRow(List<Actuator> list, int index, context) {
+  List<Widget> buildRow(List<Attuatore> attuatori) {
     double _width = MediaQuery.of(context).size.width;
     List<Widget> row = [];
+    int l = attuatori.length;
+    int nElementi = widget.attuatoriPerRiga;
 
-    // Here the row is being built: check if the index is pointing on the last
-    // actuator in the List<Actuator> list, if so we only need to add an actuator
-    // instead of two
-    for (var i = 0; i < mControllPerRow; i++) {
-      debugPrint("i" + i.toString());
-      debugPrint("index" + index.toString());
-      if (index + i == list.length - 1) {
-        debugPrint("true");
+    for (int i = 0; i < l; i = i + nElementi) {
+      if (i == 0) {
         row.add(SizedBox(
+          height: _width / 64,
+        ));
+        row.add(
+          Container(
+            height: 30,
+            margin: EdgeInsets.only(left: _width / 64, right: _width / 64),
+            decoration: BoxDecoration(
+                color: primary,
+                border: Border.all(color: primary),
+                borderRadius: BorderRadius.circular(5),
+                boxShadow: boxShadow),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                hoverColor: primary.withOpacity(0.1),
+                splashColor: primary,
+                highlightColor: primary.withOpacity(0.3),
+                onTap: () {
+                  mechanicalGroupSelector = -1;
+                  navigationController.navigateTo(manualOperationsPageRoute);
+                },
+                child: Center(
+                  child: CustomText(text: "Go Back", color: surface(4)),
+                ),
+              ),
+            ),
+          ),
+        );
+      }
+      row.add(SizedBox(
+        height: _width / 64,
+      ));
+      row.add(Row(
+        children: buildRowElement(i, attuatori),
+      ));
+      // add spacer
+    }
+    return row;
+  }
+
+  List<Widget> buildRowElement(int index, List<Attuatore> attuatori) {
+    double _width = MediaQuery.of(context).size.width;
+    List<Widget> element = [];
+    int ii;
+    int l = attuatori.length;
+    int nElementi = widget.attuatoriPerRiga;
+    for (ii = 0; ii < nElementi; ii++) {
+      if (index + ii >= attuatori.length) {
+        element.add(Container(
           width: _width / 64,
         ));
-        row.add(Expanded(child: Container()));
-        row.add(SizedBox(
-          width: _width / 64,
-        ));
+        element.add(Expanded(child: Container(color: primary)));
       } else {
-        debugPrint("false");
-        row.add(SizedBox(
+        element.add(SizedBox(
           width: _width / 64,
+          height: _width / 128,
         ));
-        row.add(ManualOperationCard(
-          type: list[index + i].type,
-          id: list[index + i].id,
-          title: list[index + i].name,
-          value: list[index + i].value,
-          onTap: () {},
-          backgroundColor:
-              Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-                  .withOpacity(0.6),
-        ));
+        Attuatore attuatore = attuatori[index + ii];
+        element.add(ManualOperationCard(
+            iGruppi: widget.indiceGruppi,
+            iAttuatori: index + ii,
+            attivo: attuatore.manualeAttivo.value,
+            nome: attuatore.nome,
+            limiteNegativo: attuatore.limiteNegativo,
+            limitePositivo: attuatore.limitePositivo,
+            id: attuatore.id,
+            value: attuatore.valore,
+            type: attuatore.tipo,
+            onTap: () {}));
       }
     }
-    row.add(SizedBox(
+    element.add(SizedBox(
       width: _width / 64,
+      height: _width / 128,
     ));
-    return row;
+    return element;
   }
 }

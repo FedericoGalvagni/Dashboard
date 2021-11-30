@@ -25,8 +25,8 @@ class _ManualOperationIconsGridState extends State<ManualOperationIconsGrid> {
       return Column(children: buildColumn(context));
     } else {
       return ManualOperationsGroup(
-        groupIndex: mechanicalGroupSelector,
-        mControllPerRow: widget.aControllPerRow,
+        indiceGruppi: mechanicalGroupSelector,
+        attuatoriPerRiga: widget.aControllPerRow,
       );
     }
   }
@@ -34,12 +34,12 @@ class _ManualOperationIconsGridState extends State<ManualOperationIconsGrid> {
   List<Widget> buildColumn(context) {
     List<Widget> mechanicalGroupIcons = [];
     double _width = MediaQuery.of(context).size.width;
-    if (mechanicalGroup.groups.isEmpty) {
+    if (gruppi.isEmpty) {
       mechanicalGroupIcons.add(Container());
       return mechanicalGroupIcons;
     }
     for (var i = 0;
-        i < mechanicalGroup.groups.length;
+        i < gruppi.length;
         i = i + widget.iconsPerRow) {
       //print("buildIndex: " + i.toString());
       mechanicalGroupIcons.add((Row(children: [
@@ -63,7 +63,7 @@ class _ManualOperationIconsGridState extends State<ManualOperationIconsGrid> {
     List<Widget> row = [];
     int ii;
     for (ii = 0; ii < widget.iconsPerRow; ii++) {
-      if (i + ii >= mechanicalGroup.groups.length) {
+      if (i + ii >= gruppi.length) {
         row.add(Container(
           width: _width / 64,
         ));
@@ -76,7 +76,7 @@ class _ManualOperationIconsGridState extends State<ManualOperationIconsGrid> {
         ));
 
         row.add(MechanicalGroupIcon(
-          groupIndex: i + ii,
+          indiceGruppi: i + ii,
         ));
         //print("false" + ii.toString());
       }

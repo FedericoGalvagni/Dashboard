@@ -65,7 +65,7 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
           Container(
             width: 1,
             height: 22,
-            color: surface(4),
+            color: surface(16),
           ),
           const SizedBox(
             width: 24,
@@ -79,7 +79,7 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
           ),
           Container(
               decoration: BoxDecoration(
-                  color: surface(4), borderRadius: BorderRadius.circular(30)),
+                  color: surface(16), borderRadius: BorderRadius.circular(30)),
               child: Container(
                   padding: const EdgeInsets.all(2),
                   margin: const EdgeInsets.all(2),
@@ -93,5 +93,5 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
         ],
       ),
       iconTheme: IconThemeData(color: onSurface),
-      backgroundColor: surface(4),
+      backgroundColor: surface(16),
     );

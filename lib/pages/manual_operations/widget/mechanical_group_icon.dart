@@ -7,8 +7,8 @@ import 'package:interface_example1/routing/routes.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 
 class MechanicalGroupIcon extends StatelessWidget {
-  final int groupIndex;
-  const MechanicalGroupIcon({Key? key, required this.groupIndex})
+  final int indiceGruppi;
+  const MechanicalGroupIcon({Key? key, required this.indiceGruppi})
       : super(key: key);
 
   @override
@@ -32,7 +32,7 @@ class MechanicalGroupIcon extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               onTap: () {
                 //print(groupIndex);
-                mechanicalGroupSelector = groupIndex;
+                mechanicalGroupSelector = indiceGruppi;
                 navigationController.navigateTo(manualOperationsPageRoute);
               },
               child: Center(
@@ -42,7 +42,7 @@ class MechanicalGroupIcon extends StatelessWidget {
                       child: Container(
                         margin: const EdgeInsets.all(20),
                         child: Image.asset(
-                            "assets/icons/" + groupIndex.toString() + ".png",
+                            "assets/icons/" + indiceGruppi.toString() + ".png",
                             color: getEmphasis(onSurface, emphasis.medium)),
                       ),
                     ),
@@ -77,7 +77,7 @@ class MechanicalGroupIcon extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               CustomText(
-                                text: mechanicalGroup.groups[groupIndex].name,
+                                text: gruppi[indiceGruppi].nome,
                                 size: 13,
                                 weight: FontWeight.w600,
                                 color: getEmphasis(onSurface, emphasis.high),
