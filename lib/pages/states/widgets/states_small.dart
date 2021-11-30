@@ -20,6 +20,7 @@ import 'package:interface_example1/widgets/spacer/small_vertical_spacer.dart';
 /// Un [TextField] il cui input vien
 ///
 
+// ignore: must_be_immutable
 class StatesSmall extends StatefulWidget {
   /// Limite numero righe richieste
   String limit;
@@ -38,6 +39,7 @@ class StatesSmallState extends State<StatesSmall> {
   Widget build(BuildContext context) {
     GlobalKey<AutoCompleteTextFieldState<String>> key =
         GlobalKey(debugLabel: "SimpleAutoCompleteTextField_federico");
+    // ignore: todo
     // TODO: CLEAN
     List<String> suggestions = ["produzione", "graficoProduzione"];
 

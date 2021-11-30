@@ -25,7 +25,7 @@ class _ManualOperationIconsGridState extends State<ManualOperationIconsGrid> {
       return Column(children: buildColumn(context));
     } else {
       return ManualOperationsGroup(
-        indiceGruppi: mechanicalGroupSelector,
+        iGruppi: mechanicalGroupSelector,
         attuatoriPerRiga: widget.aControllPerRow,
       );
     }

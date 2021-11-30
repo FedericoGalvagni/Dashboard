@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 library sliding_number;
 
 import 'package:flutter/material.dart';
@@ -104,7 +106,7 @@ class _SlidingDigitState extends State<_SlidingDigit> {
         child: ScrollConfiguration(
           behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             controller: _scrollController,
             child: Column(
               mainAxisSize: MainAxisSize.min,

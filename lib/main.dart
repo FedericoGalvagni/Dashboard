@@ -11,13 +11,14 @@ import 'classes/http/http_service.dart';
 
 void main() {
   themeSelection(false);
+  // ignore: todo
   // TODO: includere le http.get in una funzione
   HttpService(id: "parametri").get();
   HttpService(id: "produzione", limit: "100").get();
   HttpService(id: "graficoProduzione", limit: "100").get();
   Get.put(MenuController());
   Get.put(NavigationController());
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

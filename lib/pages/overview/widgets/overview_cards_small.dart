@@ -12,8 +12,6 @@ class OverviewCardsSmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width;
-
     return Column(
       children: [
         const SmallVSpacer(),
@@ -34,7 +32,8 @@ class OverviewCardsSmall extends StatelessWidget {
             ValueListenableBuilder(
                 valueListenable: produzioneUltime24h,
                 builder: (context, value, widget) {
-                  return InfoCard(  height: 80,
+                  return InfoCard(
+                    height: 80,
                     title: "Production 24H",
                     value: produzioneUltime24h.value.toString(),
                     onTap: () {},
@@ -50,7 +49,8 @@ class OverviewCardsSmall extends StatelessWidget {
             ValueListenableBuilder(
                 valueListenable: produzioneMediaGiornaliera,
                 builder: (context, value, widget) {
-                  return InfoCard(  height: 80,
+                  return InfoCard(
+                    height: 80,
                     title: "Time",
                     value: produzioneMediaGiornaliera.value.toString(),
                     onTap: () {},
@@ -60,7 +60,8 @@ class OverviewCardsSmall extends StatelessWidget {
             ValueListenableBuilder(
                 valueListenable: produzioneMediaOraria,
                 builder: (context, value, widget) {
-                  return InfoCard(  height: 80,
+                  return InfoCard(
+                    height: 80,
                     title: "Downtime",
                     value: produzioneMediaOraria.value.toString(),
                     onTap: () {},
@@ -84,10 +85,10 @@ class OverviewCardsSmall extends StatelessWidget {
                     valueListenable: productionGraph,
                     builder: (context, value, widget) {
                       return Container(
-                        margin: EdgeInsets.all(15),
+                        margin: const EdgeInsets.all(15),
                         child: SimpleTimeSeriesChart(
                           _createSampleData(),
-                          duration: Duration(milliseconds: 1500),
+                          duration: const Duration(milliseconds: 1500),
                           // Disable animations for image tests.
                           animate: true,
                         ),
@@ -125,8 +126,6 @@ class OverviewCardsSmall extends StatelessWidget {
     ];
   }
 }
-
-//TODO: MOVE AWAY THIS CLASS
 
 class TimeSeriesSales {
   final DateTime time;

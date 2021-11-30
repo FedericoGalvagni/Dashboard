@@ -6,7 +6,8 @@ class SimpleTimeSeriesChart extends StatelessWidget {
   final List<charts.Series<dynamic, DateTime>> seriesList;
   final bool? animate;
   final Duration? duration;
-  SimpleTimeSeriesChart(
+  // ignore: use_key_in_widget_constructors
+  const SimpleTimeSeriesChart(
     this.seriesList, {
     this.animate,
     this.duration,
@@ -16,7 +17,7 @@ class SimpleTimeSeriesChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return charts.TimeSeriesChart(
       seriesList,
-      animationDuration: duration ?? Duration(milliseconds: 1000),
+      animationDuration: duration ?? const Duration(milliseconds: 1000),
       domainAxis: charts.DateTimeAxisSpec(
           renderSpec: charts.SmallTickRendererSpec(
 

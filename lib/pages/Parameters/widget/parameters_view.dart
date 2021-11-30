@@ -5,6 +5,7 @@ import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/data_models/parameters_data.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 
+// ignore: must_be_immutable
 class ParametersView extends StatefulWidget {
   final String treeviewKey;
   double width;
@@ -21,7 +22,6 @@ class _ParametersViewState extends State<ParametersView> {
   int iParametri = 0;
   @override
   Widget build(BuildContext context) {
-    GlobalKey stickyKey = GlobalKey();
     List<Parametri> list;
 
     var parts = widget.treeviewKey.split('.');
@@ -101,6 +101,7 @@ class _ParametersViewState extends State<ParametersView> {
             controller: temp,
             inputFormatters: [
               FilteringTextInputFormatter.allow(
+                  // ignore: todo
                   // TODO: filtro textfield solo decimal
 
                   RegExp(r'(^-?[0-9]*.?[0-9]*$)', multiLine: true)),

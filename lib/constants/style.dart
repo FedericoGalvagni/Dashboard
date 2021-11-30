@@ -58,8 +58,8 @@ themeSelection(bool light) {
     onSurface = const Color(0xFF000000);
     onError = const Color(0xFFFFFFFF);
     // extra
-    Color divider = const Color(0xFF646464);
-    Color valid = Colors.green;
+    divider = const Color(0xFF646464);
+    valid = Colors.green;
     boxShadow = [
       //BoxShadow(offset: const Offset(6, 6), color: surface(4), blurRadius: 12)
     ];

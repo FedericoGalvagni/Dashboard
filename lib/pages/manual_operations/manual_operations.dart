@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:interface_example1/constants/controllers.dart';
-import 'package:interface_example1/data_models/config.dart';
-import 'package:interface_example1/data_models/manual_operation_data.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
 import 'package:interface_example1/pages/manual_operations/widget/manual_operation_large.dart';
 import 'package:interface_example1/pages/manual_operations/widget/manual_operations_medium.dart';
@@ -11,13 +8,6 @@ class ManualOperationsPage extends StatelessWidget {
   const ManualOperationsPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    String title;
-    if (mechanicalGroupSelector == -1) {
-      title = menuController.activeItem.value;
-    } else {
-      title = "test";
-      title = gruppi[mechanicalGroupSelector].nome;
-    }
     return Column(
       children: [
         /*Center(

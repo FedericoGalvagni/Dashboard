@@ -53,7 +53,7 @@ class DataTableDState extends State<DataTableD> {
   List<DataColumn> _buildColumns() {
     List<DataColumn> columns = [];
     Map<String, dynamic> headers = row.value[0];
-    (headers as Map<String, dynamic>).forEach((key, value) {
+    (headers).forEach((key, value) {
       columns.add(DataColumn(
           label: CustomText(
             color: getEmphasis(onSurface, emphasis.high),

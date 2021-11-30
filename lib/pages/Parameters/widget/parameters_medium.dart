@@ -58,26 +58,24 @@ class ParametersMedium extends StatelessWidget {
                   Container(),
                   InkWell(
                     onTap: () {},
-                    child: Container(
-                      //margin: EdgeInsets.only(left: 20),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.restore,
-                            color: Colors.green,
-                          ),
-                          Container(
-                            width: 5,
-                          ),
-                          //TODO: implement restore function
-                          CustomText(
-                            text: "Restore",
-                            size: 15,
-                            color: getEmphasis(onSurface, emphasis.high),
-                            weight: FontWeight.normal,
-                          )
-                        ],
-                      ),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.restore,
+                          color: Colors.green,
+                        ),
+                        Container(
+                          width: 5,
+                        ),
+                        // ignore: todo
+                        //TODO: implement restore function
+                        CustomText(
+                          text: "Restore",
+                          size: 15,
+                          color: getEmphasis(onSurface, emphasis.high),
+                          weight: FontWeight.normal,
+                        )
+                      ],
                     ),
                   ),
                 ],

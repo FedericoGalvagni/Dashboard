@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:interface_example1/constants/style.dart';
-import 'package:interface_example1/widgets/custom/custom_text.dart';
-import 'package:interface_example1/widgets/custom/number_slider.dart';
 
 /// Una card con titolo e valore, il valore viene animato
 class InfoCard extends StatelessWidget {
@@ -51,7 +49,7 @@ class InfoCard extends StatelessWidget {
                           fontSize: 16,
                           color: primary)),
                   TextSpan(
-                      text: "$value",
+                      text: value,
                       style: TextStyle(
                           fontSize: 40,
                           color: getEmphasis(onSurface, emphasis.high))),

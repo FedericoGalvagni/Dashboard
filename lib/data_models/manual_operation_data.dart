@@ -1,31 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:interface_example1/data_models/parameters_data.dart';
 
-// TODO: TRADURRE IN ITALIANO
 List<Gruppo> gruppi = [];
-//Group groupFromJson(String str) => Group.fromJson(json.decode(str));
-//String groupToJson(Group data) => json.encode(data.toJson());
-
-/*
-class Group {
-  Group({
-    required this.groups,
-  });
-
-  List<GroupElement> groups;
-
-  factory Group.fromJson(Map<String, dynamic> json) => Group(
-        groups: List<GroupElement>.from(
-            json["Groups"].map((x) => GroupElement.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "Groups": List<dynamic>.from(groups.map((x) => x.toJson())),
-      };
-}
-*/
 class Gruppo {
   Gruppo({
     required this.nome,

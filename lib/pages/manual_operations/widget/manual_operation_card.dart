@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/widgets/custom/static_button.dart';
 
+// ignore: must_be_immutable
 class ManualOperationCard extends StatefulWidget {
   final String nome;
   final String id;
@@ -10,8 +11,8 @@ class ManualOperationCard extends StatefulWidget {
   final String limitePositivo;
   final String limiteNegativo;
   final Color? backgroundColor;
-  int iAttuatori;
-  int iGruppi;
+  final int iAttuatori;
+  final int iGruppi;
   bool attivo;
   final String type;
   final VoidCallback onTap;
@@ -39,7 +40,6 @@ class _ManualOperationCardState extends State<ManualOperationCard> {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
-    String testoPulsante = "Attiva";
     return Expanded(
         child: Container(
       height: 100,

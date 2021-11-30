@@ -10,15 +10,8 @@ class OverviewCardsLarge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = [
-      TimeSeriesSales(DateTime(2017, 9, 19), 5),
-      TimeSeriesSales(DateTime(2017, 9, 26), 25),
-      TimeSeriesSales(DateTime(2017, 10, 3), 100),
-      TimeSeriesSales(DateTime(2017, 10, 10), 75),
-    ];
 
     double _width = MediaQuery.of(context).size.width;
-    final List<charts.Series<dynamic, DateTime>> seriesList = [];
     return Container(
       margin: EdgeInsets.only(left: _width / 64, right: _width / 64),
       child: Column(
@@ -100,10 +93,10 @@ class OverviewCardsLarge extends StatelessWidget {
                       valueListenable: productionGraph,
                       builder: (context, value, widget) {
                         return Container(
-                          margin: EdgeInsets.all(15),
+                          margin: const EdgeInsets.all(15),
                           child: SimpleTimeSeriesChart(
                             _createSampleData(),
-                            duration: Duration(milliseconds: 1500),
+                            duration: const Duration(milliseconds: 1500),
                             // Disable animations for image tests.
                             animate: true,
                           ),
@@ -141,8 +134,6 @@ class OverviewCardsLarge extends StatelessWidget {
     ];
   }
 }
-
-//TODO: MOVE AWAY THIS CLASS
 
 class TimeSeriesSales {
   final DateTime time;

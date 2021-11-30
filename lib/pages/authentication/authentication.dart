@@ -19,8 +19,8 @@ class AuthenticationPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             color: surface(16),
           ),
-          constraints: BoxConstraints(maxWidth: 500, maxHeight: 400),
-          padding: EdgeInsets.all(24),
+          constraints: const BoxConstraints(maxWidth: 500, maxHeight: 400),
+          padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -131,7 +131,7 @@ class AuthenticationPage extends StatelessWidget {
                       color: primary, borderRadius: BorderRadius.circular(20)),
                   alignment: Alignment.center,
                   width: double.maxFinite,
-                  padding: EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   child: CustomText(
                     text: "Login",
                     color: getEmphasis(onPrimary, emphasis.high),

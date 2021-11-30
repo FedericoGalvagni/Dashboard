@@ -1,11 +1,13 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:interface_example1/constants/style.dart';
-import 'package:interface_example1/data_models/manual_operation_data.dart';
 import 'package:interface_example1/data_models/parameters_data.dart';
 
 class ParametersTree extends StatefulWidget {
+  // ignore: use_key_in_widget_constructors
   ParametersTree(
       {Key? key,
       required this.width,
@@ -40,7 +42,6 @@ class ParametersTreeState extends State<ParametersTree> {
 
   @override
   Widget build(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width;
     TreeViewTheme _treeViewTheme = TreeViewTheme(
       expanderTheme: ExpanderThemeData(
           animated: true,
@@ -76,16 +77,6 @@ class ParametersTreeState extends State<ParametersTree> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                /*Container(height: 20),
-                Container(
-                  
-                  //margin: const EdgeInsets.only(left: 20, right: 20),
-                  child: CustomText(
-                      text: "Explorer",
-                      weight: FontWeight.w600,
-                      size: 20,
-                      color: getEmphasis(onSurface, emphasis.high)),
-                ),*/
                 SizedBox(
                   width: widget.width,
                   child: GestureDetector(
@@ -115,47 +106,7 @@ class ParametersTreeState extends State<ParametersTree> {
                     ),
                   ),
                 ),
-                /*Container(
-                    //margin: const EdgeInsets.only(bottom: 20),
-                    height: 1,
-                    decoration: BoxDecoration(
-                      color: divider,
-                      borderRadius: BorderRadius.circular(1),
-                    )),
-                Container(
-                  //margin: EdgeInsets.only(left: 20),
-                  child: CustomText(
-                      text: "Tool",
-                      weight: FontWeight.w600,
-                      size: 20,
-                      color: getEmphasis(onSurface, emphasis.high)),
-                ),
-                Container(height: 10),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    
-                    //margin: EdgeInsets.only(left: 20),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.restore,
-                          color: Colors.green,
-                        ),
-                        Container(
-                          width: 5,
-                        ),
-                        //TODO: implement restore function
-                        CustomText(
-                          text: "Restore",
-                          size: 15,
-                          color: getEmphasis(onSurface, emphasis.high),
-                          weight: FontWeight.normal,
-                        )
-                      ],
-                    ),
-                  ),
-                )*/
+                
               ],
             ),
           ],

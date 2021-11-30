@@ -8,10 +8,10 @@ import 'package:interface_example1/routing/routes.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 
 class ManualOperationsGroup extends StatefulWidget {
-  final int indiceGruppi;
+  final int iGruppi;
   final int attuatoriPerRiga;
   const ManualOperationsGroup(
-      {Key? key, required this.indiceGruppi, required this.attuatoriPerRiga})
+      {Key? key, required this.iGruppi, required this.attuatoriPerRiga})
       : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class _ManualOperationsGroupState extends State<ManualOperationsGroup> {
   Widget build(BuildContext context) {
     //print("length: " + mechanicalGroup.groups.length.toString());
 
-    return Column(children: buildRow(gruppi[widget.indiceGruppi].attuatori));
+    return Column(children: buildRow(gruppi[widget.iGruppi].attuatori));
   }
 
   List<Widget> buildRow(List<Attuatore> attuatori) {
@@ -79,7 +79,6 @@ class _ManualOperationsGroupState extends State<ManualOperationsGroup> {
     double _width = MediaQuery.of(context).size.width;
     List<Widget> element = [];
     int ii;
-    int l = attuatori.length;
     int nElementi = widget.attuatoriPerRiga;
     for (ii = 0; ii < nElementi; ii++) {
       if (index + ii >= attuatori.length) {
@@ -94,7 +93,7 @@ class _ManualOperationsGroupState extends State<ManualOperationsGroup> {
         ));
         Attuatore attuatore = attuatori[index + ii];
         element.add(ManualOperationCard(
-            iGruppi: widget.indiceGruppi,
+            iGruppi: widget.iGruppi,
             iAttuatori: index + ii,
             attivo: attuatore.manualeAttivo.value,
             nome: attuatore.nome,
@@ -103,7 +102,11 @@ class _ManualOperationsGroupState extends State<ManualOperationsGroup> {
             id: attuatore.id,
             value: attuatore.valore,
             type: attuatore.tipo,
-            onTap: () {}));
+            onTap: () {
+              attuatore.manualeAttivo.value = true;
+              disattivazioneComandiManuali(
+                      widget.iGruppi, index + ii);
+            }));
       }
     }
     element.add(SizedBox(
