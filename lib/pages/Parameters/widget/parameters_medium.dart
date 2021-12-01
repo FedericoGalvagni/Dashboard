@@ -60,7 +60,7 @@ class ParametersMedium extends StatelessWidget {
                         color: getEmphasis(onSurface, emphasis.high)),
                   ),
                   const LargeVSpacer(),
-                  Container(
+                  SizedBox(
                     width: (_width / 4),
                     child: Row(
                       children: [
@@ -148,6 +148,7 @@ class ParametersMedium extends StatelessWidget {
       ],
     );
   }
+
 
   restore() {
     debugPrint("Restore started");
