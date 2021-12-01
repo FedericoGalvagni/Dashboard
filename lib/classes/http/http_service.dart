@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:interface_example1/data_models/config.dart';
@@ -44,6 +46,8 @@ class HttpService {
     } on DioError catch (e) {
       debugPrint(e.message);
       assert(e.response!.statusCode == 404);
+    } on HttpService catch (e) {
+      debugPrint(e.toString());
     }
   }
 
@@ -64,8 +68,9 @@ class HttpService {
     try {
       final response = await dio.post(nodeUrl.toString());
 
-      parametriDatabase.value =
-          (response.data as List).map((x) => ParametriAttuatori.fromJson(x)).toList();
+      parametriDatabase.value = (response.data as List)
+          .map((x) => ParametriAttuatori.fromJson(x))
+          .toList();
 
       statoParametri.value = !statoParametri.value;
     } on DioError catch (e) {
@@ -87,14 +92,17 @@ class HttpService {
 
       case "parametri":
         debugPrint("1");
-        parametri =
-            (res.data as List).map((x) => ParametriAttuatori.fromJson(x)).toList();
-            debugPrint("1");
-        parametriOriginali =
-            (res.data as List).map((x) => ParametriAttuatori.fromJson(x)).toList();
-        parametriDatabase.value =
-            (res.data as List).map((x) => ParametriAttuatori.fromJson(x)).toList();
-        costruzioneGruppi(parametri);
+        parametri.value = (res.data as List)
+            .map((x) => ParametriAttuatori.fromJson(x))
+            .toList();
+        debugPrint("1");
+        parametriOriginali = (res.data as List)
+            .map((x) => ParametriAttuatori.fromJson(x))
+            .toList();
+        parametriDatabase.value = (res.data as List)
+            .map((x) => ParametriAttuatori.fromJson(x))
+            .toList();
+        costruzioneGruppi(parametri.value);
         break;
 
       default:

@@ -1,22 +1,27 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:interface_example1/classes/http/http_service.dart';
 import 'package:interface_example1/constants/style.dart';
+import 'package:interface_example1/data_models/config.dart';
 import 'package:interface_example1/data_models/parameters_data.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 
 // ignore: must_be_immutable
 class ParametersView extends StatefulWidget {
-  final String treeviewKey;
+  String treeviewKey;
   double width;
+  int? iGruppi;
+  int? iMotori;
   ParametersView({Key? key, required this.width, required this.treeviewKey})
       : super(key: key);
 
   @override
-  State<ParametersView> createState() => _ParametersViewState();
+  State<ParametersView> createState() => ParametersViewState();
 }
 
-class _ParametersViewState extends State<ParametersView> {
+class ParametersViewState extends State<ParametersView> {
   int iGruppi = -1;
   int iMotori = -1;
   int iParametri = 0;
@@ -25,53 +30,52 @@ class _ParametersViewState extends State<ParametersView> {
     List<Parametri> list;
 
     var parts = widget.treeviewKey.split('.');
-    var a = parts[0].trim();
-    var b = parts.sublist(1).join('.').trim();
 
-    if (a.isEmpty) {
+    if (parts.length < 2) {
       return Container();
     } else {
+      var a = parts[1];
+      var b = parts[2];
       iGruppi = int.parse(a);
       iMotori = int.parse(b);
-      list = parametri[iGruppi].attuatori[iMotori].parametri;
+      list = parametri.value[iGruppi].attuatori[iMotori].parametri;
       return Container(
-          width: widget.width,
+          width: widget.width - 20,
+          margin: const EdgeInsets.only(right: 10, left: 10),
           decoration: BoxDecoration(
               color: surface(4), borderRadius: BorderRadius.circular(10)),
           child: Theme(
             data: ThemeData(dividerColor: divider),
             child: DataTable(columns: [
               DataColumn(
-                  label: CustomText(
-                align: TextAlign.center,
-                text: "Indice",
-                size: 20,
-                color: getEmphasis(onSurface, emphasis.high),
-                weight: FontWeight.w600,
+                  label: Center(
+                child: CustomText(
+                  align: TextAlign.center,
+                  text: "Parametri",
+                  size: 20,
+                  color: getEmphasis(onSurface, emphasis.high),
+                  weight: FontWeight.w600,
+                ),
               )),
               DataColumn(
-                  label: CustomText(
-                align: TextAlign.center,
-                text: "Parametri",
-                size: 20,
-                color: getEmphasis(onSurface, emphasis.high),
-                weight: FontWeight.w600,
+                  label: Center(
+                child: CustomText(
+                  align: TextAlign.center,
+                  text: "Valori",
+                  size: 20,
+                  color: getEmphasis(onSurface, emphasis.high),
+                  weight: FontWeight.w600,
+                ),
               )),
               DataColumn(
-                  label: CustomText(
-                align: TextAlign.center,
-                text: "Valori",
-                size: 20,
-                color: getEmphasis(onSurface, emphasis.high),
-                weight: FontWeight.w600,
-              )),
-              DataColumn(
-                  label: CustomText(
-                align: TextAlign.center,
-                text: "Stato",
-                size: 20,
-                color: getEmphasis(onSurface, emphasis.high),
-                weight: FontWeight.w600,
+                  label: Center(
+                child: CustomText(
+                  align: TextAlign.center,
+                  text: "Stato",
+                  size: 20,
+                  color: getEmphasis(onSurface, emphasis.high),
+                  weight: FontWeight.w600,
+                ),
               ))
             ], rows: _buildRow(list)),
           ));
@@ -86,119 +90,115 @@ class _ParametersViewState extends State<ParametersView> {
       temp = TextEditingController(text: list[i].valore.toString());
       row.add(DataRow(cells: [
         DataCell(CustomText(
-          align: TextAlign.center,
-          text: i.toString(),
-          color: getEmphasis(onSurface, emphasis.high),
-        )),
-        DataCell(CustomText(
-          align: TextAlign.center,
+          align: TextAlign.left,
           text: list[i].nomeParametro,
           color: getEmphasis(onSurface, emphasis.high),
         )),
-        DataCell(Container(
-          margin: const EdgeInsets.only(top: 5, bottom: 5),
-          child: TextFormField(
-            controller: temp,
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(
-                  // ignore: todo
-                  // TODO: filtro textfield solo decimal
+        DataCell(Center(
+          child: Container(
+            margin: const EdgeInsets.only(top: 5, bottom: 5),
+            child: TextFormField(
+              controller: temp,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(
+                    // ignore: todo
+                    // TODO: filtro textfield solo decimal
 
-                  RegExp(r'(^-?[0-9]*.?[0-9]*$)', multiLine: true)),
-            ],
-            textAlign: TextAlign.center,
-            textAlignVertical: TextAlignVertical.center,
-            style: TextStyle(
-                color: getEmphasis(
-              onSurface,
-              emphasis.high,
-            )),
-            decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide: BorderSide(
-                      color: getEmphasis(onSurface, emphasis.medium),
-                      width: 1)),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide: BorderSide(color: primary, width: 2)),
-              border:
-                  OutlineInputBorder(borderSide: BorderSide(color: primary)),
-            ),
-            onFieldSubmitted: (newValue) {
-              statoParametri.value = !statoParametri.value;
-              setState(() {});
-              parametri[iGruppi].attuatori[iMotori].parametri[i].valore =
-                  newValue;
-              String nomeMotore =
-                  parametri[iGruppi].attuatori[iMotori].nome.toString();
-              String nomeGruppo = parametri[iGruppi].gruppo.toString();
-              String nomeParametro = parametri[iGruppi]
-                  .attuatori[iMotori]
-                  .parametri[i]
-                  .nomeParametro;
-
-              debugPrint("Assegnato: " +
-                  nomeGruppo +
-                  ">" +
-                  nomeMotore +
-                  ">" +
-                  nomeParametro +
-                  ": " +
-                  newValue +
-                  " ID: " +
-                  iGruppi.toString() +
-                  "." +
-                  iMotori.toString() +
-                  "." +
-                  i.toString());
-              HttpService(id: "modifica parametro", parametriHeaders: {
-                "gruppo": nomeGruppo,
-                "motore": nomeMotore,
-                "parametro": nomeParametro,
-                "indicegruppi": iGruppi,
-                "indicemotori": iMotori,
-                "indiceparametri": i,
-                "nuovovalore": double.parse(newValue),
-              }).post();
-            },
-          ),
-        )),
-        DataCell(ValueListenableBuilder(
-            valueListenable: statoParametri,
-            builder: (context, widget, value) {
-              return _getState(
-                  parametriOriginali[iGruppi]
-                      .attuatori[iMotori]
-                      .parametri[i]
-                      .valore,
-                  parametri[iGruppi].attuatori[iMotori].parametri[i].valore,
-                  parametriDatabase
-                      .value[iGruppi].attuatori[iMotori].parametri[i].valore,
-                  parametri[iGruppi]
-                      .attuatori[iMotori]
-                      .parametri[i]
-                      .nomeParametro,
-                  iGruppi,
-                  iMotori,
-                  i, () {
+                    RegExp(r'(^-?[0-9]*.?[0-9]*$)', multiLine: true)),
+              ],
+              textAlign: TextAlign.center,
+              textAlignVertical: TextAlignVertical.center,
+              style: TextStyle(
+                  color: getEmphasis(
+                onSurface,
+                emphasis.high,
+              )),
+              decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                    borderSide: BorderSide(color: primary, width: 2)),
+              ),
+              onFieldSubmitted: (newValue) {
+                statoParametri.value = !statoParametri.value;
+                debugPrint("Submitted");
+                indiceGruppi = iGruppi;
+                indiceAttuatori = iMotori;
                 setState(() {});
-                parametri[iGruppi].attuatori[iMotori].parametri[i].valore =
-                    parametriOriginali[iGruppi]
-                        .attuatori[iMotori]
-                        .parametri[i]
-                        .valore;
+                parametri.value[iGruppi].attuatori[iMotori].parametri[i]
+                    .valore = newValue;
+                changed.value = !changed.value;
+                String nomeMotore =
+                    parametri.value[iGruppi].attuatori[iMotori].nome.toString();
+                String nomeGruppo = parametri.value[iGruppi].gruppo.toString();
+                String nomeParametro = parametri.value[iGruppi]
+                    .attuatori[iMotori].parametri[i].nomeParametro;
+
+                debugPrint("Assegnato: " +
+                    nomeGruppo +
+                    ">" +
+                    nomeMotore +
+                    ">" +
+                    nomeParametro +
+                    ": " +
+                    newValue +
+                    " ID: " +
+                    iGruppi.toString() +
+                    "." +
+                    iMotori.toString() +
+                    "." +
+                    i.toString());
                 HttpService(id: "modifica parametro", parametriHeaders: {
+                  "gruppo": nomeGruppo,
+                  "motore": nomeMotore,
+                  "parametro": nomeParametro,
                   "indicegruppi": iGruppi,
                   "indicemotori": iMotori,
                   "indiceparametri": i,
-                  "nuovovalore": double.parse(parametriOriginali[iGruppi]
-                      .attuatori[iMotori]
-                      .parametri[i]
-                      .valore),
+                  "nuovovalore": double.parse(newValue),
                 }).post();
-              });
-            }))
+              },
+            ),
+          ),
+        )),
+        DataCell(Center(
+          child: ValueListenableBuilder(
+              valueListenable: statoParametri,
+              builder: (context, widget, value) {
+                return _getState(
+                    parametriOriginali[iGruppi]
+                        .attuatori[iMotori]
+                        .parametri[i]
+                        .valore,
+                    parametri
+                        .value[iGruppi].attuatori[iMotori].parametri[i].valore,
+                    parametriDatabase
+                        .value[iGruppi].attuatori[iMotori].parametri[i].valore,
+                    parametri.value[iGruppi].attuatori[iMotori].parametri[i]
+                        .nomeParametro,
+                    iGruppi,
+                    iMotori,
+                    i, () {
+                  setState(() {});
+
+                  parametri.value[iGruppi].attuatori[iMotori].parametri[i]
+                          .valore =
+                      parametriOriginali[iGruppi]
+                          .attuatori[iMotori]
+                          .parametri[i]
+                          .valore;
+
+                  HttpService(id: "modifica parametro", parametriHeaders: {
+                    "indicegruppi": iGruppi,
+                    "indicemotori": iMotori,
+                    "indiceparametri": i,
+                    "nuovovalore": double.parse(parametriOriginali[iGruppi]
+                        .attuatori[iMotori]
+                        .parametri[i]
+                        .valore),
+                  }).post();
+                });
+              }),
+        ))
       ]));
     }
     return row;
@@ -227,7 +227,6 @@ class _ParametersViewState extends State<ParametersView> {
     //debugPrint("DB: " + valoreDatabase);
     //debugPrint("OR: " + valoreOriginale);
     //debugPrint("UI :" + valoreInterfaccia);
-
     if (valoreDatabase == valoreInterfaccia &&
         valoreOriginale == valoreDatabase) {
       return Tooltip(

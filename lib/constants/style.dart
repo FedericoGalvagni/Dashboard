@@ -168,18 +168,51 @@ class PrimaryContainers {
   }
 }
 
+/// ## Surface containers
+/// Surface containers that use the color called "Surface" should apply an overlay
+///  that matches the color of their icon or text label (if no icon is present).
+/// The enabled, hovered, focused, pressed, and dragged states for containers using the Surface color.
+/// - Container:	Surface
+/// - Content:	On Surface
+/// - Overlay: color	Inherited from content
 class SurfaceContainer {
-  Color hovered(Color background, Color foreground) {
-    return Color.alphaBlend(overlay.withOpacity(0.04), background);
+  Color container = surface(4);
+  Color overlay = Colors.white;
+  Color content = onSurface;
+  Color hovered() {
+    return Color.alphaBlend(overlay.withOpacity(0.04), container);
   }
 
-  Color focused(Color background, Color foreground) {
-    return Color.alphaBlend(foreground.withOpacity(0.12), background);
+  Color focused() {
+    return Color.alphaBlend(overlay.withOpacity(0.12), container);
   }
 
-  Color pressed(Color background, Color foreground) {
-    getEmphasis(onSurface, emphasis.high);
-    return Color.alphaBlend(foreground.withOpacity(0.1), background);
+  Color pressed() {
+    return Color.alphaBlend(overlay.withOpacity(0.1), container);
+  }
+}
+
+/// ## Surface containers with primary content
+/// Surface containers that use the color called "Surface" should apply an overlay
+///  that matches the color of their icon or text label (if no icon is present).
+/// The enabled, hovered, focused, pressed, and dragged states for containers using the Surface color and the primary color for content.
+/// - Container	Surface
+/// - Content	Primary
+/// - Overlay color	Inherited from content
+class SurfacePrimaryContainer {
+  Color container = surface(4);
+  Color overlay = primary;
+  Color content = primary;
+  Color hovered() {
+    return Color.alphaBlend(overlay.withOpacity(0.04), container);
+  }
+
+  Color focused() {
+    return Color.alphaBlend(overlay.withOpacity(0.12), container);
+  }
+
+  Color pressed() {
+    return Color.alphaBlend(overlay.withOpacity(0.1), container);
   }
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
 import 'package:interface_example1/pages/Parameters/widget/parameters_large.dart';
+import 'package:interface_example1/pages/Parameters/widget/parameters_medium.dart';
 import 'package:interface_example1/pages/Parameters/widget/parameters_small.dart';
 
 class ParametersPage extends StatelessWidget {
@@ -31,10 +32,10 @@ class ParametersPage extends StatelessWidget {
             if (ResponsiveWidget.isLargeScreen(context) ||
                 ResponsiveWidget.isMediumScreen(context))
               if (ResponsiveWidget.isCustomSize(context))
-                const ParametersLarge() //medium
+                const ParametersMedium() //medium
               else
                 const ParametersLarge() //large
-                
+
             else
               const ParametersSmall(), //small
           ],

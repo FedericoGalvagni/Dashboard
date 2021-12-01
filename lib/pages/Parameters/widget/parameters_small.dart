@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:interface_example1/classes/http/http_service.dart';
 import 'package:interface_example1/constants/style.dart';
+import 'package:interface_example1/data_models/config.dart';
 import 'package:interface_example1/data_models/parameters_data.dart';
 import 'package:interface_example1/pages/Parameters/widget/parameters_tree.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
@@ -81,5 +83,57 @@ class ParametersSmall extends StatelessWidget {
             }),
       ],
     );
+  }
+
+  restore() {
+    debugPrint("Restore started");
+    debugPrint(indiceGruppi.toString() + indiceAttuatori.toString());
+    if (indiceGruppi == -1 || indiceAttuatori == -1) {
+      return;
+    }
+    for (var i = 0;
+        i <
+            parametriOriginali[indiceGruppi]
+                .attuatori[indiceAttuatori]
+                .parametri
+                .length;
+        i++) {
+      if (parametri.value[indiceGruppi].attuatori[indiceAttuatori].parametri[i]
+              .valore !=
+          parametriOriginali[indiceGruppi]
+              .attuatori[indiceAttuatori]
+              .parametri[i]
+              .valore) {
+        parametri.value[indiceGruppi].attuatori[indiceAttuatori].parametri[i]
+                .valore =
+            parametriOriginali[indiceGruppi]
+                .attuatori[indiceAttuatori]
+                .parametri[i]
+                .valore;
+        HttpService(id: "modifica parametro", parametriHeaders: {
+          "indicegruppi": indiceGruppi,
+          "indicemotori": indiceAttuatori,
+          "indiceparametri": i,
+          "nuovovalore": double.parse(parametriOriginali[indiceGruppi]
+              .attuatori[indiceAttuatori]
+              .parametri[i]
+              .valore),
+        }).post();
+      }
+    }
+  }
+
+  itCanBeRestored() {
+    debugPrint("check if it can be restored");
+    List<Parametri> parametriUI =
+        parametri.value[indiceGruppi].attuatori[indiceAttuatori].parametri;
+    List<Parametri> parametriOrigin =
+        parametriOriginali[indiceGruppi].attuatori[indiceAttuatori].parametri;
+    canBeRestored.value = false;
+    for (var i = 0; i < parametriUI.length; i++) {
+      if (parametriOrigin[i].valore != parametriUI[i].valore) {
+        canBeRestored.value = true;
+      } else {}
+    }
   }
 }
