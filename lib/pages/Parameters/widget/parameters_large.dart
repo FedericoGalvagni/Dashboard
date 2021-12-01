@@ -58,7 +58,7 @@ class ParametersLarge extends StatelessWidget {
                         color: getEmphasis(onSurface, emphasis.high)),
                   ),
                   const LargeVSpacer(),
-                  Container(
+                  SizedBox(
                     width: (_width / 4),
                     child: Row(
                       children: [

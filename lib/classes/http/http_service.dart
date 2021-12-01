@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:interface_example1/data_models/config.dart';
@@ -22,9 +20,9 @@ class HttpService {
   String limit;
 
   /// Parametri della richiesta
-  Map<String, dynamic> parametriHeaders;
+  Map<String, dynamic>? parametriHeaders;
   HttpService(
-      {this.parametriHeaders = const {},
+      {this.parametriHeaders = const {"": ""},
       this.limit = "1000",
       required this.id});
 
@@ -54,7 +52,7 @@ class HttpService {
   post() async {
     debugPrint("HTTP: POST|ID: " + id);
     var dio = Dio();
-    parametriHeaders.addAll({"id": id});
+    parametriHeaders!.addAll({"id": id});
 
     dio.options
       ..baseUrl = nodeUrl.toString()
@@ -67,12 +65,7 @@ class HttpService {
 
     try {
       final response = await dio.post(nodeUrl.toString());
-
-      parametriDatabase.value = (response.data as List)
-          .map((x) => ParametriAttuatori.fromJson(x))
-          .toList();
-
-      statoParametri.value = !statoParametri.value;
+      managePost(response);
     } on DioError catch (e) {
       debugPrint(e.message);
       assert(e.response!.statusCode == 404);
@@ -109,6 +102,22 @@ class HttpService {
         Map<String, dynamic> temp = res;
         debugPrint(
             "HTTP: ERRORE: " + temp["ERRORE"] + " SORGENTE: " + temp["FROM"]);
+    }
+  }
+
+  managePost(var res) {
+    switch (id) {
+      case "modifica_parametro":
+        parametriDatabase.value = (res.data as List)
+            .map((x) => ParametriAttuatori.fromJson(x))
+            .toList();
+        statoParametri.value = !statoParametri.value;
+        break;
+      case "comando_manuale_abilitato":
+        // 
+        break;
+
+      default:
     }
   }
 

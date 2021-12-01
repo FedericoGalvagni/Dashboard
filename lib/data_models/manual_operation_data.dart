@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:interface_example1/data_models/parameters_data.dart';
 
 List<Gruppo> gruppi = [];
+
 class Gruppo {
   Gruppo({
     required this.nome,
@@ -39,10 +40,10 @@ class Attuatore {
   String id;
   String limitePositivo;
   String limiteNegativo;
-  ValueNotifier<bool> manualeAttivo;
+  bool manualeAttivo;
 
   factory Attuatore.fromJson(Map<String, dynamic> json) => Attuatore(
-      manualeAttivo: ValueNotifier<bool>(false),
+      manualeAttivo: false,
       limiteNegativo: "",
       limitePositivo: "",
       nome: json["name"],
@@ -79,7 +80,7 @@ costruzioneGruppi(List<ParametriAttuatori> parametri) {
         }
       }
       Attuatore motore = Attuatore(
-          manualeAttivo: ValueNotifier<bool>(false),
+          manualeAttivo: false,
           nome: motoreItem.nome,
           tipo: "motore",
           valore: "45",
@@ -101,11 +102,33 @@ disattivazioneComandiManuali(int iGruppi, int iAttuatori) {
     for (var j = 0; j < gruppi[i].attuatori.length; j++) {
       if (i == iGruppi && j == iAttuatori) {
         // Non faccio nulla in quanto si tratta dell'attuatore appena abilitato
-        debugPrint("Abilitato");
       } else {
         // Disabilito in quanto non si tratta dell'attuatore appena abilitato
-        gruppi[i].attuatori[j].manualeAttivo.value = false;
+        gruppi[i].attuatori[j].manualeAttivo = false;
+        manualeChanged.value = !manualeChanged.value;
       }
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 }
+
+ValueNotifier<bool> manualeChanged = ValueNotifier<bool>(false);

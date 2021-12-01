@@ -22,8 +22,12 @@ class _ManualOperationsGroupState extends State<ManualOperationsGroup> {
   @override
   Widget build(BuildContext context) {
     //print("length: " + mechanicalGroup.groups.length.toString());
-
-    return Column(children: buildRow(gruppi[widget.iGruppi].attuatori));
+    int iGruppi = widget.iGruppi;
+    return ValueListenableBuilder(
+        valueListenable: manualeChanged,
+        builder: (context, widget, value) {
+          return Column(children: buildRow(gruppi[iGruppi].attuatori));
+        });
   }
 
   List<Widget> buildRow(List<Attuatore> attuatori) {
@@ -95,7 +99,7 @@ class _ManualOperationsGroupState extends State<ManualOperationsGroup> {
         element.add(ManualOperationCard(
             iGruppi: widget.iGruppi,
             iAttuatori: index + ii,
-            attivo: attuatore.manualeAttivo.value,
+            attivo: attuatore.manualeAttivo,
             nome: attuatore.nome,
             limiteNegativo: attuatore.limiteNegativo,
             limitePositivo: attuatore.limitePositivo,
@@ -103,9 +107,8 @@ class _ManualOperationsGroupState extends State<ManualOperationsGroup> {
             value: attuatore.valore,
             type: attuatore.tipo,
             onTap: () {
-              attuatore.manualeAttivo.value = true;
-              disattivazioneComandiManuali(
-                      widget.iGruppi, index + ii);
+              attuatore.manualeAttivo = true;
+              disattivazioneComandiManuali(widget.iGruppi, index + ii);
             }));
       }
     }

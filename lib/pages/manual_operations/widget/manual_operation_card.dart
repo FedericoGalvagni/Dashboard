@@ -1,6 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:interface_example1/classes/http/http_service.dart';
 import 'package:interface_example1/constants/style.dart';
+import 'package:interface_example1/data_models/config.dart';
+import 'package:interface_example1/data_models/manual_operation_data.dart';
 import 'package:interface_example1/widgets/custom/static_button.dart';
 
 // ignore: must_be_immutable
@@ -39,6 +42,7 @@ class ManualOperationCard extends StatefulWidget {
 class _ManualOperationCardState extends State<ManualOperationCard> {
   @override
   Widget build(BuildContext context) {
+    String text = "min ${widget.limiteNegativo} max ${widget.limitePositivo}";
     double _width = MediaQuery.of(context).size.width;
     return Expanded(
         child: Container(
@@ -63,8 +67,7 @@ class _ManualOperationCardState extends State<ManualOperationCard> {
                             fontSize: 40,
                             color: getEmphasis(onSurface, emphasis.high))),
                     TextSpan(
-                        text:
-                            "min ${widget.limiteNegativo} max ${widget.limitePositivo}",
+                        text: text,
                         style: TextStyle(
                             fontSize: 16,
                             color: getEmphasis(onSurface, emphasis.medium))),
@@ -75,20 +78,27 @@ class _ManualOperationCardState extends State<ManualOperationCard> {
           Container(
               margin: const EdgeInsets.only(right: 20),
               child: StaticButton(
-                  width: _width / 10,
+                  width: _width / 8,
                   height: 30,
                   activeText: "Attivato",
                   disabledText: "Disattivato",
-                  active: false,
+                  active: widget.attivo,
                   onTap: () {
                     widget.attivo = true;
-                    /*disattivazioneComandiManuali(
-                      widget.iGruppi, widget.iAttuatori);
-                  gruppi[widget.iGruppi]
-                      .attuatori[widget.iAttuatori]
-                      .manualeAttivo
-                      .value = true;
-                },*/
+                    HttpService(
+                        id: "comando_manuale_abilitato",
+                        parametriHeaders: {
+                          "nome_gruppo": gruppi[widget.iGruppi].nome.toString(),
+                          "nome_attuatore": gruppi[widget.iGruppi]
+                              .attuatori[widget.iAttuatori]
+                              .nome
+                              .toString()
+                        }).post();
+                    disattivazioneComandiManuali(
+                        widget.iGruppi, widget.iAttuatori);
+                    gruppi[widget.iGruppi]
+                        .attuatori[widget.iAttuatori]
+                        .manualeAttivo = true;
                   })),
         ],
       ),

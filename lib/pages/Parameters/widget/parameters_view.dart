@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:interface_example1/classes/http/http_service.dart';
@@ -147,7 +145,7 @@ class ParametersViewState extends State<ParametersView> {
                     iMotori.toString() +
                     "." +
                     i.toString());
-                HttpService(id: "modifica parametro", parametriHeaders: {
+                HttpService(id: "modifica_parametro", parametriHeaders: {
                   "gruppo": nomeGruppo,
                   "motore": nomeMotore,
                   "parametro": nomeParametro,
