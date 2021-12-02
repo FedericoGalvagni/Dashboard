@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+
 ValueNotifier<bool> changed = ValueNotifier<bool>(false);
 ValueNotifier<bool> canBeRestored = ValueNotifier<bool>(false);
 ValueNotifier<String> selected = ValueNotifier<String>("");
@@ -48,13 +49,16 @@ class Attuatori {
   Attuatori({
     required this.nome,
     required this.parametri,
+    required this.tipo,
   });
 
   String nome;
+  String tipo;
   List<Parametri> parametri;
 
   factory Attuatori.fromJson(Map<String, dynamic> json) => Attuatori(
         nome: json["nome"],
+        tipo: json["tipo"],
         parametri: List<Parametri>.from(
             json["parametri"].map((x) => Parametri.fromJson(x))),
       );

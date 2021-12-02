@@ -105,11 +105,11 @@ class _ManualOperationsGroupState extends State<ManualOperationsGroup> {
             limitePositivo: attuatore.limitePositivo,
             id: attuatore.id,
             value: attuatore.valore,
-            type: attuatore.tipo,
+            tipo: attuatore.tipo,
             onTap: () {
               attuatore.manualeAttivo = true;
               disattivazioneComandiManuali(widget.iGruppi, index + ii);
-            }));
+            }, size: 300,));
       }
     }
     element.add(SizedBox(

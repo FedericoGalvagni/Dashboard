@@ -189,6 +189,9 @@ class ParametersLarge extends StatelessWidget {
 
   itCanBeRestored() {
     debugPrint("check if it can be restored");
+    if (indiceGruppi == -1 || indiceAttuatori == -1) {
+      canBeRestored.value = false;
+    } else {
     List<Parametri> parametriUI =
         parametri.value[indiceGruppi].attuatori[indiceAttuatori].parametri;
     List<Parametri> parametriOrigin =
@@ -199,5 +202,5 @@ class ParametersLarge extends StatelessWidget {
         canBeRestored.value = true;
       } else {}
     }
-  }
+  }}
 }

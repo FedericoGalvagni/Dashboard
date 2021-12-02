@@ -67,11 +67,11 @@ costruzioneGruppi(List<ParametriAttuatori> parametri) {
   for (var gruppoItem in parametri) {
     List<Attuatore> motori = [];
     //debugPrint("Nuovo gruppo Item: " + gruppoItem.gruppo.toString());
-    for (var motoreItem in gruppoItem.attuatori) {
+    for (var attuatore in gruppoItem.attuatori) {
       String limiteNegativo = "";
       String limitePositivo = "";
       //debugPrint("Nuovo motore Item: " + motoreItem.nomeMotore.toString());
-      for (var parametriItem in motoreItem.parametri) {
+      for (var parametriItem in attuatore.parametri) {
         if (parametriItem.nomeParametro == "Limite Negativo") {
           limiteNegativo = parametriItem.valore;
         }
@@ -79,15 +79,17 @@ costruzioneGruppi(List<ParametriAttuatori> parametri) {
           limitePositivo = parametriItem.valore;
         }
       }
-      Attuatore motore = Attuatore(
-          manualeAttivo: false,
-          nome: motoreItem.nome,
-          tipo: "motore",
-          valore: "45",
-          id: "id",
-          limiteNegativo: limiteNegativo,
-          limitePositivo: limitePositivo);
-      motori.add(motore);
+     
+        Attuatore motore = Attuatore(
+            manualeAttivo: false,
+            nome: attuatore.nome,
+            tipo: attuatore.tipo,
+            valore: "45",
+            id: "id",
+            limiteNegativo: limiteNegativo,
+            limitePositivo: limitePositivo);
+        motori.add(motore);
+      
     }
     Gruppo gruppoMeccanico = Gruppo(nome: gruppoItem.gruppo, attuatori: motori);
     gruppi.add(gruppoMeccanico);
@@ -109,26 +111,6 @@ disattivazioneComandiManuali(int iGruppi, int iAttuatori) {
       }
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 }
 
 ValueNotifier<bool> manualeChanged = ValueNotifier<bool>(false);

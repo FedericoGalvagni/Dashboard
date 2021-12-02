@@ -29,7 +29,7 @@ class ParametersViewState extends State<ParametersView> {
 
     var parts = widget.treeviewKey.split('.');
 
-    if (parts.length < 2) {
+    if (parts.length < 2 || indiceGruppi == -1) {
       return Container();
     } else {
       var a = parts[1];
@@ -66,15 +66,13 @@ class ParametersViewState extends State<ParametersView> {
                 ),
               )),
               DataColumn(
-                  label: Center(
-                child: CustomText(
-                  align: TextAlign.center,
-                  text: "Stato",
-                  size: 20,
-                  color: getEmphasis(onSurface, emphasis.high),
-                  weight: FontWeight.w600,
-                ),
-              ))
+                  label: CustomText(
+                    align: TextAlign.center,
+                    text: "Stato",
+                    size: 20,
+                    color: getEmphasis(onSurface, emphasis.high),
+                    weight: FontWeight.w600,
+                  ))
             ], rows: _buildRow(list)),
           ));
     }
@@ -130,7 +128,6 @@ class ParametersViewState extends State<ParametersView> {
                 String nomeGruppo = parametri.value[iGruppi].gruppo.toString();
                 String nomeParametro = parametri.value[iGruppi]
                     .attuatori[iMotori].parametri[i].nomeParametro;
-
                 debugPrint("Assegnato: " +
                     nomeGruppo +
                     ">" +
@@ -177,7 +174,6 @@ class ParametersViewState extends State<ParametersView> {
                     iMotori,
                     i, () {
                   setState(() {});
-
                   parametri.value[iGruppi].attuatori[iMotori].parametri[i]
                           .valore =
                       parametriOriginali[iGruppi]

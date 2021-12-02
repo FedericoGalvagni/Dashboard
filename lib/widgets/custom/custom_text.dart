@@ -12,7 +12,7 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text!,
+    return Text(text ?? "Testo non inserito",
       textAlign: align ?? TextAlign.left,
         style: GoogleFonts.roboto(
             fontSize: size ?? 16,

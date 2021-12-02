@@ -25,6 +25,7 @@ class MechanicalGroupIcon extends StatelessWidget {
           ),
           child: Material(
             color: Colors.transparent,
+            
             child: InkWell(
               hoverColor: hovered(surface(4), Colors.white),
               splashColor: pressed(surface(4), Colors.white),

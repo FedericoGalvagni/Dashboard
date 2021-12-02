@@ -28,59 +28,41 @@ class StaticButton extends StatefulWidget {
 class _StaticButtonState extends State<StaticButton> {
   @override
   Widget build(BuildContext context) {
-    if (widget.active) {
+   
       return Container(
         height: widget.height,
         width: widget.width,
         decoration: BoxDecoration(
-            color: PrimaryContainers().container,
+            color: widget.active
+                ? PrimaryContainers().container
+                : PrimaryTrContainers().container,
             border: Border.all(color: primary),
             borderRadius: BorderRadius.circular(5),
             boxShadow: boxShadow),
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            hoverColor: PrimaryContainers().hovered(),
-            splashColor: PrimaryContainers().pressed(),
+            hoverColor: widget.active
+                ? PrimaryContainers().hovered()
+                : PrimaryTrContainers().hovered(),
+            splashColor: widget.active
+                ? PrimaryContainers().pressed()
+                : PrimaryTrContainers().pressed(),
             onTap: () {
-              widget.active = false;
-              setState(() {});
-            },
-            child: Center(
-              child: CustomText(
-                  text: widget.activeText, color: PrimaryContainers().content),
-            ),
-          ),
-        ),
-      );
-    } else {
-      return Container(
-        height: widget.height,
-        width: widget.width,
-        decoration: BoxDecoration(
-            color: PrimaryTrContainers().container,
-            border: Border.all(color: primary),
-            borderRadius: BorderRadius.circular(5),
-            boxShadow: boxShadow),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            hoverColor: PrimaryTrContainers().hovered(),
-            splashColor: PrimaryTrContainers().pressed(),
-            highlightColor: primary.withOpacity(0.3),
-            onTap: () {
-              widget.active = true;
+              widget.active = !widget.active;
               widget.onTap();
               setState(() {});
             },
             child: Center(
               child: CustomText(
-                  text: widget.disabledText,
-                  color: PrimaryTrContainers().content),
+                  text: widget.active ? widget.activeText : widget.disabledText,
+                  color: widget.active
+                      ? PrimaryContainers().content
+                      : PrimaryTrContainers().content),
             ),
           ),
         ),
       );
-    }
+    
   }
 }

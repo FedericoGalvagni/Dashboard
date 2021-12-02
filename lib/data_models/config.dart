@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 final nodeUrl = Uri.parse('http://192.168.2.184:1880/prova');
@@ -7,4 +8,4 @@ String expandedNode = "-1.-1.-1";
 String? selectedNode;
 int indiceGruppi = -1;
 int indiceAttuatori = -1;
-
+ValueNotifier<bool> updateShadow = ValueNotifier<bool>(false);
