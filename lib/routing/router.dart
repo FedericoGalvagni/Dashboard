@@ -6,6 +6,7 @@ import 'package:interface_example1/pages/overview/overview.dart';
 import 'package:interface_example1/pages/manual_operations/manual_operations.dart';
 import 'package:interface_example1/pages/settings/settings.dart';
 import 'package:interface_example1/pages/states/states.dart';
+import 'package:interface_example1/pages/telecamere/telecamere.dart';
 import 'package:interface_example1/routing/routes.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -27,6 +28,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case authenticationPageRoute:
       return _getPageRoute(const AuthenticationPage());
+      
+    case telecamerPageRoute:
+      return _getPageRoute(const TelecamerPage());
 
     default:
       return _getPageRoute(const OverviewPage());

@@ -67,12 +67,12 @@ class ParametersViewState extends State<ParametersView> {
               )),
               DataColumn(
                   label: CustomText(
-                    align: TextAlign.center,
-                    text: "Stato",
-                    size: 20,
-                    color: getEmphasis(onSurface, emphasis.high),
-                    weight: FontWeight.w600,
-                  ))
+                align: TextAlign.center,
+                text: "Stato",
+                size: 20,
+                color: getEmphasis(onSurface, emphasis.high),
+                weight: FontWeight.w600,
+              ))
             ], rows: _buildRow(list)),
           ));
     }
@@ -180,8 +180,8 @@ class ParametersViewState extends State<ParametersView> {
                           .attuatori[iMotori]
                           .parametri[i]
                           .valore;
-
-                  HttpService(id: "modifica parametro", parametriHeaders: {
+                
+                  HttpService(id: "modifica_parametro", parametriHeaders: {
                     "indicegruppi": iGruppi,
                     "indicemotori": iMotori,
                     "indiceparametri": i,

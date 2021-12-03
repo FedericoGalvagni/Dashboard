@@ -4,6 +4,7 @@ import 'package:interface_example1/classes/http/http_service.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/data_models/config.dart';
 import 'package:interface_example1/data_models/manual_operation_data.dart';
+import 'package:interface_example1/helpers/responsivness.dart';
 import 'package:interface_example1/widgets/custom/breathing_container.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 import 'package:interface_example1/widgets/custom/static_button.dart';
@@ -122,7 +123,9 @@ class _ManualOperationCardState extends State<ManualOperationCard>
                 ),
                 Expanded(child: Container()),
                 StaticButton(
-                    width: _width / 8,
+                    width: ResponsiveWidget.isSmallScreen(context) && ResponsiveWidget.isMediumScreen(context)
+                        ? _width / 2.5
+                        :  _width/7 ,
                     height: 30,
                     activeText: "Attivato",
                     disabledText: "Disattivato",

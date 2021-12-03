@@ -40,6 +40,9 @@ class MenuController extends GetxController {
       case parametersPageRoute:
         return _customIcon(Icons.list_alt, itemName);
 
+      case telecamerPageRoute:
+        return _customIcon(Icons.remove_red_eye, itemName);
+
       default:
         return _customIcon(Icons.exit_to_app, itemName);
     }

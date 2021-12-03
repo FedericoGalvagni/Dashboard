@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:interface_example1/data_models/config.dart';
@@ -84,7 +86,6 @@ class HttpService {
         break;
 
       case "parametri":
-        debugPrint("1");
         parametri.value = (res.data as List)
             .map((x) => ParametriAttuatori.fromJson(x))
             .toList();
@@ -97,11 +98,16 @@ class HttpService {
             .toList();
         costruzioneGruppi(parametri.value);
         break;
+      case "immagini_telecamere":
+        debugPrint(res.data.toString());
+        image.value = Image.memory(base64Decode(res.data));
+        break;
 
       default:
-        Map<String, dynamic> temp = res;
-        debugPrint(
+        debugPrint(res.data.toString());
+      /*debugPrint(
             "HTTP: ERRORE: " + temp["ERRORE"] + " SORGENTE: " + temp["FROM"]);
+    }*/
     }
   }
 
@@ -111,10 +117,11 @@ class HttpService {
         parametriDatabase.value = (res.data as List)
             .map((x) => ParametriAttuatori.fromJson(x))
             .toList();
+        changed.value = !changed.value;
         statoParametri.value = !statoParametri.value;
         break;
       case "comando_manuale_abilitato":
-        // 
+        //
         break;
 
       default:
@@ -125,4 +132,8 @@ class HttpService {
     HttpService(id: "parametri").get();
     HttpService(id: "graficoProduzione", limit: "100").get();
   }
+}
+
+a() {
+  HttpService(id: "immagini_telecamere").get();
 }

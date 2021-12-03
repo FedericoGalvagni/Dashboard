@@ -110,7 +110,7 @@ class ParametersSmall extends StatelessWidget {
                 .attuatori[indiceAttuatori]
                 .parametri[i]
                 .valore;
-        HttpService(id: "modifica parametro", parametriHeaders: {
+        HttpService(id: "modifica_parametro", parametriHeaders: {
           "indicegruppi": indiceGruppi,
           "indicemotori": indiceAttuatori,
           "indiceparametri": i,
@@ -125,15 +125,19 @@ class ParametersSmall extends StatelessWidget {
 
   itCanBeRestored() {
     debugPrint("check if it can be restored");
-    List<Parametri> parametriUI =
-        parametri.value[indiceGruppi].attuatori[indiceAttuatori].parametri;
-    List<Parametri> parametriOrigin =
-        parametriOriginali[indiceGruppi].attuatori[indiceAttuatori].parametri;
-    canBeRestored.value = false;
-    for (var i = 0; i < parametriUI.length; i++) {
-      if (parametriOrigin[i].valore != parametriUI[i].valore) {
-        canBeRestored.value = true;
-      } else {}
+    if (indiceGruppi == -1 || indiceAttuatori == -1) {
+      canBeRestored.value = false;
+    } else {
+      List<Parametri> parametriUI =
+          parametri.value[indiceGruppi].attuatori[indiceAttuatori].parametri;
+      List<Parametri> parametriOrigin =
+          parametriOriginali[indiceGruppi].attuatori[indiceAttuatori].parametri;
+      canBeRestored.value = false;
+      for (var i = 0; i < parametriUI.length; i++) {
+        if (parametriOrigin[i].valore != parametriUI[i].valore) {
+          canBeRestored.value = true;
+        } else {}
+      }
     }
   }
 }

@@ -115,7 +115,9 @@ class ParametersMedium extends StatelessWidget {
                                       },
                                       icon: Icon(
                                         Icons.restore,
-                                        color: canBeRestored.value ? warning : valid,
+                                        color: canBeRestored.value
+                                            ? warning
+                                            : valid,
                                       ));
                                 });
                           }),
@@ -149,8 +151,7 @@ class ParametersMedium extends StatelessWidget {
     );
   }
 
-
-  restore() {
+restore() {
     debugPrint("Restore started");
     debugPrint(indiceGruppi.toString() + indiceAttuatori.toString());
     if (indiceGruppi == -1 || indiceAttuatori == -1) {
@@ -175,7 +176,7 @@ class ParametersMedium extends StatelessWidget {
                 .attuatori[indiceAttuatori]
                 .parametri[i]
                 .valore;
-        HttpService(id: "modifica parametro", parametriHeaders: {
+        HttpService(id: "modifica_parametro", parametriHeaders: {
           "indicegruppi": indiceGruppi,
           "indicemotori": indiceAttuatori,
           "indiceparametri": i,
@@ -190,15 +191,19 @@ class ParametersMedium extends StatelessWidget {
 
   itCanBeRestored() {
     debugPrint("check if it can be restored");
-    List<Parametri> parametriUI =
-        parametri.value[indiceGruppi].attuatori[indiceAttuatori].parametri;
-    List<Parametri> parametriOrigin =
-        parametriOriginali[indiceGruppi].attuatori[indiceAttuatori].parametri;
-    canBeRestored.value = false;
-    for (var i = 0; i < parametriUI.length; i++) {
-      if (parametriOrigin[i].valore != parametriUI[i].valore) {
-        canBeRestored.value = true;
-      } else {}
+    if (indiceGruppi == -1 || indiceAttuatori == -1) {
+      canBeRestored.value = false;
+    } else {
+      List<Parametri> parametriUI =
+          parametri.value[indiceGruppi].attuatori[indiceAttuatori].parametri;
+      List<Parametri> parametriOrigin =
+          parametriOriginali[indiceGruppi].attuatori[indiceAttuatori].parametri;
+      canBeRestored.value = false;
+      for (var i = 0; i < parametriUI.length; i++) {
+        if (parametriOrigin[i].valore != parametriUI[i].valore) {
+          canBeRestored.value = true;
+        } else {}
+      }
     }
   }
 }

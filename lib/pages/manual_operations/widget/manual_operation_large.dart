@@ -8,7 +8,7 @@ class ManualOperationsLarge extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ManualOperationIconsGrid(
       iconsPerRow: 6,
-      aControllPerRow: 4,
+      aControllPerRow: 3,
     );
   }
 }
