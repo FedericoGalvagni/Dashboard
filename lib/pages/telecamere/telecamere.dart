@@ -1,11 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:interface_example1/classes/http/http_service.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
-import 'package:interface_example1/pages/telecamere/widget/telecamere_large.dart';
-import 'package:interface_example1/pages/telecamere/widget/telecamere_medium.dart';
-import 'package:interface_example1/pages/telecamere/widget/telecamere_small.dart';
+import 'package:interface_example1/pages/telecamere/widget/telecamere_menu_large.dart';
+import 'package:interface_example1/pages/telecamere/widget/telecamere_menu_medium.dart';
+import 'package:interface_example1/pages/telecamere/widget/telecamere_menu_small.dart';
 
 class TelecamerPage extends StatefulWidget {
   const TelecamerPage({Key? key}) : super(key: key);

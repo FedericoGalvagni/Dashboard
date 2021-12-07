@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:interface_example1/data_models/config.dart';
+import 'package:interface_example1/data_models/immagini_telecamera_data.dart';
 import 'package:interface_example1/data_models/manual_operation_data.dart';
 import 'package:interface_example1/data_models/overview_data.dart';
 import 'package:interface_example1/data_models/parameters_data.dart';
@@ -99,8 +100,20 @@ class HttpService {
         costruzioneGruppi(parametri.value);
         break;
       case "immagini_telecamere":
-        debugPrint(res.data.toString());
-        image.value = Image.memory(base64Decode(res.data));
+        String responseString = res.data.toString();
+
+        if (res.data == "no_update") {
+          debugPrint("No updated images");
+          firstImageGet = false;
+        } else {
+          aggiungiImmagine(res.data);
+        }
+
+        if (firstImageGet) {
+          debugPrint("Aggiornamento");
+          HttpService(id: "immagini_telecamere").get();
+        } else {}
+        update.value = !update.value;
         break;
 
       default:

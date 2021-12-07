@@ -150,6 +150,11 @@ Color pressed(Color background, Color foreground) {
   return Color.alphaBlend(foreground.withOpacity(0.1), background);
 }
 
+/// ## Primary Containers
+/// The enabled, hovered, focused, pressed, and dragged states for containers using the primary color.
+/// - Container	Primary
+/// - Content	On Primary
+/// - Overlay color	White
 class PrimaryContainers {
   Color container = primary;
   Color overlay = Colors.white;
@@ -179,6 +184,7 @@ class SurfaceContainer {
   Color container = surface(4);
   Color overlay = Colors.white;
   Color content = onSurface;
+  
   Color hovered() {
     return Color.alphaBlend(overlay.withOpacity(0.04), container);
   }
