@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:interface_example1/data_models/config.dart';
-import 'package:interface_example1/pages/telecamere/widget/telecamere_galleria.dart';
+import 'package:interface_example1/classes/data_models/global_variable.dart';
+import 'package:interface_example1/pages/telecamere/widget/telecamere_immagine.dart';
 import 'package:interface_example1/pages/telecamere/widget/telecamere_menu.dart';
 
 class TelecamereLarge extends StatelessWidget {
@@ -10,17 +10,15 @@ class TelecamereLarge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        
         ValueListenableBuilder(
             valueListenable: indiceTelecamere,
             builder: (context, value, child) {
               if (indiceTelecamere.value == -1) {
                 return TelecamereMenu(
-                  itemPerRow: 6,
+                  itemPerRow: 4,
                 );
               } else {
-                return const TelecamereGalleria(
-                    itemPerRow: 6);
+                return const TelecamereImmagine();
               }
             }),
       ],

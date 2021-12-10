@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:interface_example1/classes/http/http_service.dart';
 import 'package:interface_example1/constants/style.dart';
-import 'package:interface_example1/data_models/config.dart';
-import 'package:interface_example1/data_models/parameters_data.dart';
+import 'package:interface_example1/classes/data_models/global_variable.dart';
+import 'package:interface_example1/classes/data_models/parameters_data.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 
 // ignore: must_be_immutable

@@ -1,9 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:interface_example1/classes/data_models/global_variable.dart';
+import 'package:interface_example1/classes/data_models/manual_operation_data.dart';
 import 'package:interface_example1/classes/http/http_service.dart';
 import 'package:interface_example1/constants/style.dart';
-import 'package:interface_example1/data_models/config.dart';
-import 'package:interface_example1/data_models/manual_operation_data.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
 import 'package:interface_example1/widgets/custom/breathing_container.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
@@ -59,6 +59,7 @@ class _ManualOperationCardState extends State<ManualOperationCard>
       child: AspectRatio(
         aspectRatio: 1,
         child: BreathingGlowingWidget(
+          offset: 5,
           glow: widget.attivo,
           glowColor: primary,
           child: Container(

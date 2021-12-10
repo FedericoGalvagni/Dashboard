@@ -13,3 +13,10 @@ bool firstImageGet = true;
 ValueNotifier<bool> update = ValueNotifier<bool>(true);
 ValueNotifier<int> indiceTelecamere = ValueNotifier<int>(-1);
 int indiceImmagini = -1;
+ValueNotifier<bool> updateImmagini = ValueNotifier<bool>(true);
+enum User {
+  admin,
+  base,
+  operatore,
+}
+User user = User.admin;

@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:interface_example1/constants/style.dart';
-import 'package:interface_example1/data_models/config.dart';
-import 'package:interface_example1/data_models/parameters_data.dart';
+import 'package:interface_example1/classes/data_models/global_variable.dart';
+import 'package:interface_example1/classes/data_models/parameters_data.dart';
 
 class ParametersTree extends StatefulWidget {
   // ignore: use_key_in_widget_constructors

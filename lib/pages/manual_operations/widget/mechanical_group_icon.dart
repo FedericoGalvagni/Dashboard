@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:interface_example1/classes/data_models/global_variable.dart';
+import 'package:interface_example1/classes/data_models/manual_operation_data.dart';
 import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/constants/style.dart';
-import 'package:interface_example1/data_models/manual_operation_data.dart';
-import 'package:interface_example1/data_models/config.dart';
 import 'package:interface_example1/routing/routes.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 

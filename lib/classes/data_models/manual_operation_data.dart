@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:interface_example1/data_models/parameters_data.dart';
+import 'package:interface_example1/classes/data_models/parameters_data.dart';
 
 List<Gruppo> gruppi = [];
 

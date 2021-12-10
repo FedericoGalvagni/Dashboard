@@ -17,7 +17,6 @@ class _TelecamerPageState extends State<TelecamerPage> {
 
   @override
   Widget build(BuildContext context) {
-    HttpService(id: "immagini_telecamere").get();
     return Column(
       children: [
         /*Center(

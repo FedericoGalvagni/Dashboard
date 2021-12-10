@@ -1,7 +1,7 @@
 library breathing_glowing_button;
 
 import 'package:flutter/material.dart';
-import 'package:interface_example1/data_models/config.dart';
+import 'package:interface_example1/classes/data_models/global_variable.dart';
 
 /// A Breathing Glowing Button widget.
 ///
@@ -10,9 +10,17 @@ class BreathingGlowingWidget extends StatefulWidget {
   final Color glowColor;
   final Widget child;
   final bool glow;
+  final double offset;
+  final double startOffset;
+  final Duration duration;
 
   BreathingGlowingWidget(
-      {required this.glowColor, required this.child, required this.glow});
+      {required this.glowColor,
+      this.duration = const Duration(seconds: 1),
+      required this.child,
+      required this.glow,
+      this.startOffset = 0.5,
+      required this.offset});
 
   @override
   _BreathingGlowingButtonState createState() => _BreathingGlowingButtonState();
@@ -41,9 +49,10 @@ class _BreathingGlowingButtonState extends State<BreathingGlowingWidget>
   /// Animation completes in 2 seconds then repeat by reversing.
   void tenet() {
     _animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 1));
+        AnimationController(vsync: this, duration: widget.duration);
     _animationController.repeat(reverse: true);
-    _animation = Tween(begin: 0, end: 5.0).animate(_animationController)
+    _animation = Tween(begin: widget.startOffset, end: widget.offset)
+        .animate(_animationController)
       ..addListener(() {
         setState(() {});
       });

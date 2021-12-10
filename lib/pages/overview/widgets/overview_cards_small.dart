@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:interface_example1/data_models/overview_data.dart';
+import 'package:interface_example1/classes/data_models/overview_data.dart';
 import 'package:interface_example1/pages/overview/widgets/info_card.dart';
 import 'package:interface_example1/widgets/custom/default_line_chart.dart';
 import 'package:interface_example1/widgets/spacer/small_horizontal_spacer.dart';

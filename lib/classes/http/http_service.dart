@@ -1,14 +1,13 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:interface_example1/data_models/config.dart';
-import 'package:interface_example1/data_models/immagini_telecamera_data.dart';
-import 'package:interface_example1/data_models/manual_operation_data.dart';
-import 'package:interface_example1/data_models/overview_data.dart';
-import 'package:interface_example1/data_models/parameters_data.dart';
-
-import 'package:interface_example1/data_models/states_data.dart';
+import 'package:interface_example1/classes/data_models/global_variable.dart';
+import 'package:interface_example1/classes/data_models/immagini_telecamera_data.dart';
+import 'package:interface_example1/classes/data_models/manual_operation_data.dart';
+import 'package:interface_example1/classes/data_models/overview_data.dart';
+import 'package:interface_example1/classes/data_models/parameters_data.dart';
+import 'package:interface_example1/classes/data_models/states_data.dart';
+import 'package:interface_example1/routing/routes.dart';
+import 'package:interface_example1/widgets/menu_controller.dart';
 
 /// ## HTTP
 /// Classe di gestione methodo GET e POST http, l'attributo [id] viene inserito
@@ -22,21 +21,29 @@ class HttpService {
   /// Limite righe di risposta QUERY
   String limit;
 
+  bool print;
+
   /// Parametri della richiesta
   Map<String, dynamic>? parametriHeaders;
   HttpService(
-      {this.parametriHeaders = const {"": ""},
+      {this.parametriHeaders = const {},
       this.limit = "1000",
+      this.print = true,
       required this.id});
 
   get() async {
-    debugPrint("HTTP: GET|ID: " + id + "|LIMIT: " + limit);
+    (print) => debugPrint("HTTP: GET|ID: " + id + "|LIMIT: " + limit);
     var dio = Dio();
+    if (parametriHeaders!.isEmpty) {
+      parametriHeaders = {};
+    }
+
+    parametriHeaders!.addAll({"id": id, "limit": limit});
     dio.options
       ..baseUrl = nodeUrl.toString()
       ..connectTimeout = 5000 //5s
       ..receiveTimeout = 5000
-      ..headers = {"id": id, "limit": limit}
+      ..headers = parametriHeaders
       ..validateStatus = (int? status) {
         return status != null && status > 0;
       };
@@ -53,7 +60,7 @@ class HttpService {
   }
 
   post() async {
-    debugPrint("HTTP: POST|ID: " + id);
+    (print) => debugPrint("HTTP: POST|ID: " + id);
     var dio = Dio();
     parametriHeaders!.addAll({"id": id});
 
@@ -75,49 +82,41 @@ class HttpService {
     }
   }
 
-  manageGet(var res) {
+  manageGet(var response) {
     switch (id) {
       case "produzione":
-        row.value = res.data;
+        row.value = response.data;
         break;
 
       case "graficoProduzione":
-        productionGraph.value = res.data;
+        productionGraph.value = response.data;
         assegnaProduzione();
         break;
 
       case "parametri":
-        parametri.value = (res.data as List)
+        parametri.value = (response.data as List)
             .map((x) => ParametriAttuatori.fromJson(x))
             .toList();
-        debugPrint("1");
-        parametriOriginali = (res.data as List)
+
+        parametriOriginali = (response.data as List)
             .map((x) => ParametriAttuatori.fromJson(x))
             .toList();
-        parametriDatabase.value = (res.data as List)
+        parametriDatabase.value = (response.data as List)
             .map((x) => ParametriAttuatori.fromJson(x))
             .toList();
         costruzioneGruppi(parametri.value);
         break;
+
       case "immagini_telecamere":
-        String responseString = res.data.toString();
-
-        if (res.data == "no_update") {
+        if (response.data == "true") {
           debugPrint("No updated images");
-          firstImageGet = false;
         } else {
-          aggiungiImmagine(res.data);
+          aggiornamentoImmagini(response);
         }
-
-        if (firstImageGet) {
-          debugPrint("Aggiornamento");
-          HttpService(id: "immagini_telecamere").get();
-        } else {}
-        update.value = !update.value;
         break;
 
       default:
-        debugPrint(res.data.toString());
+        debugPrint(response.data.toString());
       /*debugPrint(
             "HTTP: ERRORE: " + temp["ERRORE"] + " SORGENTE: " + temp["FROM"]);
     }*/
@@ -147,6 +146,37 @@ class HttpService {
   }
 }
 
-a() {
-  HttpService(id: "immagini_telecamere").get();
+updateData() {
+  switch (MenuController.instance.activeItem().toString()) {
+    case overviewPageRoute:
+      HttpService(id: "graficoProduzione", limit: "100", print: false).get();
+      break;
+
+    case manualOperationsPageRoute:
+      break;
+
+    case statesPageRoute:
+      break;
+
+    case parametersPageRoute:
+      break;
+
+    case telecamerPageRoute:
+      for (var item in immaginiTelecamere) {
+        HttpService(id: "immagini_telecamere", print: false, parametriHeaders: {
+          "percorso": item.percorso.toString(),
+          "timestamp": item.timestamp.toString()
+        }).get();
+      }
+      break;
+
+    case settingsPageRoute:
+      break;
+
+    case authenticationPageRoute:
+      break;
+
+    default:
+  }
 }
+

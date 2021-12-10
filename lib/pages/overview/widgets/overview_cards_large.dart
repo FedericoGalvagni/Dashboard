@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:interface_example1/classes/data_models/overview_data.dart';
 import 'package:interface_example1/constants/style.dart';
-import 'package:interface_example1/data_models/overview_data.dart';
 import 'package:interface_example1/pages/overview/widgets/info_card.dart';
+import 'package:interface_example1/pages/overview/widgets/overview_radar.dart';
 import 'package:interface_example1/widgets/custom/default_line_chart.dart';
 
 class OverviewCardsLarge extends StatelessWidget {
@@ -10,7 +11,6 @@ class OverviewCardsLarge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     double _width = MediaQuery.of(context).size.width;
     return Container(
       margin: EdgeInsets.only(left: _width / 64, right: _width / 64),
@@ -106,6 +106,7 @@ class OverviewCardsLarge extends StatelessWidget {
               ),
             ],
           ),
+          Container(width: 600,height: 600,  child: OverviewRadarChart())
         ],
       ),
     );

@@ -1,0 +1,38 @@
+{
+	"percorso_principale": "D:\\Scuola\\Stage\\MultiPlatformInterface\\File",
+	"nome_macchina": "plissettatrice",
+	"telecamere": [{
+			"nome_telecamera": "Telecamera 1",
+			"percorso_relativo": "\\Immagini\\Telecamera1"
+		},
+		{
+			"nome_telecamera": "Telecamera 2",
+			"percorso_relativo": "\\Immagini\\Telecamera2"
+		},
+		{
+			"nome_telecamera": "Telecamera 3",
+			"percorso_relativo": "\\Immagini\\Telecamera3"
+		}
+	],
+	"operatore": {
+		"panoramica": "r",
+		"manuale": "rw",
+		"parametri": "",
+		"tabelle": "r",
+		"telecamere" :"r"
+	},
+	"admin": {
+		"panoramica": "rw",
+		"manuale": "rw",
+		"parametri": "rw",
+		"tabelle": "rw",
+		"telecamere" :"r"
+	},	  
+	"base": {
+		"panoramica": "r",
+		"manuale": "r",
+		"parametri": "",
+		"tabelle": "",
+		"telecamere" :"r"
+	}
+}

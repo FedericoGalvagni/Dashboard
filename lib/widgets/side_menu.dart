@@ -49,7 +49,7 @@ class SideMenu extends StatelessWidget {
           Column(
             mainAxisSize: MainAxisSize.min,
             //Autopopulating sidemenu
-            children: sideMenuItems
+            children: sideMenuItems()
                 .map((itemName) => SideMenuItem(
                     itemName: itemName == authenticationPageRoute
                         ? "Log Out"
