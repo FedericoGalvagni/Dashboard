@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'dart:convert';
 
-late Config config;
+late Config config ;
 String jsonString = "";
 
 Config configFromJson(String str) => Config.fromJson(json.decode(str));

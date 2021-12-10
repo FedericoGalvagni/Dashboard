@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
-final nodeUrl = Uri.parse('http://192.168.2.184:1880/prova');
+const String nodeUrl = 'http://192.168.2.184:1880/prova';
 ValueNotifier<bool> showTableIndicator = ValueNotifier<bool>(false);
 int mechanicalGroupSelector = -1;
 String expandedNode = "-1.-1.-1";
@@ -14,9 +14,11 @@ ValueNotifier<bool> update = ValueNotifier<bool>(true);
 ValueNotifier<int> indiceTelecamere = ValueNotifier<int>(-1);
 int indiceImmagini = -1;
 ValueNotifier<bool> updateImmagini = ValueNotifier<bool>(true);
+User user = User.base;
 enum User {
   admin,
   base,
   operatore,
+  developer,
 }
-User user = User.admin;
+bool logined = false;

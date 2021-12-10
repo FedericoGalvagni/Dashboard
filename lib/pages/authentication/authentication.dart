@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:interface_example1/classes/models/global_variable.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/layout.dart';
+import 'package:interface_example1/widgets/custom/custom_container.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 
-class AuthenticationPage extends StatelessWidget {
+class AuthenticationPage extends StatefulWidget {
   const AuthenticationPage({Key? key}) : super(key: key);
+
+  @override
+  State<AuthenticationPage> createState() => _AuthenticationPageState();
+}
+
+class _AuthenticationPageState extends State<AuthenticationPage> {
+  bool isApiCallProcess = false;
+  bool hidePassword = true;
+  GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController nome = TextEditingController(text: "");
-    TextEditingController password = TextEditingController(text: "");
+    TextEditingController _nome = TextEditingController(text: "");
+    TextEditingController _password = TextEditingController(text: "");
 
     return Scaffold(
       body: Center(
@@ -24,18 +36,6 @@ class AuthenticationPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              /*Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 12),
-                    child: Image.asset("assets/icons/logo.png"),
-                  ),
-                  Expanded(child: Container()),
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),*/
               Row(
                 children: [
                   Text("Login",
@@ -61,7 +61,7 @@ class AuthenticationPage extends StatelessWidget {
               ),
               TextField(
                   textAlign: TextAlign.left,
-                  controller: nome,
+                  controller: _nome,
                   style: TextStyle(
                       color: getEmphasis(
                     onSurface,
@@ -85,7 +85,7 @@ class AuthenticationPage extends StatelessWidget {
                 height: 15,
               ),
               TextField(
-                  controller: password,
+                  controller: _password,
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: "Password",
@@ -122,9 +122,16 @@ class AuthenticationPage extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              InkWell(
-                onTap: () {
+              CustomInkWell(
+                radius: 20,
+                style: ContainerStyle.primary,
+                onTap: () async {
+                  user = User.admin;
+                  logined = true;
+
                   Get.offAll(() => SiteLayout());
+                  var username = _nome.text;
+                  var password = _password.text;
                 },
                 child: Container(
                   decoration: BoxDecoration(

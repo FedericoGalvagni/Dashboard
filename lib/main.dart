@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,13 +8,11 @@ import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/controllers/navigation_controller.dart';
 import 'package:interface_example1/layout.dart';
 import 'package:interface_example1/widgets/menu_controller.dart';
-import 'classes/data_models/config_model.dart';
-import 'classes/data_models/immagini_telecamera_data.dart';
+import 'classes/models/config_model.dart';
+import 'classes/models/immagini_telecamera_data.dart';
 import 'classes/http/http_service.dart';
 
-
-Future<void> main() async {
-  await loadConfig();
+void main() {
   themeSelection(false);
   Get.put(MenuController());
   Get.put(NavigationController());
@@ -57,6 +54,7 @@ class _MyAppState extends State<MyApp> {
       HttpService(id: "parametri").get();
       HttpService(id: "produzione", limit: "100").get();
       HttpService(id: "graficoProduzione", limit: "100").get();
+      await loadConfig();
       costruzioneModelloImmagini(config.telecamere);
 
       for (var item in immaginiTelecamere) {

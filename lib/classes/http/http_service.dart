@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:interface_example1/classes/data_models/global_variable.dart';
-import 'package:interface_example1/classes/data_models/immagini_telecamera_data.dart';
-import 'package:interface_example1/classes/data_models/manual_operation_data.dart';
-import 'package:interface_example1/classes/data_models/overview_data.dart';
-import 'package:interface_example1/classes/data_models/parameters_data.dart';
-import 'package:interface_example1/classes/data_models/states_data.dart';
+import 'package:interface_example1/classes/models/global_variable.dart';
+import 'package:interface_example1/classes/models/immagini_telecamera_data.dart';
+import 'package:interface_example1/classes/models/manual_operation_data.dart';
+import 'package:interface_example1/classes/models/overview_data.dart';
+import 'package:interface_example1/classes/models/parameters_data.dart';
+import 'package:interface_example1/classes/models/states_data.dart';
 import 'package:interface_example1/routing/routes.dart';
 import 'package:interface_example1/widgets/menu_controller.dart';
 
@@ -179,4 +179,3 @@ updateData() {
     default:
   }
 }
-

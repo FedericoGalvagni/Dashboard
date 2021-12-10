@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:interface_example1/classes/data_models/global_variable.dart';
-import 'package:interface_example1/classes/data_models/manual_operation_data.dart';
+import 'package:interface_example1/classes/models/global_variable.dart';
+import 'package:interface_example1/classes/models/manual_operation_data.dart';
 import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/pages/manual_operations/widget/manual_operation_card.dart';
@@ -97,19 +97,21 @@ class _ManualOperationsGroupState extends State<ManualOperationsGroup> {
         ));
         Attuatore attuatore = attuatori[index + ii];
         element.add(ManualOperationCard(
-            iGruppi: widget.iGruppi,
-            iAttuatori: index + ii,
-            attivo: attuatore.manualeAttivo,
-            nome: attuatore.nome,
-            limiteNegativo: attuatore.limiteNegativo,
-            limitePositivo: attuatore.limitePositivo,
-            id: attuatore.id,
-            value: attuatore.valore,
-            tipo: attuatore.tipo,
-            onTap: () {
-              attuatore.manualeAttivo = true;
-              disattivazioneComandiManuali(widget.iGruppi, index + ii);
-            }, size: 300,));
+          iGruppi: widget.iGruppi,
+          iAttuatori: index + ii,
+          attivo: attuatore.manualeAttivo,
+          nome: attuatore.nome,
+          limiteNegativo: attuatore.limiteNegativo,
+          limitePositivo: attuatore.limitePositivo,
+          id: attuatore.id,
+          value: attuatore.valore,
+          tipo: attuatore.tipo,
+          onTap: () {
+            attuatore.manualeAttivo = true;
+            disattivazioneComandiManuali(widget.iGruppi, index + ii);
+          },
+          size: 300,
+        ));
       }
     }
     element.add(SizedBox(

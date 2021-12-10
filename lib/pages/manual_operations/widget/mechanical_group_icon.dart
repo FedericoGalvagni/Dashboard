@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:interface_example1/classes/data_models/global_variable.dart';
-import 'package:interface_example1/classes/data_models/manual_operation_data.dart';
+import 'package:interface_example1/classes/models/global_variable.dart';
+import 'package:interface_example1/classes/models/manual_operation_data.dart';
 import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/routing/routes.dart';
@@ -25,7 +25,6 @@ class MechanicalGroupIcon extends StatelessWidget {
           ),
           child: Material(
             color: Colors.transparent,
-            
             child: InkWell(
               hoverColor: hovered(surface(4), Colors.white),
               splashColor: pressed(surface(4), Colors.white),

@@ -1,5 +1,5 @@
-import 'package:interface_example1/classes/data_models/config_model.dart';
-import 'package:interface_example1/classes/data_models/global_variable.dart';
+import 'package:interface_example1/classes/models/config_model.dart';
+import 'package:interface_example1/classes/models/global_variable.dart';
 
 const overviewPageRoute = "Overview";
 const manualOperationsPageRoute = "Manual operation";
@@ -13,65 +13,79 @@ const telecamerPageRoute = "Telecamere";
 /// nella seguente lista coincide con l'ordinamento sull'interfaccia
 List sideMenuItems() {
   List items = [];
-  switch (user) {
-    case User.admin:
-      if (config.admin.manuale.contains("r")) {
-        items.add(manualOperationsPageRoute);
-      }
-      if (config.admin.tabelle.contains("r")) {
-        items.add(statesPageRoute);
-      }
-      if (config.admin.parametri.contains("r")) {
-        items.add(parametersPageRoute);
-      }
-      if (config.admin.telecamere.contains("r")) {
-        items.add(telecamerPageRoute);
-      }
-      items.add(overviewPageRoute);
-      items.add(settingsPageRoute);
-      items.add(authenticationPageRoute);
-      break;
+  if (logined) {
+    switch (user) {
+      case User.admin:
+        items.add(overviewPageRoute);
+        if (config.admin.manuale.contains("r")) {
+          items.add(manualOperationsPageRoute);
+        }
+        if (config.admin.tabelle.contains("r")) {
+          items.add(statesPageRoute);
+        }
+        if (config.admin.parametri.contains("r")) {
+          items.add(parametersPageRoute);
+        }
+        if (config.admin.telecamere.contains("r")) {
+          items.add(telecamerPageRoute);
+        }
 
-    case User.operatore:
-      if (config.operatore.manuale.contains("r")) {
-        items.add(manualOperationsPageRoute);
-      }
-      if (config.operatore.tabelle.contains("r")) {
-        items.add(statesPageRoute);
-      }
-      if (config.operatore.parametri.contains("r")) {
-        items.add(parametersPageRoute);
-      }
-      if (config.operatore.telecamere.contains("r")) {
-        items.add(telecamerPageRoute);
-      }
-      items.add(overviewPageRoute);
-      items.add(settingsPageRoute);
-      items.add(authenticationPageRoute);
-      break;
+        items.add(settingsPageRoute);
+        items.add(authenticationPageRoute);
+        break;
 
-    case User.base:
-      if (config.base.manuale.contains("r")) {
-        items.add(manualOperationsPageRoute);
-      }
-      if (config.base.tabelle.contains("r")) {
-        items.add(statesPageRoute);
-      }
-      if (config.base.parametri.contains("r")) {
-        items.add(parametersPageRoute);
-      }
-      if (config.base.telecamere.contains("r")) {
-        items.add(telecamerPageRoute);
-      }
-      items.add(overviewPageRoute);
-      items.add(settingsPageRoute);
-      items.add(authenticationPageRoute);
-      break;
+      case User.operatore:
+        items.add(overviewPageRoute);
+        if (config.operatore.manuale.contains("r")) {
+          items.add(manualOperationsPageRoute);
+        }
+        if (config.operatore.tabelle.contains("r")) {
+          items.add(statesPageRoute);
+        }
+        if (config.operatore.parametri.contains("r")) {
+          items.add(parametersPageRoute);
+        }
+        if (config.operatore.telecamere.contains("r")) {
+          items.add(telecamerPageRoute);
+        }
 
-    default:
-      items.add(overviewPageRoute);
-      items.add(settingsPageRoute);
-      items.add(authenticationPageRoute);
+        items.add(settingsPageRoute);
+        items.add(authenticationPageRoute);
+        break;
+
+      case User.base:
+        items.add(overviewPageRoute);
+        if (config.base.manuale.contains("r")) {
+          items.add(manualOperationsPageRoute);
+        }
+        if (config.base.tabelle.contains("r")) {
+          items.add(statesPageRoute);
+        }
+        if (config.base.parametri.contains("r")) {
+          items.add(parametersPageRoute);
+        }
+        if (config.base.telecamere.contains("r")) {
+          items.add(telecamerPageRoute);
+        }
+
+        items.add(settingsPageRoute);
+        items.add(authenticationPageRoute);
+        break;
+
+      case User.developer:
+        items.add(overviewPageRoute);
+        items.add(manualOperationsPageRoute);
+        items.add(statesPageRoute);
+        items.add(parametersPageRoute);
+        items.add(telecamerPageRoute);
+        items.add(settingsPageRoute);
+        items.add(authenticationPageRoute);
+        break;
+    }
+  } else {
+    items.add(overviewPageRoute);
+    items.add(settingsPageRoute);
+    items.add(authenticationPageRoute);
   }
   return items;
 }

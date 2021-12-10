@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:interface_example1/classes/data_models/global_variable.dart';
-import 'package:interface_example1/classes/data_models/manual_operation_data.dart';
+import 'package:interface_example1/classes/models/global_variable.dart';
+import 'package:interface_example1/classes/models/manual_operation_data.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/pages/manual_operations/widget/manual_operations_group.dart';
 import 'package:interface_example1/pages/manual_operations/widget/mechanical_group_icon.dart';
@@ -38,9 +38,7 @@ class _ManualOperationIconsGridState extends State<ManualOperationIconsGrid> {
       mechanicalGroupIcons.add(Container());
       return mechanicalGroupIcons;
     }
-    for (var i = 0;
-        i < gruppi.length;
-        i = i + widget.iconsPerRow) {
+    for (var i = 0; i < gruppi.length; i = i + widget.iconsPerRow) {
       //print("buildIndex: " + i.toString());
       mechanicalGroupIcons.add((Row(children: [
         Container(

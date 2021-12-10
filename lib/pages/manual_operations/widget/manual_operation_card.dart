@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:interface_example1/classes/data_models/global_variable.dart';
-import 'package:interface_example1/classes/data_models/manual_operation_data.dart';
+import 'package:interface_example1/classes/models/global_variable.dart';
+import 'package:interface_example1/classes/models/manual_operation_data.dart';
 import 'package:interface_example1/classes/http/http_service.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
@@ -124,9 +124,10 @@ class _ManualOperationCardState extends State<ManualOperationCard>
                 ),
                 Expanded(child: Container()),
                 StaticButton(
-                    width: ResponsiveWidget.isSmallScreen(context) && ResponsiveWidget.isMediumScreen(context)
+                    width: ResponsiveWidget.isSmallScreen(context) &&
+                            ResponsiveWidget.isMediumScreen(context)
                         ? _width / 2.5
-                        :  _width/7 ,
+                        : _width / 7,
                     height: 30,
                     activeText: "Attivato",
                     disabledText: "Disattivato",

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:interface_example1/classes/data_models/overview_data.dart';
+import 'package:interface_example1/classes/models/overview_data.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/pages/overview/widgets/info_card.dart';
 import 'package:interface_example1/pages/overview/widgets/overview_radar.dart';
@@ -106,7 +106,7 @@ class OverviewCardsLarge extends StatelessWidget {
               ),
             ],
           ),
-          Container(width: 600,height: 600,  child: OverviewRadarChart())
+          Container(width: 600, height: 600, child: OverviewRadarChart())
         ],
       ),
     );

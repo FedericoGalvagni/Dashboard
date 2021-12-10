@@ -48,6 +48,9 @@ dependencies:
   connectivity: ^3.0.6
   photo_view: ^0.13.0
   flutter_radar_chart: ^0.2.0
+  flutter_secure_storage: ^5.0.2
+  snippet_coder_utils: ^1.0.9
+  api_cache_manager: ^1.0.2
   
 dev_dependencies:
   flutter_test:

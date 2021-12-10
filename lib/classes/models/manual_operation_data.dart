@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:interface_example1/classes/data_models/parameters_data.dart';
+import 'package:interface_example1/classes/models/parameters_data.dart';
 
 List<Gruppo> gruppi = [];
 
@@ -79,17 +79,16 @@ costruzioneGruppi(List<ParametriAttuatori> parametri) {
           limitePositivo = parametriItem.valore;
         }
       }
-     
-        Attuatore motore = Attuatore(
-            manualeAttivo: false,
-            nome: attuatore.nome,
-            tipo: attuatore.tipo,
-            valore: "45",
-            id: "id",
-            limiteNegativo: limiteNegativo,
-            limitePositivo: limitePositivo);
-        motori.add(motore);
-      
+
+      Attuatore motore = Attuatore(
+          manualeAttivo: false,
+          nome: attuatore.nome,
+          tipo: attuatore.tipo,
+          valore: "45",
+          id: "id",
+          limiteNegativo: limiteNegativo,
+          limitePositivo: limitePositivo);
+      motori.add(motore);
     }
     Gruppo gruppoMeccanico = Gruppo(nome: gruppoItem.gruppo, attuatori: motori);
     gruppi.add(gruppoMeccanico);

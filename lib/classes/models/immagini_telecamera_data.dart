@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:interface_example1/classes/data_models/global_variable.dart';
-import 'package:interface_example1/classes/data_models/config_model.dart';
+import 'package:interface_example1/classes/models/global_variable.dart';
+import 'package:interface_example1/classes/models/config_model.dart';
 import 'package:interface_example1/classes/regexp.dart';
 
 List<ImmaginiTelecamere> immaginiTelecamere = [];
@@ -46,8 +46,7 @@ aggiornamentoImmagini(var response) {
   int indice = _indicePercorso(percorso);
   if (indice != -1) {
     debugPrint("AGGIORNAMENTO: " + percorso);
-    immaginiTelecamere[indice].immagine =
-        Image.memory(base64Decode(immagine));
+    immaginiTelecamere[indice].immagine = Image.memory(base64Decode(immagine));
     immaginiTelecamere[indice].timestamp = timestamp;
     immaginiTelecamere[indice].daLeggere = true;
   } else {

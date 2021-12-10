@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:interface_example1/classes/data_models/global_variable.dart';
-import 'package:interface_example1/classes/data_models/immagini_telecamera_data.dart';
+import 'package:interface_example1/classes/models/global_variable.dart';
+import 'package:interface_example1/classes/models/immagini_telecamera_data.dart';
 import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/helpers/responsivness.dart';

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:interface_example1/classes/http/http_service.dart';
 import 'package:interface_example1/constants/style.dart';
-import 'package:interface_example1/classes/data_models/global_variable.dart';
-import 'package:interface_example1/classes/data_models/states_data.dart';
+import 'package:interface_example1/classes/models/global_variable.dart';
+import 'package:interface_example1/classes/models/states_data.dart';
 import 'package:interface_example1/pages/states/widgets/states_datatable.dart';
 import 'package:interface_example1/widgets/custom/autocomplete_textfield.dart';
 import 'package:interface_example1/widgets/custom/custom_dropdownmenu.dart';
@@ -175,7 +175,7 @@ class StatesSmallState extends State<StatesSmall> {
                 color: primary,
                 minHeight: 10,
               )),
-              const SmallVSpacer()
+          const SmallVSpacer()
         ],
       );
     } else {
