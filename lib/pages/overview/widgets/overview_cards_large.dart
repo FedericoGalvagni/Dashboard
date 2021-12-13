@@ -106,7 +106,7 @@ class OverviewCardsLarge extends StatelessWidget {
               ),
             ],
           ),
-          Container(width: 600, height: 600, child: OverviewRadarChart())
+          //Container(width: 600, height: 600, child: OverviewRadarChart())
         ],
       ),
     );

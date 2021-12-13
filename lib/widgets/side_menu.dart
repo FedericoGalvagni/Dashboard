@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:interface_example1/classes/models/global_variable.dart';
 import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
-import 'package:interface_example1/pages/authentication/authentication.dart';
 import 'package:interface_example1/routing/routes.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 
@@ -46,28 +46,33 @@ class SideMenu extends StatelessWidget {
                 ),
               ],
             ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            //Autopopulating sidemenu
-            children: sideMenuItems()
-                .map((itemName) => SideMenuItem(
-                    itemName: itemName == authenticationPageRoute
-                        ? "Log Out"
-                        : itemName,
-                    onTap: () {
-                      if (itemName == authenticationPageRoute) {
-                        Get.offAll(() => const AuthenticationPage());
-                      }
+          ValueListenableBuilder(
+              valueListenable: logined,
+              builder: (context, widget, value) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  //Autopopulating sidemenu
+                  children: sideMenuItems()
+                      .map((itemName) => SideMenuItem(
+                          itemName: itemName == authenticationPageRoute
+                              ? "Log Out"
+                              : itemName,
+                          onTap: () {
+                            if (itemName == authenticationPageRoute) {
+                              logined.value = false;
+                            }
 
-                      if (!menuController.isActive(itemName)) {
-                        menuController.changeActiveItemTo(itemName);
-                        if (ResponsiveWidget.isSmallScreen(context)) Get.back();
-                        Get.back();
-                        navigationController.navigateTo(itemName);
-                      }
-                    }))
-                .toList(),
-          )
+                            if (!menuController.isActive(itemName)) {
+                              menuController.changeActiveItemTo(itemName);
+                              if (ResponsiveWidget.isSmallScreen(context))
+                                Get.back();
+                              Get.back();
+                              navigationController.navigateTo(itemName);
+                            }
+                          }))
+                      .toList(),
+                );
+              })
         ],
       ),
     );

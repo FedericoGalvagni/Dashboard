@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:interface_example1/classes/http/http_service.dart';
 import 'package:interface_example1/classes/models/global_variable.dart';
 import 'package:interface_example1/constants/style.dart';
-import 'package:interface_example1/layout.dart';
 import 'package:interface_example1/widgets/custom/custom_container.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 
@@ -23,7 +22,6 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
   Widget build(BuildContext context) {
     TextEditingController _nome = TextEditingController(text: "");
     TextEditingController _password = TextEditingController(text: "");
-
     return Scaffold(
       body: Center(
         child: Container(
@@ -31,7 +29,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
             borderRadius: BorderRadius.circular(16),
             color: surface(16),
           ),
-          constraints: const BoxConstraints(maxWidth: 500, maxHeight: 400),
+          constraints: const BoxConstraints(maxWidth: 500, maxHeight: 500),
           padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -48,6 +46,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
               const SizedBox(
                 height: 10,
               ),
+
               Row(
                 children: [
                   CustomText(
@@ -56,53 +55,103 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                   ),
                 ],
               ),
+              //create a contai
+
               const SizedBox(
                 height: 15,
               ),
-              TextField(
-                  textAlign: TextAlign.left,
-                  controller: _nome,
-                  style: TextStyle(
-                      color: getEmphasis(
-                    onSurface,
-                    emphasis.high,
-                  )),
-                  decoration: InputDecoration(
-                    labelText: "Nome",
-                    labelStyle: TextStyle(color: primary),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: BorderSide(
-                            color: getEmphasis(onSurface, emphasis.medium),
-                            width: 1)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: BorderSide(color: primary, width: 2)),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: primary)),
-                  )),
+              ValueListenableBuilder(
+                  valueListenable: loginFailed,
+                  builder: (context, widget, value) {
+                    return TextField(
+                        textAlign: TextAlign.left,
+                        controller: _nome,
+                        style: TextStyle(
+                            color: getEmphasis(
+                          onSurface,
+                          emphasis.high,
+                        )),
+                        decoration: InputDecoration(
+                          labelText: "Nome",
+                          labelStyle: loginFailed.value
+                              ? TextStyle(color: error)
+                              : TextStyle(color: primary),
+                          enabledBorder: loginFailed.value
+                              ? OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                  borderSide: BorderSide(
+                                      color:
+                                          getEmphasis(error, emphasis.medium),
+                                      width: 1))
+                              : OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                  borderSide: BorderSide(
+                                      color: getEmphasis(
+                                          onSurface, emphasis.medium),
+                                      width: 1)),
+                          focusedBorder: loginFailed.value
+                              ? OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                  borderSide:
+                                      BorderSide(color: error, width: 2))
+                              : OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                  borderSide:
+                                      BorderSide(color: primary, width: 2)),
+                          border: OutlineInputBorder(
+                              borderSide: loginFailed.value
+                                  ? BorderSide(color: error)
+                                  : BorderSide(color: primary)),
+                        ));
+                  }),
               const SizedBox(
                 height: 15,
               ),
-              TextField(
-                  controller: _password,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: "Password",
-                    labelStyle: TextStyle(color: primary),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: BorderSide(
-                            color: getEmphasis(onSurface, emphasis.medium),
-                            width: 1)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: BorderSide(color: primary, width: 2)),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: primary)),
-                  )),
+
+              ValueListenableBuilder(
+                  valueListenable: loginFailed,
+                  builder: (context, widget, value) {
+                    return TextField(
+                        controller: _password,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelStyle: loginFailed.value
+                              ? TextStyle(color: error)
+                              : TextStyle(color: primary),
+                          labelText: "Password",
+                          enabledBorder: loginFailed.value
+                              ? OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                  borderSide: BorderSide(
+                                      color:
+                                          getEmphasis(error, emphasis.medium),
+                                      width: 1))
+                              : OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                  borderSide: BorderSide(
+                                      color: getEmphasis(
+                                          onSurface, emphasis.medium),
+                                      width: 1)),
+                          focusedBorder: loginFailed.value
+                              ? OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                  borderSide:
+                                      BorderSide(color: error, width: 2))
+                              : OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                  borderSide:
+                                      BorderSide(color: primary, width: 2)),
+                          border: OutlineInputBorder(
+                              borderSide: loginFailed.value
+                                  ? BorderSide(color: error)
+                                  : BorderSide(color: primary)),
+                        ));
+                  }),
               const SizedBox(
-                height: 15,
+                height: 5,
+              ),
+              const SizedBox(
+                height: 5,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -122,16 +171,16 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
               const SizedBox(
                 height: 15,
               ),
+
               CustomInkWell(
+                showBorder: false,
                 radius: 20,
                 style: ContainerStyle.primary,
-                onTap: () async {
-                  user = User.admin;
-                  logined = true;
-
-                  Get.offAll(() => SiteLayout());
-                  var username = _nome.text;
-                  var password = _password.text;
+                onTap: () {
+                  HttpService(id: "login", percorso: "/bo", parametriHeaders: {
+                    "nome": _nome.text.toString(),
+                    "password": _password.text.toString()
+                  }).get();
                 },
                 child: Container(
                   decoration: BoxDecoration(

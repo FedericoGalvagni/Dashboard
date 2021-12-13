@@ -64,6 +64,7 @@ class Attuatore {
 ///
 costruzioneGruppi(List<ParametriAttuatori> parametri) {
   debugPrint("Inserimento dati motori nel modello");
+  gruppi.clear();
   for (var gruppoItem in parametri) {
     List<Attuatore> motori = [];
     //debugPrint("Nuovo gruppo Item: " + gruppoItem.gruppo.toString());

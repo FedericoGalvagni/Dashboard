@@ -82,7 +82,7 @@ class StatesSmallState extends State<StatesSmall> {
                     showTableIndicator.value = true;
                   });
                   widget.id = text;
-                  HttpService(id: widget.id.toString(), limit: widget.limit)
+                  HttpService(id: widget.id.toString(),percorso: "/data",  limit: widget.limit)
                       .get();
                 })),
         SizedBox(
@@ -97,7 +97,7 @@ class StatesSmallState extends State<StatesSmall> {
                     showTableIndicator.value = true;
                   });
 
-                  HttpService(id: widget.id.toString(), limit: widget.limit)
+                  HttpService(id: widget.id.toString(),percorso: "/data",  limit: widget.limit)
                       .get();
                 },
                 child: CustomText(

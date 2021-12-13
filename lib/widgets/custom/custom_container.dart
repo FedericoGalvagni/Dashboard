@@ -5,12 +5,14 @@ import 'package:interface_example1/constants/style.dart';
 class CustomInkWell extends StatefulWidget {
   CustomInkWell(
       {Key? key,
+      this.showBorder = true,
       required this.child,
       required this.style,
       required this.onTap,
       required this.radius})
       : super(key: key);
   Widget child;
+  bool showBorder;
   VoidCallback onTap;
   ContainerStyle style;
   double radius;
@@ -32,10 +34,10 @@ class _CustomInkWellState extends State<CustomInkWell> {
             borderRadius: BorderRadius.circular(widget.radius),
             onTap: widget.onTap,
             onHover: (hover) {
-              setState(() {
-                
-              });
-              isHovered = hover;
+              setState(() {});
+              if (widget.showBorder) {
+                isHovered = hover;
+              }
             },
             focusColor: _focusColor(),
             hoverColor: _hoverColor(),
@@ -59,7 +61,9 @@ class _CustomInkWellState extends State<CustomInkWell> {
         return BoxDecoration(
             border: isHovered
                 ? Border.all(color: SurfacePrimaryContainer().overlay, width: 1)
-                :Border.all(color: SurfacePrimaryContainer().overlay.withOpacity(0.2), width: 1),
+                : Border.all(
+                    color: SurfacePrimaryContainer().overlay.withOpacity(0.2),
+                    width: 1),
             color: SurfacePrimaryContainer().container,
             borderRadius: BorderRadius.circular(widget.radius),
             boxShadow: boxShadow);
@@ -75,7 +79,9 @@ class _CustomInkWellState extends State<CustomInkWell> {
         return BoxDecoration(
             border: isHovered
                 ? Border.all(color: SurfaceContainer().overlay, width: 1)
-                : Border.all(color: SurfacePrimaryContainer().overlay.withOpacity(0.2), width: 1)  ,
+                : Border.all(
+                    color: SurfacePrimaryContainer().overlay.withOpacity(0.2),
+                    width: 1),
             color: SurfaceContainer().container,
             borderRadius: BorderRadius.circular(widget.radius),
             boxShadow: boxShadow);
@@ -124,6 +130,7 @@ class _CustomInkWellState extends State<CustomInkWell> {
     }
   }
 }
+
 /// Definisce lo stile del container
 enum ContainerStyle {
   /// ## Primary Containers

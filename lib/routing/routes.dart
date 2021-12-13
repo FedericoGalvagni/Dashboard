@@ -13,7 +13,7 @@ const telecamerPageRoute = "Telecamere";
 /// nella seguente lista coincide con l'ordinamento sull'interfaccia
 List sideMenuItems() {
   List items = [];
-  if (logined) {
+  if (logined.value) {
     switch (user) {
       case User.admin:
         items.add(overviewPageRoute);
@@ -81,10 +81,10 @@ List sideMenuItems() {
         items.add(settingsPageRoute);
         items.add(authenticationPageRoute);
         break;
+      case User.notLogined:
+        items.add(authenticationPageRoute);
     }
   } else {
-    items.add(overviewPageRoute);
-    items.add(settingsPageRoute);
     items.add(authenticationPageRoute);
   }
   return items;

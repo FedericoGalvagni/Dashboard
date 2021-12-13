@@ -8,7 +8,7 @@ class TelecamereMedium extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        HttpService(id: "immagini_telecamere").get();
+        HttpService(id: "immagini_telecamere",percorso: "/data",).get();
       },
       child: Container(
         height: 600,

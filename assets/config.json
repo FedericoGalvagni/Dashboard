@@ -1,5 +1,10 @@
 {
 	"percorso_principale": "D:\\Scuola\\Stage\\MultiPlatformInterface\\File",
+	"percorso_utenti": "\\Utenti",
+	"database": {
+		"nomeDB": "test",
+		"produzione": "produzione"
+	},
 	"nome_macchina": "plissettatrice",
 	"telecamere": [{
 			"nome_telecamera": "Telecamera 1",
@@ -17,22 +22,22 @@
 	"operatore": {
 		"panoramica": "r",
 		"manuale": "rw",
-		"parametri": "",
+		"parametri": "n",
 		"tabelle": "r",
-		"telecamere" :"r"
+		"telecamere": "r"
 	},
 	"admin": {
 		"panoramica": "rw",
 		"manuale": "rw",
 		"parametri": "rw",
 		"tabelle": "rw",
-		"telecamere" :"r"
-	},	  
+		"telecamere": "r"
+	},
 	"base": {
 		"panoramica": "r",
 		"manuale": "r",
-		"parametri": "",
-		"tabelle": "",
-		"telecamere" :"r"
+		"parametri": "n",
+		"tabelle": "n",
+		"telecamere": "r"
 	}
 }

@@ -6,7 +6,7 @@ import 'package:interface_example1/routing/routes.dart';
 
 class MenuController extends GetxController {
   static MenuController instance = Get.find();
-  var activeItem = overviewPageRoute.obs;
+  var activeItem = authenticationPageRoute.obs;
   var hoverItem = "".obs;
   changeActiveItemTo(String itemName) {
     activeItem.value = itemName;

@@ -137,6 +137,7 @@ class _ManualOperationCardState extends State<ManualOperationCard>
                       updateShadow.value = !updateShadow.value;
                       HttpService(
                           id: "comando_manuale_abilitato",
+                          percorso: "/data",
                           parametriHeaders: {
                             "nome_gruppo":
                                 gruppi[widget.iGruppi].nome.toString(),

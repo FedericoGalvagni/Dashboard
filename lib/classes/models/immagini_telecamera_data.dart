@@ -24,6 +24,7 @@ class ImmaginiTelecamere {
 }
 
 costruzioneModelloImmagini(List<Telecamere> telecamere) {
+  immaginiTelecamere.clear();
   for (int i = 0; i < telecamere.length; i++) {
     immaginiTelecamere.add(ImmaginiTelecamere(
         daLeggere: true,

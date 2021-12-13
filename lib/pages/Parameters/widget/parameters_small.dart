@@ -110,7 +110,7 @@ class ParametersSmall extends StatelessWidget {
                 .attuatori[indiceAttuatori]
                 .parametri[i]
                 .valore;
-        HttpService(id: "modifica_parametro", parametriHeaders: {
+        HttpService(id: "modifica_parametro",percorso: "/parametri", parametriHeaders: {
           "indicegruppi": indiceGruppi,
           "indicemotori": indiceAttuatori,
           "indiceparametri": i,

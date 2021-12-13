@@ -142,7 +142,7 @@ class ParametersViewState extends State<ParametersView> {
                     iMotori.toString() +
                     "." +
                     i.toString());
-                HttpService(id: "modifica_parametro", parametriHeaders: {
+                HttpService(id: "modifica_parametro",percorso: "/parametri", parametriHeaders: {
                   "gruppo": nomeGruppo,
                   "motore": nomeMotore,
                   "parametro": nomeParametro,
@@ -181,7 +181,7 @@ class ParametersViewState extends State<ParametersView> {
                           .parametri[i]
                           .valore;
 
-                  HttpService(id: "modifica_parametro", parametriHeaders: {
+                  HttpService(id: "modifica_parametro",percorso: "/parametri", parametriHeaders: {
                     "indicegruppi": iGruppi,
                     "indicemotori": iMotori,
                     "indiceparametri": i,

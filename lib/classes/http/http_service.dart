@@ -1,11 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:interface_example1/classes/models/config_model.dart';
 import 'package:interface_example1/classes/models/global_variable.dart';
 import 'package:interface_example1/classes/models/immagini_telecamera_data.dart';
 import 'package:interface_example1/classes/models/manual_operation_data.dart';
 import 'package:interface_example1/classes/models/overview_data.dart';
 import 'package:interface_example1/classes/models/parameters_data.dart';
 import 'package:interface_example1/classes/models/states_data.dart';
+import 'package:interface_example1/classes/models/user_model.dart';
 import 'package:interface_example1/routing/routes.dart';
 import 'package:interface_example1/widgets/menu_controller.dart';
 
@@ -21,12 +24,18 @@ class HttpService {
   /// Limite righe di risposta QUERY
   String limit;
 
+  /// Se true, la richiesta viene visualizzata nel terminale
   bool print;
+
+  /// Percorso a cui mandare la richiesta all'api, il quale viene aggiunto
+  /// alla fine dell'url (dell'api)
+  String percorso;
 
   /// Parametri della richiesta
   Map<String, dynamic>? parametriHeaders;
   HttpService(
       {this.parametriHeaders = const {},
+      required this.percorso,
       this.limit = "1000",
       this.print = true,
       required this.id});
@@ -40,7 +49,7 @@ class HttpService {
 
     parametriHeaders!.addAll({"id": id, "limit": limit});
     dio.options
-      ..baseUrl = nodeUrl.toString()
+      ..baseUrl = nodeUrl.toString() + percorso
       ..connectTimeout = 5000 //5s
       ..receiveTimeout = 5000
       ..headers = parametriHeaders
@@ -49,7 +58,7 @@ class HttpService {
       };
 
     try {
-      final response = await dio.get(nodeUrl.toString());
+      final response = await dio.get(nodeUrl.toString() + percorso);
       manageGet(response);
     } on DioError catch (e) {
       debugPrint(e.message);
@@ -60,12 +69,15 @@ class HttpService {
   }
 
   post() async {
-    (print) => debugPrint("HTTP: POST|ID: " + id);
+    final url = nodeUrl + percorso;
+    if (print) {
+      debugPrint("HTTP: POST|ID: " + id);
+    }
     var dio = Dio();
     parametriHeaders!.addAll({"id": id});
 
     dio.options
-      ..baseUrl = nodeUrl.toString()
+      ..baseUrl = url
       ..connectTimeout = 5000 //5s
       ..receiveTimeout = 5000
       ..headers = parametriHeaders
@@ -74,10 +86,9 @@ class HttpService {
       };
 
     try {
-      final response = await dio.post(nodeUrl.toString());
+      final response = await dio.post(url);
       managePost(response);
     } on DioError catch (e) {
-      debugPrint(e.message);
       assert(e.response!.statusCode == 404);
     }
   }
@@ -114,19 +125,23 @@ class HttpService {
           aggiornamentoImmagini(response);
         }
         break;
+      case "login":
+        //debugPrint("login");
+        manageLogin(response);
+        break;
 
       default:
-        debugPrint(response.data.toString());
+
       /*debugPrint(
             "HTTP: ERRORE: " + temp["ERRORE"] + " SORGENTE: " + temp["FROM"]);
     }*/
     }
   }
 
-  managePost(var res) {
+  managePost(var response) {
     switch (id) {
       case "modifica_parametro":
-        parametriDatabase.value = (res.data as List)
+        parametriDatabase.value = (response.data as List)
             .map((x) => ParametriAttuatori.fromJson(x))
             .toList();
         changed.value = !changed.value;
@@ -140,16 +155,54 @@ class HttpService {
     }
   }
 
-  getInitialData() {
-    HttpService(id: "parametri").get();
-    HttpService(id: "graficoProduzione", limit: "100").get();
+  manageLogin(var response) {
+    utente = utenteFromJson(response.toString());
+    debugPrint(utente.permessi.toString());
+    switch (utente.permessi.toString()) {
+      case "operatore":
+        user = User.operatore;
+        logined.value = true;
+        loginFailed.value = false;
+        debugPrint("Operatore user logged");
+        getInitialData();
+        break;
+      case "admin":
+        user = User.admin;
+        logined.value = true;
+        loginFailed.value = false;
+        debugPrint("Admin user logged");
+        getInitialData();
+        break;
+      case "base":
+        user = User.base;
+        logined.value = true;
+        loginFailed.value = false;
+        debugPrint("Base user logged");
+        getInitialData();
+        break;
+      case "notlogged":
+        user = User.notLogined;
+        logined.value = false;
+        loginFailed.value = true;
+        debugPrint("Admin user logged");
+        getInitialData();
+        break;
+      default:
+    }
   }
 }
 
 updateData() {
+  //debugPrint("update");
+  //debugPrint("page: " + MenuController.instance.activeItem().toString());
   switch (MenuController.instance.activeItem().toString()) {
     case overviewPageRoute:
-      HttpService(id: "graficoProduzione", limit: "100", print: false).get();
+      HttpService(
+              id: "graficoProduzione",
+              percorso: "/data",
+              limit: "100",
+              print: false)
+          .get();
       break;
 
     case manualOperationsPageRoute:
@@ -163,10 +216,14 @@ updateData() {
 
     case telecamerPageRoute:
       for (var item in immaginiTelecamere) {
-        HttpService(id: "immagini_telecamere", print: false, parametriHeaders: {
-          "percorso": item.percorso.toString(),
-          "timestamp": item.timestamp.toString()
-        }).get();
+        HttpService(
+            id: "immagini_telecamere",
+            percorso: "/data",
+            print: false,
+            parametriHeaders: {
+              "percorso": item.percorso.toString(),
+              "timestamp": item.timestamp.toString()
+            }).get();
       }
       break;
 
@@ -176,6 +233,65 @@ updateData() {
     case authenticationPageRoute:
       break;
 
+    default:
+  }
+}
+
+Future<void> getInitialData() async {
+  switch (user) {
+    case User.admin:
+      HttpService(
+        id: "parametri",
+        percorso: "/data",
+      ).get();
+      HttpService(id: "produzione", percorso: "/data", limit: "100").get();
+      HttpService(id: "graficoProduzione", percorso: "/data", limit: "100")
+          .get();
+      costruzioneModelloImmagini(config.telecamere);
+
+      for (var item in immaginiTelecamere) {
+        HttpService(
+            id: "immagini_telecamere",
+            percorso: "/data",
+            parametriHeaders: {
+              "percorso": item.percorso.toString(),
+              "timestamp": item.timestamp
+            }).get();
+      }
+      break;
+    case User.operatore:
+      HttpService(id: "produzione", percorso: "/data", limit: "100").get();
+      HttpService(id: "graficoProduzione", percorso: "/data", limit: "100")
+          .get();
+      costruzioneModelloImmagini(config.telecamere);
+
+      for (var item in immaginiTelecamere) {
+        HttpService(
+            id: "immagini_telecamere",
+            percorso: "/data",
+            parametriHeaders: {
+              "percorso": item.percorso.toString(),
+              "timestamp": item.timestamp
+            }).get();
+      }
+      break;
+    case User.base:
+      HttpService(id: "graficoProduzione", percorso: "/data", limit: "100")
+          .get();
+      costruzioneModelloImmagini(config.telecamere);
+
+      for (var item in immaginiTelecamere) {
+        HttpService(
+            id: "immagini_telecamere",
+            percorso: "/data",
+            parametriHeaders: {
+              "percorso": item.percorso.toString(),
+              "timestamp": item.timestamp
+            }).get();
+      }
+      break;
+    case User.notLogined:
+      break;
     default:
   }
 }

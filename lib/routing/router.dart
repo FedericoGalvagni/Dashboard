@@ -33,7 +33,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(const TelecamerPage());
 
     default:
-      return _getPageRoute(const OverviewPage());
+      return _getPageRoute(const AuthenticationPage());
   }
 }
 
