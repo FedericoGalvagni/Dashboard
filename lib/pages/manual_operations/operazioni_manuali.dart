@@ -1,19 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
-import 'package:interface_example1/pages/telecamere/widget/telecamere_menu_large.dart';
-import 'package:interface_example1/pages/telecamere/widget/telecamere_menu_medium.dart';
-import 'package:interface_example1/pages/telecamere/widget/telecamere_menu_small.dart';
+import 'package:interface_example1/pages/manual_operations/widget/operazioni_manuali_large.dart';
+import 'package:interface_example1/pages/manual_operations/widget/operazioni_manuali_medium.dart';
+import 'widget/operazioni_manuali_small.dart';
 
-class TelecamerPage extends StatefulWidget {
-  const TelecamerPage({Key? key}) : super(key: key);
-
-  @override
-  State<TelecamerPage> createState() => _TelecamerPageState();
-}
-
-class _TelecamerPageState extends State<TelecamerPage> {
-
-
+class OperazioniManualiPage extends StatelessWidget {
+  const OperazioniManualiPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -38,11 +30,11 @@ class _TelecamerPageState extends State<TelecamerPage> {
             if (ResponsiveWidget.isLargeScreen(context) ||
                 ResponsiveWidget.isMediumScreen(context))
               if (ResponsiveWidget.isCustomSize(context))
-                const TelecamereMedium()
+                const OperazioniManualiMedium()
               else
-                const TelecamereLarge()
+                const OperazioniManualiLarge()
             else
-              const TelecamereSmall()
+              const OperazioniManualiSmall(),
           ],
         ))
       ],

@@ -1,14 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:interface_example1/classes/models/config_model.dart';
-import 'package:interface_example1/classes/models/global_variable.dart';
-import 'package:interface_example1/classes/models/immagini_telecamera_data.dart';
-import 'package:interface_example1/classes/models/manual_operation_data.dart';
-import 'package:interface_example1/classes/models/overview_data.dart';
-import 'package:interface_example1/classes/models/parameters_data.dart';
-import 'package:interface_example1/classes/models/states_data.dart';
-import 'package:interface_example1/classes/models/user_model.dart';
+import 'package:interface_example1/classes/modelli/config_modello.dart';
+import 'package:interface_example1/classes/modelli/variabili_globali.dart';
+import 'package:interface_example1/classes/modelli/immagini_telecamera_modello.dart';
+import 'package:interface_example1/classes/modelli/operazioni_manuali_modello.dart';
+import 'package:interface_example1/classes/modelli/panoramica_data.dart';
+import 'package:interface_example1/classes/modelli/parametri_modello.dart';
+import 'package:interface_example1/classes/modelli/states_data.dart';
+import 'package:interface_example1/classes/modelli/utente_modello.dart';
 import 'package:interface_example1/routing/routes.dart';
 import 'package:interface_example1/widgets/menu_controller.dart';
 
@@ -41,7 +41,9 @@ class HttpService {
       required this.id});
 
   get() async {
-    (print) => debugPrint("HTTP: GET|ID: " + id + "|LIMIT: " + limit);
+    if (print) {
+      debugPrint("HTTP: GET|ID: " + id + "|LIMIT: " + limit);
+    }
     var dio = Dio();
     if (parametriHeaders!.isEmpty) {
       parametriHeaders = {};
@@ -196,7 +198,7 @@ updateData() {
   //debugPrint("update");
   //debugPrint("page: " + MenuController.instance.activeItem().toString());
   switch (MenuController.instance.activeItem().toString()) {
-    case overviewPageRoute:
+    case panoramicaPageRoute:
       HttpService(
               id: "graficoProduzione",
               percorso: "/data",
@@ -205,13 +207,13 @@ updateData() {
           .get();
       break;
 
-    case manualOperationsPageRoute:
+    case operazioniManualiPageRoute:
       break;
 
     case statesPageRoute:
       break;
 
-    case parametersPageRoute:
+    case parametriPageRoute:
       break;
 
     case telecamerPageRoute:
@@ -227,7 +229,7 @@ updateData() {
       }
       break;
 
-    case settingsPageRoute:
+    case impostazioniPageRoute:
       break;
 
     case authenticationPageRoute:

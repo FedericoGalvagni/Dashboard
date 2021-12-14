@@ -9,7 +9,7 @@ abstract class RegExpCustom {
     var regex = RegExp(r'(.*[\\])');
     var match = regex.firstMatch(percorsoFile);
     String str = match!.group(match.groupCount) ?? "";
-    if (str != null && str.length > 0) {
+    if (str.length > 0) {
       str = str.substring(0, str.length - 1);
     }
     return str;

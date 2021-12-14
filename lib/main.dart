@@ -4,24 +4,28 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:interface_example1/classes/models/global_variable.dart';
+import 'package:interface_example1/classes/modelli/variabili_globali.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/controllers/navigation_controller.dart';
 import 'package:interface_example1/layout.dart';
-import 'package:interface_example1/pages/authentication/authentication.dart';
-
-import 'classes/models/config_model.dart';
+import 'package:interface_example1/pages/autenticazione/autenticazione.dart';
+import 'classes/modelli/config_modello.dart';
 import 'classes/http/http_service.dart';
 import 'widgets/menu_controller.dart';
 
 void main() async {
-  await LoadConfigurazione();
+  await loadConfigurazione();
   themeSelection(false);
   Get.put(MenuController());
   Get.put(NavigationController());
   runApp(const MyApp());
   const oneSec = Duration(seconds: 3);
   Timer.periodic(oneSec, (Timer t) => updateData());
+  //TODO CLEAN
+  HttpService(
+      id: "login",
+      percorso: "/bo",
+      parametriHeaders: {"nome": "admin", "password": "password"}).get();
 }
 
 class MyApp extends StatefulWidget {
@@ -49,7 +53,9 @@ class _MyAppState extends State<MyApp> {
         home: ValueListenableBuilder(
             valueListenable: logined,
             builder: (context, value, widget) {
-              return logined.value ? SiteLayout() : const AuthenticationPage();
+              return logined.value
+                  ? SiteLayout()
+                  : const AutenticazionePagina();
             }));
   }
 }

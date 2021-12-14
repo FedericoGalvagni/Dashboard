@@ -1,12 +1,12 @@
-import 'package:interface_example1/classes/models/config_model.dart';
-import 'package:interface_example1/classes/models/global_variable.dart';
+import 'package:interface_example1/classes/modelli/config_modello.dart';
+import 'package:interface_example1/classes/modelli/variabili_globali.dart';
 
-const overviewPageRoute = "Overview";
-const manualOperationsPageRoute = "Manual operation";
+const panoramicaPageRoute = "Panoramica";
+const operazioniManualiPageRoute = "Manual operation";
 const statesPageRoute = "Machine state";
-const settingsPageRoute = "Settings";
+const impostazioniPageRoute = "Impostazioni";
 const authenticationPageRoute = "Authentication";
-const parametersPageRoute = "Parameters";
+const parametriPageRoute = "Parametri";
 const telecamerPageRoute = "Telecamere";
 
 /// Lista che contiene gli elementi del menu laterale, l'ordine
@@ -16,69 +16,69 @@ List sideMenuItems() {
   if (logined.value) {
     switch (user) {
       case User.admin:
-        items.add(overviewPageRoute);
+        items.add(panoramicaPageRoute);
         if (config.admin.manuale.contains("r")) {
-          items.add(manualOperationsPageRoute);
+          items.add(operazioniManualiPageRoute);
         }
         if (config.admin.tabelle.contains("r")) {
           items.add(statesPageRoute);
         }
         if (config.admin.parametri.contains("r")) {
-          items.add(parametersPageRoute);
+          items.add(parametriPageRoute);
         }
         if (config.admin.telecamere.contains("r")) {
           items.add(telecamerPageRoute);
         }
 
-        items.add(settingsPageRoute);
+        items.add(impostazioniPageRoute);
         items.add(authenticationPageRoute);
         break;
 
       case User.operatore:
-        items.add(overviewPageRoute);
+        items.add(panoramicaPageRoute);
         if (config.operatore.manuale.contains("r")) {
-          items.add(manualOperationsPageRoute);
+          items.add(operazioniManualiPageRoute);
         }
         if (config.operatore.tabelle.contains("r")) {
           items.add(statesPageRoute);
         }
         if (config.operatore.parametri.contains("r")) {
-          items.add(parametersPageRoute);
+          items.add(parametriPageRoute);
         }
         if (config.operatore.telecamere.contains("r")) {
           items.add(telecamerPageRoute);
         }
 
-        items.add(settingsPageRoute);
+        items.add(impostazioniPageRoute);
         items.add(authenticationPageRoute);
         break;
 
       case User.base:
-        items.add(overviewPageRoute);
+        items.add(panoramicaPageRoute);
         if (config.base.manuale.contains("r")) {
-          items.add(manualOperationsPageRoute);
+          items.add(operazioniManualiPageRoute);
         }
         if (config.base.tabelle.contains("r")) {
           items.add(statesPageRoute);
         }
         if (config.base.parametri.contains("r")) {
-          items.add(parametersPageRoute);
+          items.add(parametriPageRoute);
         }
         if (config.base.telecamere.contains("r")) {
           items.add(telecamerPageRoute);
         }
 
-        items.add(settingsPageRoute);
+        items.add(impostazioniPageRoute);
         items.add(authenticationPageRoute);
         break;
 
       case User.developer:
-        items.add(overviewPageRoute);
-        items.add(manualOperationsPageRoute);
+        items.add(panoramicaPageRoute);
+        items.add(operazioniManualiPageRoute);
         items.add(statesPageRoute);
-        items.add(parametersPageRoute);
+        items.add(parametriPageRoute);
         items.add(telecamerPageRoute);
-        items.add(settingsPageRoute);
+        items.add(impostazioniPageRoute);
         items.add(authenticationPageRoute);
         break;
       case User.notLogined:

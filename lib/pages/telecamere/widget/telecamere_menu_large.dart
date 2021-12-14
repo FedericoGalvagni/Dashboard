@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:interface_example1/classes/models/global_variable.dart';
+import 'package:interface_example1/classes/modelli/variabili_globali.dart';
 import 'package:interface_example1/pages/telecamere/widget/telecamere_immagine.dart';
 import 'package:interface_example1/pages/telecamere/widget/telecamere_menu.dart';
 

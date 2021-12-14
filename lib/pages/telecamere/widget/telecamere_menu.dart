@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/constants/spacer.dart';
 import 'package:interface_example1/constants/style.dart';
-import 'package:interface_example1/classes/models/global_variable.dart';
-import 'package:interface_example1/classes/models/immagini_telecamera_data.dart';
+import 'package:interface_example1/classes/modelli/variabili_globali.dart';
+import 'package:interface_example1/classes/modelli/immagini_telecamera_modello.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
 import 'package:interface_example1/routing/routes.dart';
 import 'package:interface_example1/widgets/custom/breathing_container.dart';
 import 'package:interface_example1/widgets/custom/custom_container.dart';
 import 'package:interface_example1/widgets/custom/custom_text.dart';
 
+// ignore: must_be_immutable
 class TelecamereMenu extends StatelessWidget {
   TelecamereMenu({Key? key, required this.itemPerRow}) : super(key: key);
   int itemPerRow;
@@ -62,8 +63,6 @@ class TelecamereMenu extends StatelessWidget {
       String _nome = immaginiTelecamere[i].nome;
       Image _immagine = immaginiTelecamere[i].immagine;
       bool _daLeggere = immaginiTelecamere[i].daLeggere;
-      String _timestamp = immaginiTelecamere[i].timestamp;
-      String _percorso = immaginiTelecamere[i].percorso;
 
       children.add(Stack(
         children: [
@@ -86,7 +85,7 @@ class TelecamereMenu extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        height: 70,
+                        height: large ? 50 : 40,
                         decoration: BoxDecoration(
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(10),

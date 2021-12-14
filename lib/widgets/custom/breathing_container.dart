@@ -1,7 +1,7 @@
 library breathing_glowing_button;
 
 import 'package:flutter/material.dart';
-import 'package:interface_example1/classes/models/global_variable.dart';
+import 'package:interface_example1/classes/modelli/variabili_globali.dart';
 
 /// A Breathing Glowing Button widget.
 ///

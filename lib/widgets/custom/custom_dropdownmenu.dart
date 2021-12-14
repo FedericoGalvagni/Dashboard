@@ -26,7 +26,6 @@ class CustomDDMenu extends StatefulWidget {
 class _CustomDDMenuState extends State<CustomDDMenu> {
   @override
   Widget build(BuildContext context) {
-    widget.color ?? primary;
     return DropdownButton<String>(
       value: widget.dropdownValue,
       dropdownColor: surface(4),

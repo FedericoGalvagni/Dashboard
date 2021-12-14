@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:interface_example1/classes/models/global_variable.dart';
-import 'package:interface_example1/classes/models/immagini_telecamera_data.dart';
+import 'package:interface_example1/classes/modelli/variabili_globali.dart';
+import 'package:interface_example1/classes/modelli/immagini_telecamera_modello.dart';
 import 'package:interface_example1/constants/controllers.dart';
 import 'package:interface_example1/constants/style.dart';
 import 'package:interface_example1/helpers/responsivness.dart';
@@ -17,7 +17,6 @@ class TelecamereImmagine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
-    double _height = MediaQuery.of(context).size.height;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,

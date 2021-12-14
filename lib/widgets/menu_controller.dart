@@ -22,22 +22,22 @@ class MenuController extends GetxController {
 
   Widget returnIconFor(String itemName) {
     switch (itemName) {
-      case overviewPageRoute:
+      case panoramicaPageRoute:
         return _customIcon(Icons.trending_up, itemName);
 
-      case manualOperationsPageRoute:
+      case operazioniManualiPageRoute:
         return _customIcon(Icons.pan_tool, itemName);
 
       case statesPageRoute:
         return _customIcon(Icons.traffic, itemName);
 
-      case settingsPageRoute:
+      case impostazioniPageRoute:
         return _customIcon(Icons.construction, itemName);
 
       case authenticationPageRoute:
         return _customIcon(Icons.person, itemName);
 
-      case parametersPageRoute:
+      case parametriPageRoute:
         return _customIcon(Icons.list_alt, itemName);
 
       case telecamerPageRoute:
