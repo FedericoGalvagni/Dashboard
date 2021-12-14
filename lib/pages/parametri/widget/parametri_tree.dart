@@ -33,9 +33,10 @@ class ParametriTreeState extends State<ParametriTree> {
 
   @override
   void initState() {
+    debugPrint("INIT selezionato" + selezionato.value);
     _treeViewController = TreeViewController(
       children: _buildMainNode(),
-      selectedKey: selectedNode,
+      selectedKey: selezionato.value,
     );
 
     super.initState();
@@ -88,15 +89,17 @@ class ParametriTreeState extends State<ParametriTree> {
                       padding: const EdgeInsets.all(20),
                       child: TreeView(
                         shrinkWrap: true,
-                        controller: _treeViewController,
+                        controller: _treeViewController.copyWith(
+                            children: _buildMainNode()),
                         allowParentSelect: _allowParentSelect,
                         supportParentDoubleTap: _supportParentDoubleTap,
                         onExpansionChanged: (key, expanded) {
-                          _expandNode(key, expanded);
+                          //_expandNode(key, expanded);
                           expandedNode = key;
                         },
                         onNodeTap: (key) {
                           selezionato.value = key;
+                          expandedNode = key;
                           var temp = selezionato.value.split(".");
                           if (temp.length > 2) {
                             var iG = temp[1];
@@ -104,11 +107,12 @@ class ParametriTreeState extends State<ParametriTree> {
                             indiceGruppi = int.parse(iG);
                             indiceAttuatori = int.parse(iA);
                           }
-                          debugPrint('Selected: $key');
+
                           setState(() {
-                            selectedNode = key;
-                            _treeViewController =
-                                _treeViewController.copyWith(selectedKey: key);
+                            selezionato.value = key;
+                            debugPrint("Selezionato: " + selezionato.value);
+                            _treeViewController = _treeViewController.copyWith(
+                                selectedKey: key, children: _buildMainNode());
                           });
                         },
                         theme: _treeViewTheme,
@@ -124,8 +128,8 @@ class ParametriTreeState extends State<ParametriTree> {
     );
   }
 
-  _expandNode(String key, bool expanded) {
-    String msg = '${expanded ? "Expanded" : "Collapsed"}: $key ';
+  /*_expandNode(String key, bool expanded) {
+    /*String msg = '${expanded ? "Expanded" : "Collapsed"}: $key ';
     debugPrint(msg);
     Node? node = _treeViewController.getNode(key);
     if (node != null) {
@@ -141,13 +145,13 @@ class ParametriTreeState extends State<ParametriTree> {
         docsOpen = expanded;
         _treeViewController = _treeViewController.copyWith(children: updated);
       });
-    }
-  }
+    }*/
+  }*/
 
   List<Node<dynamic>> _buildMainNode() {
     List<Node<dynamic>> node = [];
     bool expanded = false;
-    String key = "9";
+    String key = "0";
     var splittedExpanded = expandedNode.split(".");
     //debugPrint("EXPANDEDNODE:" + widget.expandedNode);
     //debugPrint("key:" + key);
@@ -174,14 +178,12 @@ class ParametriTreeState extends State<ParametriTree> {
       String key = parentKey + "." + i.toString();
       var splittedKey = key.split(".");
       var splittedExpanded = expandedNode.split(".");
-      //debugPrint("EXPANDEDNODE:" + widget.expandedNode);
-      //debugPrint("key:" + key);
       if (splittedKey[1] == splittedExpanded[1]) {
         expanded = true;
       } else {
         expanded = false;
       }
-
+      debugPrint(item.gruppo);
       node.add(Node(
           key: key,
           expanded: expanded,
@@ -200,7 +202,6 @@ class ParametriTreeState extends State<ParametriTree> {
     int i = 0;
     for (var item in motorlist) {
       String key = parentKey + "." + i.toString();
-
       node.add(Node(
         key: key,
         icon: Icons.tune,

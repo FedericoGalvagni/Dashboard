@@ -119,7 +119,6 @@ class HttpService {
             .toList();
         costruzioneGruppi(parametri.value);
         break;
-
       case "immagini_telecamere":
         if (response.data == "true") {
           debugPrint("No updated images");

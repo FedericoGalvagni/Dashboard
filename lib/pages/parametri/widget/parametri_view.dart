@@ -36,6 +36,10 @@ class ParametriViewState extends State<ParametriView> {
       var b = parts[2];
       iGruppi = int.parse(a);
       iMotori = int.parse(b);
+      debugPrint(parametri.value[iGruppi].attuatori[iMotori].parametri.length
+          .toString());
+      debugPrint(a);
+      debugPrint(b);
       list = parametri.value[iGruppi].attuatori[iMotori].parametri;
       return Container(
           width: widget.width - 20,
@@ -301,14 +305,14 @@ class ParametriViewState extends State<ParametriView> {
                 String nomeParametro = parameter[iGruppi]
                     .listaMotori[iMotori]
                     .parametri[i]
-                    .nomeParametro;
-                debugPrint("Assegnato: " +
-                    nomeGruppo +
-                    ">" +
-                    nomeMotore +
-                    ">" +
-                    nomeParametro +
-                    ": " +
+  asd       .nomeParametro;
+  asd   debugPrint("Assegnato: " +
+  asd       nomeGruppo +
+  asd       ">" +
+  asd       nomeMotore +
+  asd       ">" +
+  asd       nomeParametro +
+  asd       ": " +
                     newvalue +
                     " ID: " +
                     iGruppi.toString() +

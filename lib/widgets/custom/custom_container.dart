@@ -5,14 +5,14 @@ import 'package:interface_example1/constants/style.dart';
 class CustomInkWell extends StatefulWidget {
   CustomInkWell(
       {Key? key,
-      this.showBorder = true,
+      this.showBorder,
       required this.child,
       required this.style,
       required this.onTap,
       required this.radius})
       : super(key: key);
   Widget child;
-  bool showBorder;
+  bool? showBorder;
   VoidCallback onTap;
   ContainerStyle style;
   double radius;
@@ -35,7 +35,7 @@ class _CustomInkWellState extends State<CustomInkWell> {
             onTap: widget.onTap,
             onHover: (hover) {
               setState(() {});
-              if (widget.showBorder) {
+              if (widget.showBorder ?? true) {
                 isHovered = hover;
               }
             },

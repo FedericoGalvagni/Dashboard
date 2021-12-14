@@ -11,21 +11,7 @@ class ParametriPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        /*Obx(
-          () => Row(
-            children: [
-              Container(
-                  margin: EdgeInsets.only(
-                      top: ResponsiveWidget.isSmallScreen(context) ? 56 : 6),
-                  child: CustomText(
-                    color: onBackground,
-                    text: menuController.activeItem.value,
-                    size: 24,
-                    weight: FontWeight.bold,
-                  )),
-            ],
-          ),
-        ),*/
+
         Expanded(
             child: ListView(
           children: [

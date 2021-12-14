@@ -67,7 +67,7 @@ costruzioneGruppi(List<ParametriAttuatori> parametri) {
   gruppi.clear();
   for (var gruppoItem in parametri) {
     List<Attuatore> motori = [];
-    //debugPrint("Nuovo gruppo Item: " + gruppoItem.gruppo.toString());
+    debugPrint("Nuovo gruppo Item: " + gruppoItem.gruppo.toString());
     for (var attuatore in gruppoItem.attuatori) {
       String limiteNegativo = "";
       String limitePositivo = "";
@@ -80,7 +80,7 @@ costruzioneGruppi(List<ParametriAttuatori> parametri) {
           limitePositivo = parametriItem.valore;
         }
       }
-
+      debugPrint("Nome attuatore: " + attuatore.nome);
       Attuatore motore = Attuatore(
           manualeAttivo: false,
           nome: attuatore.nome,
