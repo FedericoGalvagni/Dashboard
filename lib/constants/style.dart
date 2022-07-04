@@ -18,8 +18,6 @@ Color onError = const Color(0xFF000000);
 Color divider = const Color(0xFF646464);
 Color valid = Colors.green;
 Color warning = Colors.orange.shade700;
-
-// shadow
 List<BoxShadow> boxShadow = [
   //BoxShadow(offset: const Offset(6, 6), color: surface(4), blurRadius: 12)
 ];
@@ -72,42 +70,42 @@ themeSelection(bool light) {
 /// valori di opacità (in base a quanto la vogliamo elevare). Valori disponibili
 /// [0, 1, 2, 3, 4, 6, 8, 12, 14, 16 ,24] dp DEFAULT 01dp
 Color surface(int elevation) {
-  Color surface;
+  Color elevatedColor;
   switch (elevation) {
     case 0:
-      surface = Color.alphaBlend(overlay.withOpacity(0.0), surfaceColor);
+      elevatedColor = Color.alphaBlend(overlay.withOpacity(0.0), surfaceColor);
       break;
     case 1:
-      surface = Color.alphaBlend(overlay.withOpacity(0.05), surfaceColor);
+      elevatedColor = Color.alphaBlend(overlay.withOpacity(0.05), surfaceColor);
       break;
     case 2:
-      surface = Color.alphaBlend(overlay.withOpacity(0.07), surfaceColor);
+      elevatedColor = Color.alphaBlend(overlay.withOpacity(0.07), surfaceColor);
       break;
     case 3:
-      surface = Color.alphaBlend(overlay.withOpacity(0.08), surfaceColor);
+      elevatedColor = Color.alphaBlend(overlay.withOpacity(0.08), surfaceColor);
       break;
     case 4:
-      surface = Color.alphaBlend(overlay.withOpacity(0.09), surfaceColor);
+      elevatedColor = Color.alphaBlend(overlay.withOpacity(0.09), surfaceColor);
       break;
     case 6:
-      surface = Color.alphaBlend(overlay.withOpacity(0.11), surfaceColor);
+      elevatedColor = Color.alphaBlend(overlay.withOpacity(0.11), surfaceColor);
       break;
     case 8:
-      surface = Color.alphaBlend(overlay.withOpacity(0.12), surfaceColor);
+      elevatedColor = Color.alphaBlend(overlay.withOpacity(0.12), surfaceColor);
       break;
     case 12:
-      surface = Color.alphaBlend(overlay.withOpacity(0.14), surfaceColor);
+      elevatedColor = Color.alphaBlend(overlay.withOpacity(0.14), surfaceColor);
       break;
     case 16:
-      surface = Color.alphaBlend(overlay.withOpacity(0.15), surfaceColor);
+      elevatedColor = Color.alphaBlend(overlay.withOpacity(0.15), surfaceColor);
       break;
     case 24:
-      surface = Color.alphaBlend(overlay.withOpacity(0.16), surfaceColor);
+      elevatedColor = Color.alphaBlend(overlay.withOpacity(0.16), surfaceColor);
       break;
     default:
-      surface = Color.alphaBlend(overlay.withOpacity(0.05), surfaceColor);
+      elevatedColor = Color.alphaBlend(overlay.withOpacity(0.05), surfaceColor);
   }
-  return surface;
+  return elevatedColor;
 }
 
 /// ## Emphasis
@@ -184,7 +182,7 @@ class SurfaceContainer {
   Color container = surface(4);
   Color overlay = Colors.white;
   Color content = onSurface;
-  
+
   Color hovered() {
     return Color.alphaBlend(overlay.withOpacity(0.04), container);
   }

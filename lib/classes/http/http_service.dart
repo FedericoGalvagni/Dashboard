@@ -107,6 +107,7 @@ class HttpService {
         break;
 
       case "parametri":
+        debugPrint("nuovi parametri ricevuti");
         parametri.value = (response.data as List)
             .map((x) => ParametriAttuatori.fromJson(x))
             .toList();
@@ -238,7 +239,7 @@ updateData() {
   }
 }
 
-Future<void> getInitialData() async {
+Future<void>getInitialData() async {
   switch (user) {
     case User.admin:
       HttpService(

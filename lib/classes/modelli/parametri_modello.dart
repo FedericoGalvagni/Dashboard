@@ -16,6 +16,7 @@ ValueNotifier<List<ParametriAttuatori>> parametriDatabase =
 //
 //     final parametri = parametriFromJson(jsonString);
 
+
 List<ParametriAttuatori> parametriFromJson(String str) =>
     List<ParametriAttuatori>.from(
         json.decode(str).map((x) => ParametriAttuatori.fromJson(x)));
@@ -28,7 +29,7 @@ class ParametriAttuatori {
     required this.gruppo,
     required this.attuatori,
   });
-
+  
   String gruppo;
   List<Attuatori> attuatori;
 
@@ -49,7 +50,7 @@ class Attuatori {
   Attuatori({
     required this.nome,
     required this.parametri,
-    required this.tipo,
+    required this.tipo
   });
 
   String nome;
@@ -65,6 +66,7 @@ class Attuatori {
 
   Map<String, dynamic> toJson() => {
         "nome": nome,
+        "tipo": tipo,
         "parametri": List<dynamic>.from(parametri.map((x) => x.toJson())),
       };
 }

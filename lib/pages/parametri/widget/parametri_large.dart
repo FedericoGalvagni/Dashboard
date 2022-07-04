@@ -535,11 +535,11 @@ class _ParametriLargeState extends State<ParametriLarge> {
 
     debugPrint("Aggiunto nodo al gruppo: " + iGruppi.toString());
     parametri.value[iGruppi].attuatori.add(Attuatori(
-        nome: nomeAttuatore, parametri: parametriDefault(tipo), tipo: tipo));
+        nome: nomeAttuatore, tipo: tipo, parametri: parametriDefault(tipo)));
     parametriOriginali[iGruppi].attuatori.add(Attuatori(
-        nome: nomeAttuatore, parametri: parametriDefault(tipo), tipo: tipo));
+        nome: nomeAttuatore, tipo: tipo, parametri: parametriDefault(tipo)));
     parametriDatabase.value[iGruppi].attuatori.add(Attuatori(
-        nome: nomeAttuatore, parametri: parametriDefault(tipo), tipo: tipo));
+        nome: nomeAttuatore, tipo: tipo, parametri: parametriDefault(tipo)));
     debugPrint(jsonEncode(parametri.value));
     HttpService(
             id: "ModificaFileParametri",
@@ -553,10 +553,10 @@ class _ParametriLargeState extends State<ParametriLarge> {
     switch (tipo) {
       case "motore":
         parametriDefault
-            .add(Parametri(nomeParametro: "Limite Postivo", valore: "0"));
+            .add(Parametri(nomeParametro: "Limite Positivo", valore: "0"));
         parametriDefault
             .add(Parametri(nomeParametro: "Limite Negativo", valore: "0"));
-        parametriDefault.add(Parametri(nomeParametro: "", valore: ""));
+        parametriDefault.add(Parametri(nomeParametro: "-", valore: "0"));
         parametriDefault
             .add(Parametri(nomeParametro: "Posizione per homing", valore: "0"));
         parametriDefault.add(Parametri(
@@ -567,7 +567,7 @@ class _ParametriLargeState extends State<ParametriLarge> {
             .add(Parametri(nomeParametro: "Vel Lento", valore: "0"));
         parametriDefault
             .add(Parametri(nomeParametro: "Vel Homing", valore: "0"));
-        parametriDefault.add(Parametri(nomeParametro: "", valore: ""));
+        parametriDefault.add(Parametri(nomeParametro: "-", valore: "0"));
         parametriDefault
             .add(Parametri(nomeParametro: "Decelerazione Stop", valore: "0"));
         parametriDefault
@@ -582,47 +582,47 @@ class _ParametriLargeState extends State<ParametriLarge> {
             .add(Parametri(nomeParametro: "Jerk Rapido", valore: "0"));
         parametriDefault
             .add(Parametri(nomeParametro: "Jerk Lento", valore: "0"));
-        parametriDefault.add(Parametri(nomeParametro: "", valore: ""));
-        parametriDefault.add(Parametri(nomeParametro: "", valore: ""));
-        parametriDefault.add(Parametri(nomeParametro: "Vel JOG", valore: ""));
-        parametriDefault.add(Parametri(nomeParametro: "Acc JOG", valore: ""));
-        parametriDefault.add(Parametri(nomeParametro: "Dec JOG", valore: ""));
-        parametriDefault.add(Parametri(nomeParametro: "", valore: ""));
+        parametriDefault.add(Parametri(nomeParametro: "-", valore: "0"));
+        parametriDefault.add(Parametri(nomeParametro: "-", valore: "0"));
+        parametriDefault.add(Parametri(nomeParametro: "Vel JOG", valore: "0"));
+        parametriDefault.add(Parametri(nomeParametro: "Acc JOG", valore: "0"));
+        parametriDefault.add(Parametri(nomeParametro: "Dec JOG", valore: "0"));
+        parametriDefault.add(Parametri(nomeParametro: "-", valore: "0"));
         parametriDefault.add(
-            Parametri(nomeParametro: "Limite Coppia Positivo", valore: ""));
-        parametriDefault.add(Parametri(nomeParametro: "", valore: ""));
-        parametriDefault.add(Parametri(nomeParametro: "", valore: ""));
+            Parametri(nomeParametro: "Limite Coppia Positivo", valore: "0"));
+        parametriDefault.add(Parametri(nomeParametro: "-", valore: "0"));
+        parametriDefault.add(Parametri(nomeParametro: "-", valore: "0"));
         parametriDefault
-            .add(Parametri(nomeParametro: "Zero Offset/ RefPos", valore: ""));
+            .add(Parametri(nomeParametro: "Zero Offset/ RefPos", valore: "0"));
         parametriDefault.add(
-            Parametri(nomeParametro: "Ritorno da Zero/RefMove", valore: ""));
+            Parametri(nomeParametro: "Ritorno da Zero/RefMove", valore: "0"));
         parametriDefault.add(
-            Parametri(nomeParametro: "Accelerazione Ricerca Zero", valore: ""));
+            Parametri(nomeParametro: "Accelerazione Ricerca Zero", valore: "0"));
         parametriDefault
-            .add(Parametri(nomeParametro: "Velocita Ricerca Zero", valore: ""));
+            .add(Parametri(nomeParametro: "Velocita Ricerca Zero", valore: "0"));
         parametriDefault.add(
-            Parametri(nomeParametro: "Velocita Ricerca Tacca", valore: ""));
+            Parametri(nomeParametro: "Velocita Ricerca Tacca", valore: "0"));
         parametriDefault.add(
-            Parametri(nomeParametro: "Limite Coppia Ricerca Zero", valore: ""));
-        parametriDefault.add(Parametri(nomeParametro: "", valore: ""));
+            Parametri(nomeParametro: "Limite Coppia Ricerca Zero", valore: "0"));
+        parametriDefault.add(Parametri(nomeParametro: "-", valore: "0"));
         return parametriDefault;
       case "pistone":
         parametriDefault
-            .add(Parametri(nomeParametro: "iTipoAttuatore", valore: ""));
+            .add(Parametri(nomeParametro: "iTipoAttuatore", valore: "0"));
         parametriDefault
-            .add(Parametri(nomeParametro: "Opzione sensore 1", valore: ""));
-        parametriDefault.add(Parametri(nomeParametro: "iOpt_S1", valore: ""));
-        parametriDefault.add(Parametri(nomeParametro: "iOpt_S2", valore: ""));
-        parametriDefault.add(Parametri(nomeParametro: "iRit_S1", valore: ""));
-        parametriDefault.add(Parametri(nomeParametro: "iRit_S2", valore: ""));
+            .add(Parametri(nomeParametro: "Opzione sensore 1", valore: "0"));
+        parametriDefault.add(Parametri(nomeParametro: "iOpt_S1", valore: "0"));
+        parametriDefault.add(Parametri(nomeParametro: "iOpt_S2", valore: "0"));
+        parametriDefault.add(Parametri(nomeParametro: "iRit_S1", valore: "0"));
+        parametriDefault.add(Parametri(nomeParametro: "iRit_S2", valore: "0"));
         parametriDefault
-            .add(Parametri(nomeParametro: "iTimeout_S1", valore: ""));
+            .add(Parametri(nomeParametro: "iTimeout_S1", valore: "0"));
         parametriDefault
-            .add(Parametri(nomeParametro: "iTimeout_S2", valore: ""));
+            .add(Parametri(nomeParametro: "iTimeout_S2", valore: "0"));
         parametriDefault
-            .add(Parametri(nomeParametro: "iTempoSimulazioneS1", valore: ""));
+            .add(Parametri(nomeParametro: "iTempoSimulazioneS1", valore: "0"));
         parametriDefault
-            .add(Parametri(nomeParametro: "iTempoSimulazioneS2", valore: ""));
+            .add(Parametri(nomeParametro: "iTempoSimulazioneS2", valore: "0"));
         return parametriDefault;
       default:
         return parametriDefault;

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
-const String nodeUrl = 'http://192.168.2.184:1880';
+const String nodeUrl = 'http://192.168.50.25:1881';
 ValueNotifier<bool> showTableIndicator = ValueNotifier<bool>(false);
 int mechanicalGroupSelector = -1;
 String expandedNode = "-1.-1.-1";
