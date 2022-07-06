@@ -99,7 +99,7 @@ class _OperazioniManualiCardState extends State<OperazioniManualiCard>
                                 splashRadius: 1,
                                 onPressed: () {},
                                 icon: const Icon(Icons.tune),
-                                color: SurfaceContainer().content,
+                                color: SurfaceContainer(elevation: 4).content,
                               )),
                         ),
                       )

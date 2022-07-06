@@ -9,9 +9,11 @@ class CustomInkWell extends StatefulWidget {
       required this.child,
       required this.style,
       required this.onTap,
+      required this.elevation,
       required this.radius})
       : super(key: key);
   Widget child;
+  int elevation;
   bool? showBorder;
   VoidCallback onTap;
   ContainerStyle style;
@@ -23,7 +25,7 @@ class CustomInkWell extends StatefulWidget {
 
 class _CustomInkWellState extends State<CustomInkWell> {
   bool isHovered = false;
-
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -78,11 +80,11 @@ class _CustomInkWellState extends State<CustomInkWell> {
       case ContainerStyle.surface:
         return BoxDecoration(
             border: isHovered
-                ? Border.all(color: SurfaceContainer().overlay, width: 1)
+                ? Border.all(color: SurfaceContainer(elevation: widget.elevation).overlay, width: 1)
                 : Border.all(
                     color: SurfacePrimaryContainer().overlay.withOpacity(0.2),
                     width: 1),
-            color: SurfaceContainer().container,
+            color: SurfaceContainer(elevation: widget.elevation).container,
             borderRadius: BorderRadius.circular(widget.radius),
             boxShadow: boxShadow);
 
@@ -100,7 +102,7 @@ class _CustomInkWellState extends State<CustomInkWell> {
       case ContainerStyle.prymaryTransparent:
         return PrimaryTrContainers().focused();
       case ContainerStyle.surface:
-        return SurfaceContainer().focused();
+        return SurfaceContainer(elevation: widget.elevation).focused();
     }
   }
 
@@ -113,7 +115,7 @@ class _CustomInkWellState extends State<CustomInkWell> {
       case ContainerStyle.prymaryTransparent:
         return PrimaryTrContainers().hovered();
       case ContainerStyle.surface:
-        return SurfaceContainer().hovered();
+        return SurfaceContainer(elevation: widget.elevation).hovered();
     }
   }
 
@@ -126,7 +128,7 @@ class _CustomInkWellState extends State<CustomInkWell> {
       case ContainerStyle.prymaryTransparent:
         return PrimaryTrContainers().pressed();
       case ContainerStyle.surface:
-        return SurfaceContainer().pressed();
+        return SurfaceContainer(elevation: widget.elevation).pressed();
     }
   }
 }

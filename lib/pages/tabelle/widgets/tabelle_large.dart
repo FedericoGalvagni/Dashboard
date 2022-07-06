@@ -41,7 +41,7 @@ class TabelleLargeState extends State<TabelleLarge> {
         GlobalKey(debugLabel: "SimpleAutoCompleteTextField_federico");
     // ignore: todo
     // TODO: CLEAN
-    List<String> suggestions = ["produzione", "graficoProduzione"];
+    List<String> suggestions = ["produzione", "graficoProduzione", "suggerimento", "suggerimento 1","suggerimento 2","suggerimento 3"];
 
     double _width = MediaQuery.of(context).size.width;
 

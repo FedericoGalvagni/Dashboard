@@ -55,7 +55,7 @@ class SideMenu extends StatelessWidget {
                   children: sideMenuItems()
                       .map((itemName) => SideMenuItem(
                           itemName: itemName == authenticationPageRoute
-                              ? "Log Out"
+                              ? "Esci"
                               : itemName,
                           onTap: () {
                             if (itemName == authenticationPageRoute) {

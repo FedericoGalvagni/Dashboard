@@ -27,6 +27,7 @@ class TelecamereImmagine extends StatelessWidget {
           height: 30,
           margin: EdgeInsets.only(left: _width / 64, right: _width / 64),
           child: CustomInkWell(
+            elevation: 4,
             style: ContainerStyle.primary,
             radius: 6,
             onTap: () {

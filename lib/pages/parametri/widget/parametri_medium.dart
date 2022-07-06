@@ -93,14 +93,14 @@ class ParametriMedium extends StatelessWidget {
                                               InkSplash.splashFactory,
                                           backgroundColor:
                                               MaterialStateProperty.all(
-                                                  (SurfaceContainer()
+                                                  (SurfaceContainer(elevation: 4)
                                                       .container)),
                                           overlayColor:
                                               MaterialStateProperty.all(
-                                                  SurfaceContainer().hovered()),
+                                                  SurfaceContainer(elevation: 4).hovered()),
                                           foregroundColor:
                                               MaterialStateProperty.all(
-                                                  SurfaceContainer()
+                                                  SurfaceContainer(elevation: 4)
                                                       .container)),
                                       label: CustomText(
                                         text: "Restore",

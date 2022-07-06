@@ -178,13 +178,19 @@ class PrimaryContainers {
 /// - Container:	Surface
 /// - Content:	On Surface
 /// - Overlay: color	Inherited from content
-class SurfaceContainer {
-  Color container = surface(4);
-  Color overlay = Colors.white;
-  Color content = onSurface;
+class SurfaceContainer{
 
+final Color overlay = Colors.white;
+final Color content = onSurface;
+final int elevation;
+late Color container = surface(elevation);
+SurfaceContainer({required this.elevation});
+Widget build(BuildContext context){
+  
+  return Container();
+}
   Color hovered() {
-    return Color.alphaBlend(overlay.withOpacity(0.04), container);
+    return Color.alphaBlend(overlay.withOpacity(0.04), this.container);
   }
 
   Color focused() {
@@ -193,6 +199,12 @@ class SurfaceContainer {
 
   Color pressed() {
     return Color.alphaBlend(overlay.withOpacity(0.1), container);
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }
 
@@ -208,7 +220,7 @@ class SurfacePrimaryContainer {
   Color overlay = primary;
   Color content = primary;
   Color hovered() {
-    return Color.alphaBlend(overlay.withOpacity(0.04), container);
+    return Color.alphaBlend(overlay.withOpacity(0.04), primary);
   }
 
   Color focused() {

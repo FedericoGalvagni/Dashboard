@@ -95,14 +95,13 @@ class _ParametriLargeState extends State<ParametriLarge> {
                           ),
                         ),
                         const LargeHSpacer(),
-                        const LargeHSpacer(),
                       ],
                     ),
                   ),
                   const LargeVSpacer(),
                   Row(
                     children: [
-                      const LargeHSpacer(),
+    
                       ValueListenableBuilder(
                           valueListenable: selezionato,
                           builder: (context, widget, value) {
@@ -114,7 +113,8 @@ class _ParametriLargeState extends State<ParametriLarge> {
                                     children: [
                                       const LargeHSpacer(),
                                       CustomInkWell(
-                                        style: ContainerStyle.primary,
+                                        elevation: 24,
+                                        style: ContainerStyle.surface,
                                         onTap: () {
                                           debugPrint(indiceGruppi.toString());
                                           restore();
@@ -130,23 +130,21 @@ class _ParametriLargeState extends State<ParametriLarge> {
                                             ),
                                             const LargeHSpacer(),
                                             CustomText(
-                                              text: "Valori iniziali",
+                                              text: "Ripristina valori originali",
                                               size: 18,
-                                              weight: FontWeight.w600,
+                                              weight: FontWeight.w500,
                                               color: getEmphasis(
-                                                  onPrimary, emphasis.high),
+                                                  onSurface, emphasis.high),
                                             ),
                                             const LargeHSpacer(),
                                           ],
                                         ),
                                       ),
                                       const LargeHSpacer(),
-                                      const LargeHSpacer(),
                                     ],
                                   );
                                 });
                           }),
-                      const LargeHSpacer(),
                       const LargeHSpacer(),
                     ],
                   ),
@@ -155,7 +153,8 @@ class _ParametriLargeState extends State<ParametriLarge> {
                     children: [
                       const LargeHSpacer(),
                       CustomInkWell(
-                        style: ContainerStyle.primary,
+                        elevation: 24,
+                        style: ContainerStyle.surface,
                         onTap: () {
                           showDialog(
                               context: context,
@@ -167,54 +166,55 @@ class _ParametriLargeState extends State<ParametriLarge> {
                         radius: 3,
                         child: Row(
                           children: [
-                            Icon(Icons.add_box_outlined),
+                            Icon(Icons.add_box_outlined, color: primary,),
                             const LargeHSpacer(),
                             CustomText(
                               text: "Aggiungi gruppo",
                               size: 18,
-                              weight: FontWeight.w600,
-                              color: getEmphasis(onPrimary, emphasis.high),
+                              weight: FontWeight.w500,
+                              color: getEmphasis(onSurface, emphasis.high),
                             ),
                             const LargeHSpacer(),
                           ],
                         ),
                       ),
                       const LargeHSpacer(),
-                      const LargeHSpacer(),
                     ],
                   ),
                   const LargeVSpacer(),
-                  Row(
+                                    Row(
                     children: [
                       const LargeHSpacer(),
                       CustomInkWell(
-                        style: ContainerStyle.primary,
+                        elevation: 24,
+                        style: ContainerStyle.surface,
                         onTap: () {
                           showDialog(
                               context: context,
                               builder: (context) {
                                 return _inputAttuatore(context);
                               });
+                          setState(() {});
                         },
                         radius: 3,
                         child: Row(
                           children: [
-                            Icon(Icons.add_box_outlined),
+                            Icon(Icons.add_box_outlined, color: primary,),
                             const LargeHSpacer(),
                             CustomText(
                               text: "Aggiungi attuatore",
                               size: 18,
-                              weight: FontWeight.w600,
-                              color: getEmphasis(onPrimary, emphasis.high),
+                              weight: FontWeight.w500,
+                              color: getEmphasis(onSurface, emphasis.high),
                             ),
                             const LargeHSpacer(),
                           ],
                         ),
                       ),
                       const LargeHSpacer(),
-                      const LargeHSpacer(),
                     ],
                   ),
+                  const LargeVSpacer()
                 ],
               ),
             ),
@@ -321,8 +321,10 @@ class _ParametriLargeState extends State<ParametriLarge> {
 
   Widget _inputGruppo(BuildContext context) {
     TextEditingController _nomeGruppo = TextEditingController();
-
+    debugPrint("Apertura finestra di dialogo gruppo");
+    
     return Dialog(
+      
       backgroundColor: Colors.transparent,
       child: Container(
           width: 500,

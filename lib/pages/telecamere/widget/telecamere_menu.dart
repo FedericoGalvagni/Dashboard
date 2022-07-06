@@ -80,6 +80,7 @@ class TelecamereMenu extends StatelessWidget {
           AspectRatio(
               aspectRatio: 1,
               child: CustomInkWell(
+                elevation: 4,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,

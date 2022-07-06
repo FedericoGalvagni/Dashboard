@@ -30,7 +30,7 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
         children: [
           Visibility(
               child: CustomText(
-                  text: "Dash",
+                  text: "Pannello di controllo",
                   color: getEmphasis(onSurface, emphasis.high),
                   size: 20,
                   weight: FontWeight.bold)),

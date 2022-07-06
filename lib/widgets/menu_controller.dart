@@ -29,7 +29,7 @@ class MenuController extends GetxController {
         return _customIcon(Icons.pan_tool, itemName);
 
       case statesPageRoute:
-        return _customIcon(Icons.traffic, itemName);
+        return _customIcon(Icons.storage, itemName);
 
       case impostazioniPageRoute:
         return _customIcon(Icons.construction, itemName);

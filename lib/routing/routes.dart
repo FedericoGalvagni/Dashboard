@@ -2,10 +2,10 @@ import 'package:interface_example1/classes/modelli/config_modello.dart';
 import 'package:interface_example1/classes/modelli/variabili_globali.dart';
 
 const panoramicaPageRoute = "Panoramica";
-const operazioniManualiPageRoute = "Manual operation";
-const statesPageRoute = "Machine state";
+const operazioniManualiPageRoute = "Operazioni manuali";
+const statesPageRoute = "Database";
 const impostazioniPageRoute = "Impostazioni";
-const authenticationPageRoute = "Authentication";
+const authenticationPageRoute = "Autenticazione";
 const parametriPageRoute = "Parametri";
 const telecamerPageRoute = "Telecamere";
 
